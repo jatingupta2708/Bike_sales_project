@@ -1,0 +1,321 @@
+Graph 1: Total Listings & Key Metrics (KPI Cards)
+Business Question: What are the total listings, average price, average resale price, and average mileage?
+
+Objective: Provide high-level summary of the dataset.
+
+Best Plotly Chart: KPI Cards (numeric values)
+
+Aggregation: Count, Mean(Price), Mean(Resale Price), Mean(Mileage)
+
+GroupBy Needed: No
+
+Columns Used: Price, Resale Price, Mileage
+
+Graph 2: Distribution of Bike Brands
+Business Question: Which bike brands have the most listings in the used market?
+
+Objective: Show brand popularity in the used bike market.
+
+Best Plotly Chart: Bar Chart
+
+X-axis: Brand
+
+Y-axis: Count of Listings
+
+Color: Brand
+
+Aggregation: Count by Brand
+
+GroupBy Needed: Yes (group by Brand)
+
+Columns Used: Brand
+
+Graph 3: Average Resale Price by Brand
+Business Question: Which brands have the highest average resale price?
+
+Objective: Identify premium brands in the used market.
+
+Best Plotly Chart: Bar Chart (sorted descending)
+
+X-axis: Brand
+
+Y-axis: Average Resale Price
+
+Color: Brand
+
+Aggregation: Mean Resale Price by Brand
+
+GroupBy Needed: Yes (group by Brand)
+
+Columns Used: Brand, Resale Price
+
+Section 2: Brand & Model Analysis
+Graph 4: Top 15 Models by Number of Listings
+Business Question: Which specific bike models are most commonly sold in the used market?
+
+Objective: Identify popular models with high supply.
+
+Best Plotly Chart: Horizontal Bar Chart
+
+X-axis: Count of Listings
+
+Y-axis: Model
+
+Color: Brand (to show which brand owns the model)
+
+Aggregation: Count by Model, take top 15
+
+GroupBy Needed: Yes (group by Model and Brand)
+
+Columns Used: Model, Brand
+
+Graph 5: Brand vs Model Price Comparison (Box Plot)
+Business Question: How do resale prices vary across different brands and their models?
+
+Objective: Show price distribution and identify high-value models.
+
+Best Plotly Chart: Box Plot
+
+X-axis: Model (filtered to top brands/models)
+
+Y-axis: Resale Price
+
+Color: Brand
+
+Aggregation: Distribution of resale prices by model
+
+GroupBy Needed: Yes (group by Model and Brand)
+
+Columns Used: Model, Brand, Resale Price
+
+Graph 6: Resale Price vs Original Price Scatter
+Business Question: What is the relationship between original price and resale price?
+
+Objective: Show value retention patterns.
+
+Best Plotly Chart: Scatter Plot
+
+X-axis: Price (Original)
+
+Y-axis: Resale Price
+
+Color: Brand
+
+Aggregation: Individual data points (can sample if too many)
+
+GroupBy Needed: No (or sample)
+
+Columns Used: Price, Resale Price, Brand
+
+Section 3: Pricing & Value Analysis
+Graph 7: Resale Price vs Year of Manufacture
+Business Question: How does bike age affect resale value?
+
+Objective: Show depreciation trends over time.
+
+Best Plotly Chart: Box Plot or Violin Plot
+
+X-axis: Year of Manufacture
+
+Y-axis: Resale Price
+
+Color: No color grouping (or Brand)
+
+Aggregation: Distribution by year
+
+GroupBy Needed: Yes (group by Year of Manufacture)
+
+Columns Used: Year of Manufacture, Resale Price
+
+Graph 8: Price vs Resale Price by Fuel Type
+Business Question: Which fuel types hold value better in the used market?
+
+Objective: Compare original and resale prices across fuel types.
+
+Best Plotly Chart: Grouped Bar Chart
+
+X-axis: Fuel Type
+
+Y-axis: Average Price and Average Resale Price
+
+Color: Metric (Price vs Resale)
+
+Aggregation: Mean Price and Mean Resale Price by Fuel Type
+
+GroupBy Needed: Yes (group by Fuel Type, compute both means)
+
+Columns Used: Fuel Type, Price, Resale Price
+
+Graph 9: Mileage vs Resale Price
+Business Question: Does higher mileage correlate with higher resale value?
+
+Objective: Understand the value of fuel efficiency.
+
+Best Plotly Chart: Scatter Plot
+
+X-axis: Mileage
+
+Y-axis: Resale Price
+
+Color: Fuel Type
+
+Aggregation: Individual data points
+
+GroupBy Needed: No (or sample)
+
+Columns Used: Mileage, Resale Price, Fuel Type
+
+Section 4: Geographic Analysis
+Graph 10: Listings by State
+Business Question: Which Indian states have the most used bike listings?
+
+Objective: Identify active used bike markets by region.
+
+Best Plotly Chart: Bar Chart or Choropleth Map
+
+X-axis: State
+
+Y-axis: Count of Listings
+
+Color: State
+
+Aggregation: Count by State
+
+GroupBy Needed: Yes (group by State)
+
+Columns Used: State
+
+Graph 11: Average Resale Price by State
+Business Question: Which states have the highest average resale prices?
+
+Objective: Identify regional pricing differences.
+
+Best Plotly Chart: Bar Chart
+
+X-axis: State
+
+Y-axis: Average Resale Price
+
+Color: State
+
+Aggregation: Mean Resale Price by State
+
+GroupBy Needed: Yes (group by State)
+
+Columns Used: State, Resale Price
+
+Graph 12: City Tier Distribution
+Business Question: How are used bike listings distributed across different city tiers?
+
+Objective: Understand market activity by city tier.
+
+Best Plotly Chart: Pie Chart / Donut Chart
+
+X-axis: City Tier
+
+Y-axis: Count of Listings
+
+Color: City Tier
+
+Aggregation: Count by City Tier
+
+GroupBy Needed: Yes (group by City Tier)
+
+Columns Used: City Tier
+
+Section 5: Specifications Impact
+Graph 13: Engine Capacity vs Resale Price
+Business Question: Do bikes with larger engines have higher resale prices?
+
+Objective: Understand the value of engine capacity.
+
+Best Plotly Chart: Scatter Plot
+
+X-axis: Engine Capacity (cc)
+
+Y-axis: Resale Price
+
+Color: Fuel Type
+
+Aggregation: Individual data points
+
+GroupBy Needed: No (or sample)
+
+Columns Used: Engine Capacity, Resale Price, Fuel Type
+
+Graph 14: Average Daily Distance vs Resale Price
+Business Question: Do bikes with higher daily usage sell for lower prices?
+
+Objective: Understand usage impact on resale value.
+
+Best Plotly Chart: Scatter Plot
+
+X-axis: Avg Daily Distance
+
+Y-axis: Resale Price
+
+Color: Brand
+
+Aggregation: Individual data points
+
+GroupBy Needed: No (or sample)
+
+Columns Used: Avg Daily Distance, Resale Price, Brand
+
+Graph 15: Insurance Status Analysis
+Business Question: Does insurance status affect resale price?
+
+Objective: Understand buyer preference for insured bikes.
+
+Best Plotly Chart: Box Plot
+
+X-axis: Insurance Status
+
+Y-axis: Resale Price
+
+Color: Insurance Status
+
+Aggregation: Distribution by Insurance Status
+
+GroupBy Needed: Yes (group by Insurance Status)
+
+Columns Used: Insurance Status, Resale Price
+
+Section 6: Seller & Ownership Analysis
+Graph 16: Owner Type vs Resale Price
+Business Question: Do first-owner bikes sell for more than second or third owner bikes?
+
+Objective: Understand ownership impact on value.
+
+Best Plotly Chart: Box Plot
+
+X-axis: Owner Type
+
+Y-axis: Resale Price
+
+Color: Owner Type
+
+Aggregation: Distribution by Owner Type
+
+GroupBy Needed: Yes (group by Owner Type)
+
+Columns Used: Owner Type, Resale Price
+
+Graph 17: Seller Type Distribution
+Business Question: What percentage of listings are from dealers vs individuals?
+
+Objective: Understand seller composition in the market.
+
+Best Plotly Chart: Pie Chart / Donut Chart
+
+X-axis: Seller Type
+
+Y-axis: Count of Listings
+
+Color: Seller Type
+
+Aggregation: Count by Seller Type
+
+GroupBy Needed: Yes (group by Seller Type)
+
+Columns Used: Seller Type
