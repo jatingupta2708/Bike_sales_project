@@ -16,7 +16,7 @@ df= pd.read_csv('bike_sales_india.csv')
 
 
 with st.sidebar:
-    st.image("../new logo-Picsart-BackgroundRemover.PNG", width=1200)
+    st.image("new logo-Picsart-BackgroundRemover.PNG", width=1200)
     st.markdown("---")
     st.caption("Developed by Jatin Gupta")
     st.markdown("### Menu")
