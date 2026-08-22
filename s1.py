@@ -196,7 +196,7 @@ if opt == 'Dashboard':
         st.markdown("<p style='color:#94a3b8; font-size:18px;'>Smart Analytics & Market Intelligence for Indian Two-Wheelers</p>", unsafe_allow_html=True)
 
     with col_image:
-        st.image('../The journey is the.jpg', use_container_width=True)
+        st.image('The journey is the.jpg', use_container_width=True)
 
     st.markdown("<hr style='border:0; height:1px; background:linear-gradient(90deg, #38bdf8, #a855f7, #ec4899); margin:20px 0;'>", unsafe_allow_html=True)
 
