@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 
-df= pd.read_csv('../bike_sales_india.csv')
+df= pd.read_csv('bike_sales_india.csv')
 
 
 with st.sidebar:
