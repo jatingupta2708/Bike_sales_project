@@ -2052,10 +2052,7 @@ hr {
 
 
 
-
 elif opt == "Resale Analysis":
-
-    
     st.markdown(
         """
         <style>
