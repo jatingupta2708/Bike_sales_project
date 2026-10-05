@@ -1089,257 +1089,100 @@ elif opt == 'Brand Analysis':
 
 
 
-elif opt == "Model Analysis":
+elif opt == "Resale Analysis":
 
     # ============================================================
-    # CSS STYLING
+    # SIMPLE PROFESSIONAL CSS
     # ============================================================
     st.markdown(
         """
         <style>
 
-        /* ================= MAIN BACKGROUND ================= */
-
-        .stApp {
-            background: radial-gradient(
-                circle at 20% 10%,
-                #1e1b4b 0%,
-                #0f172a 45%,
-                #030712 100%
-            );
-            color: #f8fafc;
-            font-family: 'Inter', system-ui, sans-serif;
+        .resale-header {
+            background: linear-gradient(135deg, #123c43, #102a43);
+            border: 1px solid #285b70;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
         }
 
-        /* ================= HERO HEADER ================= */
-
-        .model-header {
-            background: linear-gradient(
-                135deg,
-                rgba(16, 185, 129, 0.20),
-                rgba(6, 182, 212, 0.14)
-            );
-
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            border-radius: 20px;
-
-            padding: 25px 30px;
-            margin-bottom: 25px;
-
-            box-shadow:
-                0 12px 35px rgba(0, 0, 0, 0.45),
-                inset 0 1px 2px rgba(255, 255, 255, 0.20);
-
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-        }
-
-        .model-header h1 {
+        .resale-header h1 {
             color: #ffffff;
             margin: 0;
-            font-size: 32px;
+            font-size: 2.2rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
-        .model-header p {
+        .resale-header p {
             color: #cbd5e1;
             margin: 7px 0 0 0;
-            font-size: 15px;
+            font-size: 0.95rem;
         }
 
-        /* ================= SECTION HEADINGS ================= */
-
-        .section-title {
-            color: #f8fafc;
-            font-size: 22px;
-            font-weight: 800;
-            margin: 20px 0 15px 0;
-            padding-left: 12px;
-            border-left: 4px solid #38bdf8;
+        .resale-kpi {
+            background: #111827;
+            border: 1px solid #293548;
+            border-radius: 14px;
+            padding: 20px 16px;
+            text-align: center;
+            min-height: 145px;
+            transition: 0.25s ease;
+            box-shadow: 0 5px 16px rgba(0,0,0,0.20);
         }
 
-        /* ================= KPI CARDS ================= */
-
-        .model-kpi {
-            border-radius: 16px;
-            padding: 18px 20px;
-
-            min-height: 135px;
-
-            border: 1px solid rgba(255, 255, 255, 0.13);
-
-            box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.35),
-                inset 0 1px 1px rgba(255, 255, 255, 0.12);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-        .model-kpi:hover {
-            transform: translateY(-6px);
-
-            box-shadow:
-                0 18px 35px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(56, 189, 248, 0.18);
-
-            border-color: rgba(255, 255, 255, 0.30);
-        }
-
-        .kpi-cyan {
-            background: linear-gradient(
-                135deg,
-                rgba(14, 165, 233, 0.20),
-                rgba(15, 23, 42, 0.92)
-            );
-            border-bottom: 3px solid #38bdf8;
-        }
-
-        .kpi-green {
-            background: linear-gradient(
-                135deg,
-                rgba(16, 185, 129, 0.20),
-                rgba(15, 23, 42, 0.92)
-            );
-            border-bottom: 3px solid #34d399;
-        }
-
-        .kpi-purple {
-            background: linear-gradient(
-                135deg,
-                rgba(168, 85, 247, 0.20),
-                rgba(15, 23, 42, 0.92)
-            );
-            border-bottom: 3px solid #c084fc;
-        }
-
-        .kpi-orange {
-            background: linear-gradient(
-                135deg,
-                rgba(245, 158, 11, 0.20),
-                rgba(15, 23, 42, 0.92)
-            );
-            border-bottom: 3px solid #fbbf24;
-        }
-
-        .kpi-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+        .resale-kpi:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(56,189,248,0.18);
+            border-color: #38bdf8;
         }
 
         .kpi-label {
             color: #94a3b8;
-            font-size: 12px;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .kpi-icon {
-            width: 38px;
-            height: 38px;
-
-            border-radius: 11px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 19px;
-
-            color: white;
-
-            border: 1px solid rgba(255, 255, 255, 0.25);
-        }
-
-        .icon-cyan {
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
-        }
-
-        .icon-green {
-            background: linear-gradient(135deg, #059669, #34d399);
-            box-shadow: 0 0 12px rgba(52, 211, 153, 0.35);
-        }
-
-        .icon-purple {
-            background: linear-gradient(135deg, #7c3aed, #c084fc);
-            box-shadow: 0 0 12px rgba(192, 132, 252, 0.35);
-        }
-
-        .icon-orange {
-            background: linear-gradient(135deg, #d97706, #fbbf24);
-            box-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
+            letter-spacing: 0.5px;
         }
 
         .kpi-value {
-            color: #ffffff;
-            font-size: 27px;
+            color: #f8fafc;
+            font-size: 1.45rem;
             font-weight: 800;
-            margin-top: 3px;
+            margin: 9px 0;
         }
 
         .kpi-sub {
-            margin-top: 5px;
-            font-size: 12px;
-            font-weight: 600;
+            color: #94a3b8;
+            font-size: 0.78rem;
         }
 
-        /* ================= INSIGHT CARDS ================= */
+        .section-title {
+            color: #f8fafc;
+            font-size: 1.25rem;
+            font-weight: 750;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            padding-left: 10px;
+            border-left: 4px solid #38bdf8;
+        }
 
-        .model-insight {
-            background: linear-gradient(
-                135deg,
-                rgba(30, 41, 59, 0.75),
-                rgba(15, 23, 42, 0.88)
-            );
-
-            border-radius: 14px;
+        .insight-box {
+            background: #111827;
+            border: 1px solid #293548;
+            border-radius: 12px;
             padding: 16px 18px;
             margin-bottom: 12px;
-
-            border: 1px solid rgba(255, 255, 255, 0.10);
-
-            box-shadow:
-                0 8px 22px rgba(0, 0, 0, 0.35);
-
-            transition: all 0.3s ease;
+            color: #cbd5e1;
         }
 
-        .model-insight:hover {
-            transform: translateX(4px);
-            border-color: rgba(255, 255, 255, 0.25);
+        .insight-box:hover {
+            border-color: #38bdf8;
         }
 
-        /* ================= DIVIDER ================= */
-
-        .model-divider {
-            height: 1px;
-            border: 0;
-            margin: 25px 0;
-
-            background: linear-gradient(
-                90deg,
-                transparent,
-                #38bdf8,
-                #a855f7,
-                #ec4899,
-                transparent
-            );
-        }
-
-        /* ================= CHART HEADING ================= */
-
-        .chart-title {
-            color: #f8fafc;
-            font-size: 18px;
-            font-weight: 750;
-            margin: 8px 0 10px 0;
+        .insight-title {
+            font-weight: 700;
+            margin-bottom: 5px;
         }
 
         </style>
@@ -1347,432 +1190,339 @@ elif opt == "Model Analysis":
         unsafe_allow_html=True,
     )
 
-
     # ============================================================
     # HEADER
     # ============================================================
-
     st.markdown(
         """
-        <div class="model-header">
-            <h1>🚲 Model Analysis Analytics</h1>
+        <div class="resale-header">
+            <h1>⚡ Bike Resale Analytics</h1>
             <p>
-                Explore bike models, pricing, mileage, engine capacity
-                and resale performance.
+                Interactive market analytics with category-wise resale insights.
             </p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-
     # ============================================================
-    # FILTERS
+    # CATEGORY SELECTOR
     # ============================================================
-
-    col_filter, col_slider = st.columns([1, 1])
-
-    with col_filter:
-        brand = st.selectbox(
-            "🔍 Select Brand Filter",
-            ["All"] + sorted(
-                df["Brand"].dropna().unique().tolist()
-            )
-        )
-
-    with col_slider:
-        n_rows = st.slider(
-            "📄 Preview Data Rows",
-            min_value=5,
-            max_value=50,
-            value=10,
-            step=5
-        )
-
-    filtered_df = (
-        df
-        if brand == "All"
-        else df[df["Brand"] == brand]
+    selected_group = st.selectbox(
+        "🎛️ Select Category",
+        ["Brand", "Fuel Type", "Year of Manufacture", "Owner Type"],
     )
 
+    # ============================================================
+    # DATA PREPARATION
+    # ============================================================
+    current_year = 2026
+
+    df["Bike Age"] = (
+        current_year - df["Year of Manufacture"]
+    )
+
+    grouped_df = (
+        df.groupby(selected_group)["Resale Price (INR)"]
+        .mean()
+        .reset_index()
+    )
+
+    grouped_df = grouped_df.sort_values(
+        "Resale Price (INR)",
+        ascending=False
+    )
+
+    top_group_item = grouped_df.iloc[0][selected_group]
+    top_group_val = grouped_df.iloc[0]["Resale Price (INR)"]
+
+    lowest_group_item = grouped_df.iloc[-1][selected_group]
+    lowest_group_val = grouped_df.iloc[-1]["Resale Price (INR)"]
+
+    avg_resale = df["Resale Price (INR)"].mean()
+
+    total_categories = df[selected_group].nunique()
 
     # ============================================================
-    # RAW DATA
+    # KPI CARDS
     # ============================================================
+    st.markdown(
+        '<div class="section-title">📊 Resale Market Overview</div>',
+        unsafe_allow_html=True,
+    )
 
-    with st.expander(
-        "📊 View Raw Filtered Data Table",
-        expanded=False
-    ):
-        st.dataframe(
-            filtered_df.head(n_rows),
-            use_container_width=True
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.markdown(
+            f"""
+            <div class="resale-kpi"
+                 style="border-bottom: 3px solid #10b981;">
+                <div class="kpi-label">
+                    Top {selected_group}
+                </div>
+
+                <div class="kpi-value"
+                     style="color:#10b981;">
+                    {top_group_item}
+                </div>
+
+                <div class="kpi-sub">
+                    Avg: ₹{top_group_val:,.0f}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
+    with col2:
+        st.markdown(
+            f"""
+            <div class="resale-kpi"
+                 style="border-bottom: 3px solid #38bdf8;">
+                <div class="kpi-label">
+                    Lowest {selected_group}
+                </div>
 
+                <div class="kpi-value"
+                     style="color:#38bdf8;">
+                    {lowest_group_item}
+                </div>
+
+                <div class="kpi-sub">
+                    Avg: ₹{lowest_group_val:,.0f}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with col3:
+        st.markdown(
+            f"""
+            <div class="resale-kpi"
+                 style="border-bottom: 3px solid #f43f5e;">
+                <div class="kpi-label">
+                    Overall Avg Resale
+                </div>
+
+                <div class="kpi-value"
+                     style="color:#f43f5e;">
+                    ₹{avg_resale:,.0f}
+                </div>
+
+                <div class="kpi-sub">
+                    All Bikes Mean
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with col4:
+        st.markdown(
+            f"""
+            <div class="resale-kpi"
+                 style="border-bottom: 3px solid #f59e0b;">
+                <div class="kpi-label">
+                    Total {selected_group}s
+                </div>
+
+                <div class="kpi-value"
+                     style="color:#f59e0b;">
+                    {total_categories}
+                </div>
+
+                <div class="kpi-sub">
+                    Unique Groups
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.divider()
+
+    # ============================================================
+    # BAR CHART
+    # ============================================================
     st.markdown(
-        """
-        <div class="model-divider"></div>
+        f"""
+        <div class="section-title">
+            📊 Average Resale Price by {selected_group}
+        </div>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
-
-    # ============================================================
-    # KPI CALCULATIONS
-    # ============================================================
-
-    st.markdown(
-        '<div class="section-title">⚡ Performance Overview</div>',
-        unsafe_allow_html=True
+    fig_bar = px.bar(
+        grouped_df,
+        x=selected_group,
+        y="Resale Price (INR)",
+        title=f"Average Resale Price Grouped by {selected_group}",
+        color="Resale Price (INR)",
+        color_continuous_scale="Mint",
+        text_auto=".0f",
     )
 
-    if not filtered_df.empty:
-
-        avg_price = filtered_df["Price (INR)"].mean()
-        avg_mileage = filtered_df["Mileage (km/l)"].mean()
-        avg_engine = filtered_df["Engine Capacity (cc)"].mean()
-        avg_resale = filtered_df["Resale Price (INR)"].mean()
-
-        retention_rate = (
-            (avg_resale / avg_price) * 100
-            if avg_price > 0
-            else 0
-        )
-
-
-        # ========================================================
-        # KPI CARDS
-        # ========================================================
-
-        k1, k2, k3, k4 = st.columns(4)
-
-        with k1:
-            st.markdown(
-                f"""
-                <div class="model-kpi kpi-cyan">
-
-                    <div class="kpi-top">
-                        <span class="kpi-label">
-                            Avg Price
-                        </span>
-
-                        <div class="kpi-icon icon-cyan">
-                            💰
-                        </div>
-                    </div>
-
-                    <div class="kpi-value">
-                        ₹{avg_price:,.0f}
-                    </div>
-
-                    <div
-                        class="kpi-sub"
-                        style="color:#38bdf8;"
-                    >
-                        🏷️ Average MSRP
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-
-        with k2:
-            st.markdown(
-                f"""
-                <div class="model-kpi kpi-green">
-
-                    <div class="kpi-top">
-                        <span class="kpi-label">
-                            Avg Mileage
-                        </span>
-
-                        <div class="kpi-icon icon-green">
-                            ⛽
-                        </div>
-                    </div>
-
-                    <div class="kpi-value">
-                        {avg_mileage:.1f}
-                        <span style="font-size:14px;">
-                            km/l
-                        </span>
-                    </div>
-
-                    <div
-                        class="kpi-sub"
-                        style="color:#34d399;"
-                    >
-                        ⚡ Fuel Economy
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-
-        with k3:
-            st.markdown(
-                f"""
-                <div class="model-kpi kpi-purple">
-
-                    <div class="kpi-top">
-                        <span class="kpi-label">
-                            Avg Engine
-                        </span>
-
-                        <div class="kpi-icon icon-purple">
-                            ⚙️
-                        </div>
-                    </div>
-
-                    <div class="kpi-value">
-                        {avg_engine:.0f}
-                        <span style="font-size:14px;">
-                            cc
-                        </span>
-                    </div>
-
-                    <div
-                        class="kpi-sub"
-                        style="color:#c084fc;"
-                    >
-                        🚀 Engine Capacity
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-
-        with k4:
-            st.markdown(
-                f"""
-                <div class="model-kpi kpi-orange">
-
-                    <div class="kpi-top">
-                        <span class="kpi-label">
-                            Avg Resale
-                        </span>
-
-                        <div class="kpi-icon icon-orange">
-                            ♻️
-                        </div>
-                    </div>
-
-                    <div class="kpi-value">
-                        ₹{avg_resale:,.0f}
-                    </div>
-
-                    <div
-                        class="kpi-sub"
-                        style="color:#fbbf24;"
-                    >
-                        📈 {retention_rate:.1f}% Retained
-                    </div>
-
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-
-    # ============================================================
-    # DIVIDER
-    # ============================================================
-
-    st.markdown(
-        """
-        <div class="model-divider"></div>
-        """,
-        unsafe_allow_html=True
+    fig_bar.update_layout(
+        template="plotly_dark",
+        title_x=0.5,
+        margin=dict(l=20, r=20, t=65, b=30),
+        height=430,
     )
 
-
-    # ============================================================
-    # DATA VISUALIZATION
-    # ============================================================
-
-    st.markdown(
-        '<div class="section-title">📊 Data Visualization</div>',
-        unsafe_allow_html=True
+    # Disable zoom / pan / toolbar
+    fig_bar.update_layout(
+        dragmode=False,
+        hovermode=False,
     )
 
-    chart_col1, chart_col2 = st.columns(2)
-
+    st.plotly_chart(
+        fig_bar,
+        use_container_width=True,
+        config={
+            "displayModeBar": False,
+            "scrollZoom": False,
+            "doubleClick": False,
+            "staticPlot": True,
+        },
+    )
 
     # ============================================================
-    # PRICE VS RESALE
+    # PIE + SCATTER
     # ============================================================
+    col_chart1, col_chart2 = st.columns(2)
 
-    with chart_col1:
+    with col_chart1:
 
         st.markdown(
-            '<div class="chart-title">💰 Price vs Resale Price</div>',
-            unsafe_allow_html=True
+            f"""
+            <div class="section-title">
+                🥧 Resale Share by {selected_group}
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
-        st.line_chart(
-            filtered_df,
-            x="Price (INR)",
+        fig_pie = px.pie(
+            grouped_df,
+            names=selected_group,
+            values="Resale Price (INR)",
+            title=f"Resale Price Breakdown ({selected_group})",
+            hole=0.4,
+            color_discrete_sequence=px.colors.qualitative.Dark24,
+        )
+
+        fig_pie.update_layout(
+            template="plotly_dark",
+            title_x=0.5,
+            margin=dict(l=10, r=10, t=60, b=10),
+            height=400,
+        )
+
+        st.plotly_chart(
+            fig_pie,
+            use_container_width=True,
+            config={
+                "displayModeBar": False,
+                "scrollZoom": False,
+                "doubleClick": False,
+                "staticPlot": True,
+            },
+        )
+
+    with col_chart2:
+
+        st.markdown(
+            f"""
+            <div class="section-title">
+                📉 Resale vs Bike Age
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        fig_scatter = px.scatter(
+            df,
+            x="Bike Age",
             y="Resale Price (INR)",
-            use_container_width=True
+            color=selected_group,
+            size="Engine Capacity (cc)",
+            title=f"Bike Age vs Resale Price ({selected_group})",
+            color_discrete_sequence=px.colors.qualitative.Bold,
         )
 
-
-    # ============================================================
-    # BRAND-WISE PRICE
-    # ============================================================
-
-    with chart_col2:
-
-        st.markdown(
-            '<div class="chart-title">🏍️ Brand-wise Average Price</div>',
-            unsafe_allow_html=True
+        fig_scatter.update_layout(
+            template="plotly_dark",
+            title_x=0.5,
+            margin=dict(l=10, r=10, t=60, b=10),
+            height=400,
         )
 
-        bar_data = (
-            filtered_df
-            .groupby("Brand")["Price (INR)"]
-            .mean()
+        st.plotly_chart(
+            fig_scatter,
+            use_container_width=True,
+            config={
+                "displayModeBar": False,
+                "scrollZoom": False,
+                "doubleClick": False,
+                "staticPlot": True,
+            },
         )
 
-        st.bar_chart(
-            bar_data,
-            use_container_width=True
-        )
-
+    st.divider()
 
     # ============================================================
-    # MARKET HIGHLIGHTS
+    # INSIGHTS
     # ============================================================
-
     st.markdown(
         """
-        <div class="model-divider"></div>
+        <div class="section-title">
+            💡 Resale Market Insights
+        </div>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
     st.markdown(
-        '<div class="section-title">💡 Market Highlights</div>',
-        unsafe_allow_html=True
+        f"""
+        <div class="insight-box"
+             style="border-left:4px solid #10b981;">
+            <div class="insight-title"
+                 style="color:#10b981;">
+                🏆 Top Performance
+            </div>
+
+            <div>
+                <b>{top_group_item}</b> leads the
+                <b>{selected_group}</b> category with an
+                average resale price of
+                <b>₹{top_group_val:,.0f}</b>.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
-
-    # ============================================================
-    # HIGHLIGHT CALCULATIONS
-    # ============================================================
-
-    most_popular = df["Model"].mode()[0]
-
-    highest_price = df.loc[
-        df["Price (INR)"].idxmax(),
-        "Model"
-    ]
-
-    highest_mileage = df.loc[
-        df["Mileage (km/l)"].idxmax(),
-        "Model"
-    ]
-
-    highest_resale = df.loc[
-        df["Resale Price (INR)"].idxmax(),
-        "Model"
-    ]
-
-
-    # ============================================================
-    # INSIGHT CARDS
-    # ============================================================
-
-    i1, i2 = st.columns(2)
-
-
-    with i1:
-
-        st.markdown(
-            f"""
-            <div
-                class="model-insight"
-                style="border-left:4px solid #38bdf8;"
-            >
-                🏆
-                <b>Most Popular Model:</b>
-                <span
-                    style="
-                        color:#38bdf8;
-                        font-weight:700;
-                    "
-                >
-                    {most_popular}
-                </span>
+    st.markdown(
+        f"""
+        <div class="insight-box"
+             style="border-left:4px solid #38bdf8;">
+            <div class="insight-title"
+                 style="color:#38bdf8;">
+                📉 Lower Resale Category
             </div>
 
-            <div
-                class="model-insight"
-                style="border-left:4px solid #c084fc;"
-            >
-                💎
-                <b>Highest Price Model:</b>
-                <span
-                    style="
-                        color:#c084fc;
-                        font-weight:700;
-                    "
-                >
-                    {highest_price}
-                </span>
+            <div>
+                <b>{lowest_group_item}</b> has the lowest average
+                resale valuation of
+                <b>₹{lowest_group_val:,.0f}</b>.
             </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-
-    with i2:
-
-        st.markdown(
-            f"""
-            <div
-                class="model-insight"
-                style="border-left:4px solid #34d399;"
-            >
-                ⛽
-                <b>Highest Mileage Model:</b>
-                <span
-                    style="
-                        color:#34d399;
-                        font-weight:700;
-                    "
-                >
-                    {highest_mileage}
-                </span>
-            </div>
-
-            <div
-                class="model-insight"
-                style="border-left:4px solid #fbbf24;"
-            >
-                📈
-                <b>Highest Resale Model:</b>
-                <span
-                    style="
-                        color:#fbbf24;
-                        font-weight:700;
-                    "
-                >
-                    {highest_resale}
-                </span>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 
