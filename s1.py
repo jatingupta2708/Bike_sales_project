@@ -1514,35 +1514,59 @@ elif opt== 'Price Analyse':
 # ==========================================
 
 
-if opt == "Price Analysis":
-
-    # ============================================================
-    # PROFESSIONAL PRICE ANALYSIS CSS
-    # ============================================================
-    st.markdown(
-        """
+st.markdown(
+    """
 <style>
 
+/* ============================================================
+   PRICE ANALYSIS HEADER
+   ============================================================ */
+
 .header-box {
-    background: linear-gradient(135deg, #123b43 0%, #0d2b3d 55%, #10253b 100%);
-    border: 1px solid rgba(96, 165, 250, 0.35);
-    border-radius: 18px;
-    padding: 28px 32px;
-    margin-bottom: 28px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(
+        135deg,
+        #123b43 0%,
+        #0d3040 50%,
+        #10253b 100%
+    );
+    border: 1px solid rgba(96, 165, 250, 0.38);
+    border-radius: 20px;
+    padding: 30px 34px;
+    margin-bottom: 30px;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Soft glow inside header */
+.header-box::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: rgba(59, 130, 246, 0.10);
+    border-radius: 50%;
+    top: -90px;
+    right: 40px;
+    filter: blur(5px);
 }
 
 .header-box h1 {
     color: #ffffff !important;
     margin: 0 !important;
-    font-size: 2.2rem !important;
+    font-size: 2.25rem !important;
     font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    position: relative;
 }
 
 .header-box p {
     color: #cbd5e1 !important;
-    margin-top: 7px !important;
-    font-size: 0.96rem !important;
+    margin-top: 8px !important;
+    font-size: 0.98rem !important;
+    position: relative;
 }
 
 
@@ -1551,18 +1575,45 @@ if opt == "Price Analysis":
    ============================================================ */
 
 .price-section-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+
     background: linear-gradient(
         90deg,
         rgba(30, 64, 175, 0.18),
-        rgba(15, 23, 42, 0.05)
+        rgba(15, 23, 42, 0.02)
     );
-    border-left: 4px solid #3b82f6;
-    border-radius: 8px;
-    padding: 12px 18px;
-    margin: 26px 0 15px 0;
+
+    border-left: 4px solid #60a5fa;
+    border-radius: 10px;
+
+    padding: 13px 18px;
+    margin: 30px 0 17px 0;
+
     color: #f8fafc;
     font-size: 21px;
-    font-weight: 750;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+
+/* Small glow beside heading */
+.price-section-title::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: #60a5fa;
+    border-radius: 50%;
+    margin-right: 10px;
+
+    box-shadow:
+        0 0 8px rgba(96, 165, 250, 0.9),
+        0 0 16px rgba(96, 165, 250, 0.45);
 }
 
 
@@ -1571,40 +1622,160 @@ if opt == "Price Analysis":
    ============================================================ */
 
 .price-kpi {
-    background: linear-gradient(145deg, #182338, #101827);
-    border: 1px solid rgba(96, 165, 250, 0.20);
-    border-radius: 16px;
-    padding: 20px 18px;
-    min-height: 112px;
+    background: linear-gradient(
+        145deg,
+        #1a2538 0%,
+        #111a2b 100%
+    );
+
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 17px;
+
+    padding: 21px 18px;
+    min-height: 116px;
+
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.24);
-    transition: all 0.25s ease;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+
+    position: relative;
+    overflow: hidden;
 }
 
-.price-kpi:hover {
-    transform: translateY(-4px);
-    border-color: rgba(96, 165, 250, 0.65);
-    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+
+/* Light glow on hover */
+.price-kpi::after {
+    content: "";
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    background: rgba(96, 165, 250, 0.13);
+
+    border-radius: 50%;
+
+    top: -95px;
+    right: -65px;
+
+    filter: blur(8px);
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
+
+
+/* Hover effect */
+.price-kpi:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(96, 165, 250, 0.65);
+
+    background: linear-gradient(
+        145deg,
+        #1d2b43 0%,
+        #121d31 100%
+    );
+
+    box-shadow:
+        0 14px 32px rgba(0, 0, 0, 0.32),
+        0 0 22px rgba(59, 130, 246, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.price-kpi:hover::after {
+    opacity: 1;
+}
+
+
+/* KPI icon */
 
 .kpi-icon {
-    font-size: 24px;
-    margin-bottom: 5px;
+    font-size: 25px;
+    margin-bottom: 6px;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
 }
+
+.price-kpi:hover .kpi-icon {
+    transform: scale(1.12);
+
+    filter:
+        drop-shadow(0 0 7px rgba(96, 165, 250, 0.55));
+}
+
+
+/* KPI label */
 
 .kpi-label {
     color: #94a3b8;
-    font-size: 12px;
-    font-weight: 700;
+
+    font-size: 11px;
+    font-weight: 800;
+
     text-transform: uppercase;
-    letter-spacing: 0.7px;
+    letter-spacing: 0.8px;
+
+    transition: color 0.25s ease;
 }
+
+.price-kpi:hover .kpi-label {
+    color: #cbd5e1;
+}
+
+
+/* KPI number */
 
 .kpi-number {
     color: #f8fafc;
+
     font-size: 23px;
-    font-weight: 800;
+    font-weight: 850;
+
     margin-top: 5px;
+
+    letter-spacing: -0.3px;
+
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease;
+}
+
+.price-kpi:hover .kpi-number {
+    color: #ffffff;
+
+    text-shadow:
+        0 0 12px rgba(96, 165, 250, 0.35);
+}
+
+
+/* ============================================================
+   GRAPH AREA
+   ============================================================ */
+
+.graph-box {
+    background: #0d1422;
+
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 15px;
+
+    padding: 6px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
 }
 
 
@@ -1613,426 +1784,58 @@ if opt == "Price Analysis":
    ============================================================ */
 
 .insight-card {
-    background: linear-gradient(145deg, #111c30, #0f172a);
-    border: 1px solid rgba(96, 165, 250, 0.22);
-    border-left: 4px solid #3b82f6;
-    border-radius: 12px;
+    background: linear-gradient(
+        145deg,
+        #121d30,
+        #0f172a
+    );
+
+    border: 1px solid rgba(96, 165, 250, 0.20);
+
+    border-left: 4px solid #60a5fa;
+
+    border-radius: 13px;
+
     padding: 17px 20px;
+
     margin: 12px 0;
+
     color: #cbd5e1;
+
     font-size: 15px;
     line-height: 1.6;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-    transition: all 0.25s ease;
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .insight-card:hover {
-    transform: translateX(3px);
-    border-left-color: #60a5fa;
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.14);
+    transform: translateX(4px);
+
+    border-left-color: #93c5fd;
+
+    box-shadow:
+        0 9px 26px rgba(37, 99, 235, 0.15);
 }
 
 
 /* ============================================================
-   GRAPH CONTAINER
-   ============================================================ */
-
-.graph-box {
-    background: #0d1422;
-    border: 1px solid rgba(148, 163, 184, 0.12);
-    border-radius: 14px;
-    padding: 5px;
-    margin-bottom: 22px;
-}
-
-
-/* ============================================================
-   DIVIDER
+   DIVIDERS
    ============================================================ */
 
 hr {
-    border-color: rgba(148, 163, 184, 0.18) !important;
+    border-color: rgba(148, 163, 184, 0.16) !important;
 }
 
 </style>
 """,
-        unsafe_allow_html=True
-    )
-
-
-    # ============================================================
-    # HEADER
-    # ============================================================
-    st.markdown(
-        """
-<div class="header-box">
-
-<h1>💰 Price Analysis</h1>
-
-<p>
-Analyze bike pricing trends, brand values, and market distribution.
-</p>
-
-</div>
-""",
-        unsafe_allow_html=True
-    )
-
-
-    # ============================================================
-    # KPI CALCULATIONS
-    # ============================================================
-    avg_price = df["Price (INR)"].mean()
-    avg_resale = df["Resale Price (INR)"].mean()
-    highest_price = df["Price (INR)"].max()
-    lowest_price = df["Price (INR)"].min()
-    price_gap = highest_price - lowest_price
-    retention_pct = (avg_resale / avg_price) * 100
-
-
-    # ============================================================
-    # KPI CARDS
-    # ============================================================
-    col1, col2, col3, col4 = st.columns(4)
-
-
-    with col1:
-
-        st.markdown(
-            f"""
-<div class="price-kpi">
-
-<div class="kpi-icon">💰</div>
-
-<div class="kpi-label">
-Average Price
-</div>
-
-<div class="kpi-number">
-₹{avg_price:,.0f}
-</div>
-
-</div>
-""",
-            unsafe_allow_html=True
-        )
-
-
-    with col2:
-
-        st.markdown(
-            f"""
-<div class="price-kpi">
-
-<div class="kpi-icon">💵</div>
-
-<div class="kpi-label">
-Average Resale
-</div>
-
-<div class="kpi-number">
-₹{avg_resale:,.0f}
-</div>
-
-</div>
-""",
-            unsafe_allow_html=True
-        )
-
-
-    with col3:
-
-        st.markdown(
-            f"""
-<div class="price-kpi">
-
-<div class="kpi-icon">📈</div>
-
-<div class="kpi-label">
-Highest Price
-</div>
-
-<div class="kpi-number">
-₹{highest_price:,.0f}
-</div>
-
-</div>
-""",
-            unsafe_allow_html=True
-        )
-
-
-    with col4:
-
-        st.markdown(
-            f"""
-<div class="price-kpi">
-
-<div class="kpi-icon">📊</div>
-
-<div class="kpi-label">
-Price Range Gap
-</div>
-
-<div class="kpi-number">
-₹{price_gap:,.0f}
-</div>
-
-</div>
-""",
-            unsafe_allow_html=True
-        )
-
-
-    st.divider()
-
-
-    # ============================================================
-    # HISTOGRAM
-    # ============================================================
-    st.markdown(
-        '<div class="price-section-title">📊 Price Distribution</div>',
-        unsafe_allow_html=True
-    )
-
-
-    fig1 = px.histogram(
-        df,
-        x="Price (INR)",
-        nbins=30,
-        title="Distribution of Bike Prices",
-        color_discrete_sequence=["#6366f1"]
-    )
-
-
-    fig1.update_traces(
-        marker_line_color="#0f172a",
-        marker_line_width=1.5
-    )
-
-
-    fig1.update_layout(
-        template="plotly_dark",
-        title_x=0.5,
-        title_font_size=18,
-        title_font_color="#f8fafc",
-        paper_bgcolor="#0d1422",
-        plot_bgcolor="#0d1422",
-        font=dict(color="#cbd5e1")
-    )
-
-
-    st.plotly_chart(
-        fig1,
-        use_container_width=True
-    )
-
-
-    # ============================================================
-    # BRAND PRICE BAR CHART
-    # ============================================================
-    st.markdown(
-        '<div class="price-section-title">🏍️ Average Price by Brand</div>',
-        unsafe_allow_html=True
-    )
-
-
-    brand_price = (
-        df.groupby("Brand")["Price (INR)"]
-        .mean()
-        .reset_index()
-    )
-
-
-    fig2 = px.bar(
-        brand_price,
-        x="Brand",
-        y="Price (INR)",
-        color="Brand",
-        title="Average Price by Brand"
-    )
-
-
-    fig2.update_layout(
-        template="plotly_dark",
-        title_x=0.5,
-        title_font_size=18,
-        title_font_color="#f8fafc",
-        paper_bgcolor="#0d1422",
-        plot_bgcolor="#0d1422",
-        font=dict(color="#cbd5e1")
-    )
-
-
-    st.plotly_chart(
-        fig2,
-        use_container_width=True
-    )
-
-
-    # ============================================================
-    # PRICE VS MILEAGE
-    # ============================================================
-    st.markdown(
-        '<div class="price-section-title">⛽ Price vs Mileage</div>',
-        unsafe_allow_html=True
-    )
-
-
-    mileage_data = df.groupby("Brand")[
-        ["Mileage (km/l)", "Price (INR)"]
-    ].mean().reset_index()
-
-
-    fig3 = px.scatter(
-        mileage_data,
-        x="Mileage (km/l)",
-        y="Price (INR)",
-        color="Brand",
-        title="Average Price vs Average Mileage by Brand"
-    )
-
-
-    fig3.update_layout(
-        template="plotly_dark",
-        title_x=0.5,
-        title_font_size=18,
-        title_font_color="#f8fafc",
-        paper_bgcolor="#0d1422",
-        plot_bgcolor="#0d1422",
-        font=dict(color="#cbd5e1")
-    )
-
-
-    st.plotly_chart(
-        fig3,
-        use_container_width=True
-    )
-
-
-    # ============================================================
-    # PRICE VS RESALE
-    # ============================================================
-    st.markdown(
-        '<div class="price-section-title">♻️ Price vs Resale Price</div>',
-        unsafe_allow_html=True
-    )
-
-
-    brand_resale_data = df.groupby("Brand")[
-        ["Price (INR)", "Resale Price (INR)"]
-    ].mean().reset_index()
-
-
-    fig4 = px.scatter(
-        brand_resale_data,
-        x="Price (INR)",
-        y="Resale Price (INR)",
-        color="Brand",
-        title="Average Price vs Average Resale Price by Brand"
-    )
-
-
-    fig4.update_layout(
-        template="plotly_dark",
-        title_x=0.5,
-        title_font_size=18,
-        title_font_color="#f8fafc",
-        paper_bgcolor="#0d1422",
-        plot_bgcolor="#0d1422",
-        font=dict(color="#cbd5e1")
-    )
-
-
-    st.plotly_chart(
-        fig4,
-        use_container_width=True
-    )
-
-
-    # ============================================================
-    # YEARLY PRICE TREND
-    # ============================================================
-    st.markdown(
-        '<div class="price-section-title">📅 Average Price Trend</div>',
-        unsafe_allow_html=True
-    )
-
-
-    year_price = df.groupby("Year of Manufacture")[
-        "Price (INR)"
-    ].mean().reset_index()
-
-
-    fig5 = px.line(
-        year_price,
-        x="Year of Manufacture",
-        y="Price (INR)",
-        markers=True,
-        title="Average Price by Manufacturing Year"
-    )
-
-
-    fig5.update_layout(
-        template="plotly_dark",
-        title_x=0.5,
-        title_font_size=18,
-        title_font_color="#f8fafc",
-        paper_bgcolor="#0d1422",
-        plot_bgcolor="#0d1422",
-        font=dict(color="#cbd5e1")
-    )
-
-
-    st.plotly_chart(
-        fig5,
-        use_container_width=True
-    )
-
-
-    # ============================================================
-    # KEY INSIGHTS
-    # ============================================================
-    st.markdown(
-        '<div class="price-section-title">💡 Key Insights</div>',
-        unsafe_allow_html=True
-    )
-
-
-    st.markdown(
-        f"""
-<div class="insight-card">
-📍 <b>Market Price Range:</b>
-Bikes range from ₹{lowest_price:,.0f} to ₹{highest_price:,.0f}.
-</div>
-""",
-        unsafe_allow_html=True
-    )
-
-
-    st.markdown(
-        f"""
-<div class="insight-card">
-📊 <b>Average Valuation:</b>
-The average bike price is ₹{avg_price:,.0f}.
-</div>
-""",
-        unsafe_allow_html=True
-    )
-
-
-    st.markdown(
-        f"""
-<div class="insight-card">
-♻️ <b>Resale Value:</b>
-The average resale price is ₹{avg_resale:,.0f},
-which is about {retention_pct:.1f}% of the average price.
-</div>
-""",
-        unsafe_allow_html=True
-    )
-
-
+    unsafe_allow_html=True
+)
 
 
 
