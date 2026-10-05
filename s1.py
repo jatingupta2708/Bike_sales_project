@@ -68,8 +68,7 @@ with st.sidebar:
 
 
 
-
-if opt == 'Dashboard':
+elif opt == 'Dashboard':
 
     # ============================================================
     # 1. RESALE-STYLE GLOSSY CSS
@@ -112,25 +111,21 @@ if opt == 'Dashboard':
         [data-testid="stSidebar"] {
             background: rgba(15, 23, 42, 0.75) !important;
             border-right: 1px solid rgba(255,255,255,0.08);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
         }
 
-
         /* ==============================
-           PAGE TITLE
+           PAGE HEADINGS
         ============================== */
 
         h1, h2, h3 {
             color: #f8fafc !important;
         }
 
-
         /* ==============================
-           GLOSSY HEADER
+           HEADER
         ============================== */
 
-        .dashboard-header {
+        .dashboard-header-box {
             background:
                 linear-gradient(
                     135deg,
@@ -139,62 +134,36 @@ if opt == 'Dashboard':
                 );
 
             border: 1px solid rgba(255,255,255,0.15);
-
             border-radius: 20px;
 
             padding: 24px 28px;
-
             margin-bottom: 22px;
 
             box-shadow:
                 0 12px 35px rgba(0,0,0,0.45),
                 inset 0 1px 2px rgba(255,255,255,0.18);
-
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
         }
-
-        .dashboard-header h1 {
-            margin: 0;
-            color: #ffffff;
-            font-size: 2.3rem;
-            font-weight: 800;
-        }
-
-        .dashboard-header p {
-            color: #cbd5e1;
-            margin-top: 6px;
-            margin-bottom: 0;
-            font-size: 0.95rem;
-        }
-
 
         /* ==============================
-           GLOSSY KPI CARDS
+           STREAMLIT METRIC CARDS
         ============================== */
 
-        .dashboard-kpi {
-            position: relative;
+        div[data-testid="stMetric"] {
 
             background:
                 linear-gradient(
                     135deg,
                     rgba(255,255,255,0.08),
                     rgba(255,255,255,0.02)
-                );
+                ) !important;
 
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.15) !important;
 
-            border-radius: 16px;
+            border-radius: 16px !important;
 
-            padding: 20px;
-
-            text-align: center;
+            padding: 20px !important;
 
             min-height: 125px;
-
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
 
             box-shadow:
                 0 10px 30px rgba(0,0,0,0.45),
@@ -204,101 +173,88 @@ if opt == 'Dashboard':
                 transform 0.28s ease,
                 box-shadow 0.28s ease,
                 border-color 0.28s ease;
-
-            overflow: hidden;
         }
 
-        .dashboard-kpi::before {
-            content: "";
-            position: absolute;
+        div[data-testid="stMetric"]:hover {
+            transform: translateY(-5px);
 
-            top: 0;
-            left: -100%;
-
-            width: 70%;
-            height: 100%;
-
-            background:
-                linear-gradient(
-                    100deg,
-                    transparent,
-                    rgba(255,255,255,0.08),
-                    transparent
-                );
-
-            transition: left 0.55s ease;
-
-            pointer-events: none;
-        }
-
-        .dashboard-kpi:hover::before {
-            left: 130%;
-        }
-
-        .dashboard-kpi:hover {
-            transform: translateY(-7px);
-
-            border-color: rgba(255,255,255,0.35);
+            border-color: rgba(255,255,255,0.35) !important;
 
             box-shadow:
                 0 18px 38px rgba(0,0,0,0.48),
                 0 0 22px rgba(16,185,129,0.18);
         }
 
+        /* Metric label */
 
-        /* KPI COLORS */
-
-        .kpi-blue {
-            border-bottom: 3px solid #38bdf8;
-        }
-
-        .kpi-green {
-            border-bottom: 3px solid #10b981;
-        }
-
-        .kpi-amber {
-            border-bottom: 3px solid #f59e0b;
-        }
-
-        .kpi-purple {
-            border-bottom: 3px solid #a78bfa;
-        }
-
-
-        /* KPI TOP */
-
-        .dashboard-kpi-title {
-            color: #9ca3af;
-
-            font-size: 0.75rem;
-
-            font-weight: 700;
-
+        div[data-testid="stMetricLabel"] {
+            color: #9ca3af !important;
+            font-weight: 700 !important;
             text-transform: uppercase;
-
             letter-spacing: 0.7px;
         }
 
-        .dashboard-kpi-icon {
-            font-size: 1.35rem;
+        /* Metric value */
 
-            margin-top: 7px;
-            margin-bottom: 3px;
-        }
-
-        .dashboard-kpi-value {
-            color: #ffffff;
-
-            font-size: 1.55rem;
-
-            font-weight: 900;
-
-            margin-top: 4px;
-
+        div[data-testid="stMetricValue"] {
+            color: #ffffff !important;
+            font-weight: 900 !important;
             text-shadow:
                 0 3px 10px rgba(0,0,0,0.45);
         }
 
+        /* ==============================
+           METRIC CARD COLORS
+        ============================== */
+
+        .kpi-blue {
+            border-bottom: 3px solid #38bdf8 !important;
+        }
+
+        .kpi-green {
+            border-bottom: 3px solid #10b981 !important;
+        }
+
+        .kpi-amber {
+            border-bottom: 3px solid #f59e0b !important;
+        }
+
+        .kpi-purple {
+            border-bottom: 3px solid #a78bfa !important;
+        }
+
+        /* ==============================
+           SELECTBOX / MULTISELECT
+        ============================== */
+
+        div[data-baseweb="select"] > div {
+            background: rgba(30,41,59,0.85) !important;
+
+            border: 1px solid rgba(255,255,255,0.10) !important;
+
+            border-radius: 10px !important;
+        }
+
+        /* ==============================
+           DIVIDER
+        ============================== */
+
+        hr {
+            border: none !important;
+
+            height: 1px !important;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(16,185,129,0.55),
+                    rgba(6,182,212,0.45),
+                    transparent
+                ) !important;
+
+            margin: 22px 0 !important;
+        }
 
         /* ==============================
            HIGHLIGHT CARDS
@@ -319,9 +275,6 @@ if opt == 'Dashboard':
             padding: 18px;
 
             text-align: center;
-
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
 
             box-shadow:
                 0 8px 24px rgba(0,0,0,0.35);
@@ -361,42 +314,6 @@ if opt == 'Dashboard':
             margin-top: 6px;
         }
 
-
-        /* ==============================
-           SELECTBOX
-        ============================== */
-
-        div[data-baseweb="select"] > div {
-            background: rgba(30,41,59,0.85) !important;
-
-            border: 1px solid rgba(255,255,255,0.10) !important;
-
-            border-radius: 10px !important;
-        }
-
-
-        /* ==============================
-           DIVIDER
-        ============================== */
-
-        hr {
-            border: none !important;
-
-            height: 1px !important;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(16,185,129,0.55),
-                    rgba(6,182,212,0.45),
-                    transparent
-                ) !important;
-
-            margin: 22px 0 !important;
-        }
-
-
         /* ==============================
            PLOTLY CONTAINERS
         ============================== */
@@ -410,7 +327,6 @@ if opt == 'Dashboard':
 
             border: 1px solid rgba(255,255,255,0.05);
         }
-
 
         /* ==============================
            BLOCK CONTAINER
@@ -431,20 +347,17 @@ if opt == 'Dashboard':
     # ============================================================
 
     st.markdown("""
-        <div class="dashboard-header">
-
+        <div class="dashboard-header-box">
             <h1>🏍️ MOTO VISION INDIA</h1>
-
-            <p>
+            <p style="color:#cbd5e1;">
                 Smart Analytics & Market Intelligence for Indian Two-Wheelers
             </p>
-
         </div>
     """, unsafe_allow_html=True)
 
 
     # ============================================================
-    # 3. BRAND FILTER
+    # 3. MARKET OVERVIEW
     # ============================================================
 
     st.markdown("### 📊 Market Overview")
@@ -471,108 +384,33 @@ if opt == 'Dashboard':
 
 
     # ============================================================
-    # 5. GLOSSY KPI CARDS
+    # 5. KPI CARDS
     # ============================================================
 
     k1, k2, k3, k4 = st.columns(4)
 
-
     with k1:
-
-        st.markdown(
-            f"""
-            <div class="dashboard-kpi kpi-blue">
-
-                <div class="dashboard-kpi-title">
-                    Total Inventory
-                </div>
-
-                <div class="dashboard-kpi-icon">
-                    🏍️
-                </div>
-
-                <div class="dashboard-kpi-value">
-                    {total_bikes:,}
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
+        st.metric(
+            label="🏍️ TOTAL INVENTORY",
+            value=f"{total_bikes:,}"
         )
-
 
     with k2:
-
-        st.markdown(
-            f"""
-            <div class="dashboard-kpi kpi-green">
-
-                <div class="dashboard-kpi-title">
-                    Average Price
-                </div>
-
-                <div class="dashboard-kpi-icon">
-                    💰
-                </div>
-
-                <div class="dashboard-kpi-value">
-                    ₹{Average_price:,.0f}
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
+        st.metric(
+            label="💰 AVERAGE PRICE",
+            value=f"₹{Average_price:,.0f}"
         )
-
 
     with k3:
-
-        st.markdown(
-            f"""
-            <div class="dashboard-kpi kpi-amber">
-
-                <div class="dashboard-kpi-title">
-                    Avg Resale Value
-                </div>
-
-                <div class="dashboard-kpi-icon">
-                    💵
-                </div>
-
-                <div class="dashboard-kpi-value">
-                    ₹{Average_resale_price:,.0f}
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
+        st.metric(
+            label="💵 AVG RESALE VALUE",
+            value=f"₹{Average_resale_price:,.0f}"
         )
 
-
     with k4:
-
-        st.markdown(
-            f"""
-            <div class="dashboard-kpi kpi-purple">
-
-                <div class="dashboard-kpi-title">
-                    Avg Mileage
-                </div>
-
-                <div class="dashboard-kpi-icon">
-                    ⛽
-                </div>
-
-                <div class="dashboard-kpi-value">
-                    {Average_mileage:.1f}
-                    <span style="font-size:14px;color:#cbd5e1;">
-                        km/l
-                    </span>
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
+        st.metric(
+            label="⛽ AVG MILEAGE",
+            value=f"{Average_mileage:.1f} km/l"
         )
 
 
@@ -666,7 +504,7 @@ if opt == 'Dashboard':
 
 
     # ============================================================
-    # 7. CHARTS
+    # 7. CHART COLORS
     # ============================================================
 
     custom_palette = [
@@ -681,12 +519,14 @@ if opt == 'Dashboard':
     ]
 
 
-    # ------------------------------------------------------------
-    # CHART 1 + CHART 2
-    # ------------------------------------------------------------
+    # ============================================================
+    # 8. CHART 1 + CHART 2
+    # ============================================================
 
     col_1, col_2 = st.columns(2)
 
+
+    # ---------------- CHART 1 ----------------
 
     with col_1:
 
@@ -727,6 +567,8 @@ if opt == 'Dashboard':
             key="dashboard_top_brands"
         )
 
+
+    # ---------------- CHART 2 ----------------
 
     with col_2:
 
@@ -770,12 +612,14 @@ if opt == 'Dashboard':
         )
 
 
-    # ------------------------------------------------------------
-    # CHART 3 + CHART 4
-    # ------------------------------------------------------------
+    # ============================================================
+    # 9. CHART 3 + CHART 4
+    # ============================================================
 
     col_3, col_4 = st.columns(2)
 
+
+    # ---------------- CHART 3 ----------------
 
     with col_3:
 
@@ -809,6 +653,8 @@ if opt == 'Dashboard':
             key="dashboard_price_hist"
         )
 
+
+    # ---------------- CHART 4 ----------------
 
     with col_4:
 
