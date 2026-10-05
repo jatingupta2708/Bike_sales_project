@@ -398,285 +398,233 @@ if opt == 'Dashboard':
 
 
 
-
-elif opt == "Data Overview":
+elif opt == 'Data Overview':
 
     rows = df.shape[0]
     cols = df.shape[1]
 
     # ============================================================
-    # HEADER
+    # DATA OVERVIEW STYLING
     # ============================================================
-    st.markdown(
-        """
-        <div class="dataset-header">
-            <h1>📊 Dataset Overview</h1>
-            <p>
-                Explore, inspect and understand the Bike Sales India dataset.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
-    # ============================================================
-    # CSS - CLEAN PROFESSIONAL GLOW
-    # ============================================================
     st.markdown(
         """
         <style>
 
-        /* ==============================
-           MAIN PAGE
-        ============================== */
-
+        /* Main Background */
         [data-testid="stAppViewContainer"] {
-            background:
-                radial-gradient(
-                    circle at 10% 0%,
-                    rgba(37, 99, 235, 0.16),
-                    transparent 32%
-                ),
-                radial-gradient(
-                    circle at 90% 90%,
-                    rgba(124, 58, 237, 0.14),
-                    transparent 32%
-                ),
-                #020617 !important;
+            background: radial-gradient(
+                circle at top,
+                #172033 0%,
+                #0f172a 45%,
+                #020617 100%
+            ) !important;
         }
 
         [data-testid="stHeader"] {
             background: transparent !important;
         }
 
+        /* Main Container */
         .block-container {
-            max-width: 1400px;
             padding-top: 2rem;
             padding-bottom: 3rem;
+            max-width: 1400px;
         }
 
-        h1, h2, h3, h4 {
+        /* Headings */
+        h1, h2, h3 {
             color: #f8fafc !important;
+            font-weight: 700 !important;
         }
 
-
-        /* ==============================
+        /* ========================================================
            HEADER
-        ============================== */
+        ======================================================== */
 
-        .dataset-header {
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #1e3a8a
-                );
-            border: 1px solid rgba(96, 165, 250, 0.45);
+        .overview-header {
+            background: linear-gradient(
+                135deg,
+                rgba(16,185,129,0.20),
+                rgba(6,182,212,0.14)
+            );
+
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 18px;
-            padding: 25px 28px;
-            margin-bottom: 24px;
+            padding: 24px 28px;
+            margin-bottom: 22px;
+
             box-shadow:
-                0 10px 30px rgba(37, 99, 235, 0.25);
+                0 10px 30px rgba(0,0,0,0.40),
+                inset 0 1px 1px rgba(255,255,255,0.15);
         }
 
-        .dataset-header h1 {
-            color: #ffffff !important;
+        .overview-header h1 {
             margin: 0;
+            color: #ffffff;
             font-size: 2.2rem;
             font-weight: 800;
         }
 
-        .dataset-header p {
-            color: #e2e8f0;
-            margin: 7px 0 0 0;
+        .overview-header p {
+            margin-top: 7px;
+            margin-bottom: 0;
+            color: #cbd5e1;
             font-size: 0.95rem;
         }
 
-
-        /* ==============================
+        /* ========================================================
            DATASET INFO CARDS
-        ============================== */
+        ======================================================== */
 
         .dataset-info {
             display: flex;
-            gap: 18px;
+            gap: 16px;
             flex-wrap: wrap;
-            margin-bottom: 28px;
+            margin-bottom: 26px;
         }
 
         .dataset-info-item {
             flex: 1;
             min-width: 180px;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    #1e293b,
-                    #0f172a
-                );
+            background: linear-gradient(
+                145deg,
+                rgba(30,41,59,0.95),
+                rgba(15,23,42,0.95)
+            );
 
-            padding: 22px 18px;
+            border: 1px solid rgba(255,255,255,0.10);
             border-radius: 16px;
 
-            color: #ffffff;
+            padding: 18px;
             text-align: center;
 
-            border: 1px solid rgba(96, 165, 250, 0.18);
+            color: #f8fafc;
 
             box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.32);
+                0 8px 24px rgba(0,0,0,0.35),
+                inset 0 1px 1px rgba(255,255,255,0.05);
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                border-color 0.25s ease;
-
-            position: relative;
-            overflow: hidden;
+            transition: 0.25s ease;
         }
 
         .dataset-info-item:hover {
-            transform: translateY(-5px);
-
-            border-color: rgba(96, 165, 250, 0.55);
+            transform: translateY(-4px);
 
             box-shadow:
-                0 12px 28px rgba(0, 0, 0, 0.4),
-                0 0 22px rgba(37, 99, 235, 0.22);
+                0 12px 28px rgba(0,0,0,0.45),
+                0 0 18px rgba(16,185,129,0.18);
+
+            border-color: rgba(16,185,129,0.35);
         }
 
         .dataset-info-item strong {
             display: block;
-
-            color: #60a5fa;
-
-            font-size: 13px;
-            font-weight: 700;
-
+            color: #10b981;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.7px;
-
-            margin-bottom: 9px;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
         }
 
-
-        /* ==============================
+        /* ========================================================
            TABS
-        ============================== */
+        ======================================================== */
 
         button[data-baseweb="tab"] {
-            background: #111827 !important;
             color: #cbd5e1 !important;
+            background: rgba(30,41,59,0.75) !important;
 
-            border: 1px solid rgba(148, 163, 184, 0.16) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
             border-radius: 10px !important;
 
             padding: 9px 16px !important;
-            margin-right: 6px !important;
+            margin-right: 6px;
 
             font-weight: 600 !important;
-
-            transition:
-                all 0.25s ease !important;
         }
 
         button[data-baseweb="tab"]:hover {
             color: #ffffff !important;
-
-            border-color: #3b82f6 !important;
-
-            box-shadow:
-                0 0 16px rgba(37, 99, 235, 0.25) !important;
+            background: rgba(16,185,129,0.18) !important;
         }
 
-        button[data-baseweb="tab"][aria-selected="true"] {
-            background: #2563eb !important;
+        button[aria-selected="true"] {
+            background: #10b981 !important;
             color: #ffffff !important;
-
-            border-color: #60a5fa !important;
+            border-color: #10b981 !important;
 
             box-shadow:
-                0 0 18px rgba(37, 99, 235, 0.35) !important;
+                0 6px 18px rgba(16,185,129,0.25);
         }
 
-
-        /* ==============================
+        /* ========================================================
            DATAFRAME
-        ============================== */
+        ======================================================== */
 
         div[data-testid="stDataFrame"] {
             border-radius: 14px !important;
-
             overflow: hidden !important;
 
-            border: 1px solid rgba(96, 165, 250, 0.18) !important;
+            border: 1px solid rgba(255,255,255,0.08) !important;
 
             box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.28) !important;
+                0 8px 22px rgba(0,0,0,0.30);
         }
 
-
-        /* ==============================
+        /* ========================================================
            SLIDER
-        ============================== */
+        ======================================================== */
 
         div[data-testid="stSlider"] {
             padding-top: 8px;
             padding-bottom: 4px;
         }
 
-
-        /* ==============================
+        /* ========================================================
            DOWNLOAD BUTTON
-        ============================== */
+        ======================================================== */
 
         .stDownloadButton button {
             width: 100%;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #1d4ed8
-                ) !important;
+            background: linear-gradient(
+                135deg,
+                #10b981,
+                #06b6d4
+            ) !important;
 
             color: #ffffff !important;
 
-            border: 1px solid rgba(96, 165, 250, 0.35) !important;
-
+            border: none !important;
             border-radius: 10px !important;
 
             font-weight: 700 !important;
 
-            padding: 0.65rem 1rem !important;
-
-            transition: all 0.25s ease !important;
-
-            box-shadow:
-                0 6px 18px rgba(37, 99, 235, 0.25) !important;
+            transition: 0.25s ease;
         }
 
         .stDownloadButton button:hover {
             transform: translateY(-2px);
 
             box-shadow:
-                0 10px 24px rgba(37, 99, 235, 0.38) !important;
+                0 8px 20px rgba(16,185,129,0.28);
         }
 
-
-        /* ==============================
+        /* ========================================================
            EXPANDER
-        ============================== */
+        ======================================================== */
 
         details {
-            background: #111827 !important;
+            background: rgba(30,41,59,0.85) !important;
+
+            border: 1px solid rgba(255,255,255,0.08) !important;
 
             border-radius: 12px !important;
 
-            border: 1px solid rgba(148, 163, 184, 0.15) !important;
-
             box-shadow:
-                0 6px 18px rgba(0, 0, 0, 0.22) !important;
+                0 6px 18px rgba(0,0,0,0.20);
         }
 
         details summary {
@@ -684,34 +632,29 @@ elif opt == "Data Overview":
             font-weight: 600 !important;
         }
 
-
-        /* ==============================
-           SELECTBOX / INPUTS
-        ============================== */
-
-        div[data-baseweb="select"] > div {
-            background: #111827 !important;
-            border-color: rgba(148, 163, 184, 0.2) !important;
-        }
-
-
-        /* ==============================
-           SIDEBAR
-        ============================== */
-
-        section[data-testid="stSidebar"] {
-            background: #0f172a !important;
-            border-right: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
         </style>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
 
+    # ============================================================
+    # HEADER
+    # ============================================================
+
+    st.markdown(
+        """
+        <div class="overview-header">
+            <h1>📊 Dataset Overview</h1>
+            <p>
+                Explore, inspect and understand the Bike Sales India dataset.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     # ============================================================
-    # DATASET KPI CARDS
+    # DATASET INFORMATION CARDS
     # ============================================================
 
     st.markdown(
@@ -740,9 +683,8 @@ elif opt == "Data Overview":
 
         </div>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
-
 
     # ============================================================
     # TABS
@@ -756,9 +698,8 @@ elif opt == "Data Overview":
         ]
     )
 
-
     # ============================================================
-    # TAB 1: DATA PREVIEW
+    # TAB 1 - DATA PREVIEW
     # ============================================================
 
     with tab1:
@@ -769,7 +710,6 @@ elif opt == "Data Overview":
             st.subheader("Preview Filtered Data")
 
         with col_right:
-
             n_rows = st.slider(
                 "Rows to show",
                 min_value=10,
@@ -790,6 +730,7 @@ elif opt == "Data Overview":
                 use_container_width=True
             )
 
+        # Download button
         csv = df.to_csv(index=False).encode("utf-8")
 
         st.download_button(
@@ -800,9 +741,8 @@ elif opt == "Data Overview":
             use_container_width=True,
         )
 
-
     # ============================================================
-    # TAB 2: COLUMN DETAILS
+    # TAB 2 - COLUMN DETAILS
     # ============================================================
 
     with tab2:
@@ -838,23 +778,23 @@ elif opt == "Data Overview":
             use_container_width=True
         )
 
-
     # ============================================================
-    # TAB 3: SUMMARY
+    # TAB 3 - SUMMARY
     # ============================================================
 
     with tab3:
 
         st.subheader("Statistical Summary")
 
+        # Numeric columns
         num_cols = df.select_dtypes(
             include=["int64", "float64"]
         ).columns.tolist()
 
+        # Categorical columns
         cat_cols = df.select_dtypes(
             include=["object", "category"]
         ).columns.tolist()
-
 
         if num_cols:
 
@@ -864,7 +804,6 @@ elif opt == "Data Overview":
                 df[num_cols].describe(),
                 use_container_width=True
             )
-
 
         if cat_cols:
 
@@ -885,15 +824,12 @@ elif opt == "Data Overview":
                         hide_index=True
                     )
 
-
         if len(cat_cols) > 4:
 
             st.info(
                 f"Showing top 4 categorical columns. "
                 f"There are {len(cat_cols)} in total."
             )
-
-
 
 
 
