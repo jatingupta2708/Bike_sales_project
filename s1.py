@@ -1089,100 +1089,169 @@ elif opt == 'Brand Analysis':
 
 
 
-elif opt == "Resale Analysis":
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+elif opt == "Model Analysis":
 
     # ============================================================
-    # SIMPLE PROFESSIONAL CSS
+    # MODEL ANALYSIS - SIMPLE PROFESSIONAL CSS
     # ============================================================
     st.markdown(
         """
         <style>
 
-        .resale-header {
-            background: linear-gradient(135deg, #123c43, #102a43);
-            border: 1px solid #285b70;
-            border-radius: 18px;
-            padding: 24px 28px;
-            margin-bottom: 22px;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+        /* Main Background */
+        [data-testid="stAppViewContainer"] {
+            background: #080d18 !important;
         }
 
-        .resale-header h1 {
-            color: #ffffff;
+        [data-testid="stHeader"] {
+            background: transparent !important;
+        }
+
+        .block-container {
+            max-width: 1400px;
+            padding-top: 2rem;
+            padding-bottom: 3rem;
+        }
+
+        /* Header */
+        .model-header {
+            background: linear-gradient(
+                135deg,
+                #123d4a,
+                #102b43
+            );
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .model-header h1 {
+            color: #ffffff !important;
             margin: 0;
             font-size: 2.2rem;
             font-weight: 800;
         }
 
-        .resale-header p {
+        .model-header p {
             color: #cbd5e1;
             margin: 7px 0 0 0;
             font-size: 0.95rem;
         }
 
-        .resale-kpi {
+        /* KPI Card */
+        .model-kpi {
             background: #111827;
-            border: 1px solid #293548;
-            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.20);
+            border-radius: 15px;
             padding: 20px 16px;
             text-align: center;
-            min-height: 145px;
+            min-height: 165px;
             transition: 0.25s ease;
-            box-shadow: 0 5px 16px rgba(0,0,0,0.20);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
         }
 
-        .resale-kpi:hover {
+        .model-kpi:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(56,189,248,0.18);
-            border-color: #38bdf8;
+            border-color: rgba(96, 165, 250, 0.55);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.18);
         }
 
-        .kpi-label {
+        .model-kpi-icon {
+            font-size: 25px;
+            margin-bottom: 7px;
+        }
+
+        .model-kpi-title {
             color: #94a3b8;
-            font-size: 0.75rem;
+            font-size: 0.76rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .kpi-value {
+        .model-kpi-value {
             color: #f8fafc;
-            font-size: 1.45rem;
+            font-size: 1.35rem;
             font-weight: 800;
-            margin: 9px 0;
+            margin-top: 8px;
         }
 
-        .kpi-sub {
+        .model-kpi-sub {
             color: #94a3b8;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
+            margin-top: 7px;
         }
 
+        /* Section Headings */
         .section-title {
             color: #f8fafc;
-            font-size: 1.25rem;
+            font-size: 1.45rem;
             font-weight: 750;
-            margin-top: 12px;
-            margin-bottom: 8px;
-            padding-left: 10px;
-            border-left: 4px solid #38bdf8;
+            margin-top: 10px;
+            margin-bottom: 12px;
         }
 
-        .insight-box {
+        /* Insight Card */
+        .model-insight {
             background: #111827;
-            border: 1px solid #293548;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-left: 4px solid #38bdf8;
             border-radius: 12px;
             padding: 16px 18px;
             margin-bottom: 12px;
-            color: #cbd5e1;
         }
 
-        .insight-box:hover {
-            border-color: #38bdf8;
-        }
-
-        .insight-title {
+        .model-insight-title {
+            color: #38bdf8;
             font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .model-insight-text {
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            line-height: 1.5;
         }
 
         </style>
@@ -1190,64 +1259,58 @@ elif opt == "Resale Analysis":
         unsafe_allow_html=True,
     )
 
+
     # ============================================================
     # HEADER
     # ============================================================
     st.markdown(
         """
-        <div class="resale-header">
-            <h1>⚡ Bike Resale Analytics</h1>
+        <div class="model-header">
+            <h1>🏍️ Model Analysis</h1>
             <p>
-                Interactive market analytics with category-wise resale insights.
+                Explore bike models and compare price, mileage,
+                engine capacity and resale performance.
             </p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    # ============================================================
-    # CATEGORY SELECTOR
-    # ============================================================
-    selected_group = st.selectbox(
-        "🎛️ Select Category",
-        ["Brand", "Fuel Type", "Year of Manufacture", "Owner Type"],
-    )
 
     # ============================================================
-    # DATA PREPARATION
+    # MODEL SELECTOR
     # ============================================================
-    current_year = 2026
+    st.subheader("🔎 Select Bike Model")
 
-    df["Bike Age"] = (
-        current_year - df["Year of Manufacture"]
+    model = st.selectbox(
+        "Choose Model",
+        options=sorted(df["Model"].dropna().unique()),
+        key="model_analysis_select",
     )
 
-    grouped_df = (
-        df.groupby(selected_group)["Resale Price (INR)"]
-        .mean()
-        .reset_index()
+    selected_data = df[df["Model"] == model]
+
+
+    # ============================================================
+    # KPI CALCULATIONS
+    # ============================================================
+    avg_price = selected_data["Price (INR)"].mean()
+    avg_mileage = selected_data["Mileage (km/l)"].mean()
+    avg_engine = selected_data["Engine Capacity (cc)"].mean()
+    avg_resale = selected_data["Resale Price (INR)"].mean()
+
+    resale_percentage = (
+        (avg_resale / avg_price) * 100
+        if avg_price > 0
+        else 0
     )
 
-    grouped_df = grouped_df.sort_values(
-        "Resale Price (INR)",
-        ascending=False
-    )
-
-    top_group_item = grouped_df.iloc[0][selected_group]
-    top_group_val = grouped_df.iloc[0]["Resale Price (INR)"]
-
-    lowest_group_item = grouped_df.iloc[-1][selected_group]
-    lowest_group_val = grouped_df.iloc[-1]["Resale Price (INR)"]
-
-    avg_resale = df["Resale Price (INR)"].mean()
-
-    total_categories = df[selected_group].nunique()
 
     # ============================================================
     # KPI CARDS
     # ============================================================
     st.markdown(
-        '<div class="section-title">📊 Resale Market Overview</div>',
+        '<div class="section-title">📊 Model Overview</div>',
         unsafe_allow_html=True,
     )
 
@@ -1256,19 +1319,15 @@ elif opt == "Resale Analysis":
     with col1:
         st.markdown(
             f"""
-            <div class="resale-kpi"
-                 style="border-bottom: 3px solid #10b981;">
-                <div class="kpi-label">
-                    Top {selected_group}
+            <div class="model-kpi"
+                 style="border-bottom: 3px solid #38bdf8;">
+                <div class="model-kpi-icon">💰</div>
+                <div class="model-kpi-title">Avg Price</div>
+                <div class="model-kpi-value">
+                    ₹{avg_price:,.0f}
                 </div>
-
-                <div class="kpi-value"
-                     style="color:#10b981;">
-                    {top_group_item}
-                </div>
-
-                <div class="kpi-sub">
-                    Avg: ₹{top_group_val:,.0f}
+                <div class="model-kpi-sub">
+                    Average MSRP
                 </div>
             </div>
             """,
@@ -1278,19 +1337,16 @@ elif opt == "Resale Analysis":
     with col2:
         st.markdown(
             f"""
-            <div class="resale-kpi"
-                 style="border-bottom: 3px solid #38bdf8;">
-                <div class="kpi-label">
-                    Lowest {selected_group}
+            <div class="model-kpi"
+                 style="border-bottom: 3px solid #34d399;">
+                <div class="model-kpi-icon">⛽</div>
+                <div class="model-kpi-title">Avg Mileage</div>
+                <div class="model-kpi-value">
+                    {avg_mileage:.1f}
+                    <span style="font-size:0.8rem;">km/l</span>
                 </div>
-
-                <div class="kpi-value"
-                     style="color:#38bdf8;">
-                    {lowest_group_item}
-                </div>
-
-                <div class="kpi-sub">
-                    Avg: ₹{lowest_group_val:,.0f}
+                <div class="model-kpi-sub">
+                    Fuel Economy
                 </div>
             </div>
             """,
@@ -1300,19 +1356,16 @@ elif opt == "Resale Analysis":
     with col3:
         st.markdown(
             f"""
-            <div class="resale-kpi"
-                 style="border-bottom: 3px solid #f43f5e;">
-                <div class="kpi-label">
-                    Overall Avg Resale
+            <div class="model-kpi"
+                 style="border-bottom: 3px solid #c084fc;">
+                <div class="model-kpi-icon">⚙️</div>
+                <div class="model-kpi-title">Avg Engine</div>
+                <div class="model-kpi-value">
+                    {avg_engine:,.0f}
+                    <span style="font-size:0.8rem;">cc</span>
                 </div>
-
-                <div class="kpi-value"
-                     style="color:#f43f5e;">
-                    ₹{avg_resale:,.0f}
-                </div>
-
-                <div class="kpi-sub">
-                    All Bikes Mean
+                <div class="model-kpi-sub">
+                    Engine Capacity
                 </div>
             </div>
             """,
@@ -1322,208 +1375,263 @@ elif opt == "Resale Analysis":
     with col4:
         st.markdown(
             f"""
-            <div class="resale-kpi"
-                 style="border-bottom: 3px solid #f59e0b;">
-                <div class="kpi-label">
-                    Total {selected_group}s
+            <div class="model-kpi"
+                 style="border-bottom: 3px solid #fbbf24;">
+                <div class="model-kpi-icon">♻️</div>
+                <div class="model-kpi-title">Avg Resale</div>
+                <div class="model-kpi-value">
+                    ₹{avg_resale:,.0f}
                 </div>
-
-                <div class="kpi-value"
-                     style="color:#f59e0b;">
-                    {total_categories}
-                </div>
-
-                <div class="kpi-sub">
-                    Unique Groups
+                <div class="model-kpi-sub">
+                    {resale_percentage:.1f}% Retained
                 </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
+
     st.divider()
 
+
     # ============================================================
-    # BAR CHART
+    # PRICE & RESALE CHART
     # ============================================================
     st.markdown(
-        f"""
-        <div class="section-title">
-            📊 Average Resale Price by {selected_group}
-        </div>
-        """,
+        '<div class="section-title">💰 Price & Resale Analysis</div>',
         unsafe_allow_html=True,
     )
 
-    fig_bar = px.bar(
-        grouped_df,
-        x=selected_group,
-        y="Resale Price (INR)",
-        title=f"Average Resale Price Grouped by {selected_group}",
-        color="Resale Price (INR)",
-        color_continuous_scale="Mint",
-        text_auto=".0f",
+    price_resale = selected_data[
+        ["Year of Manufacture", "Price (INR)", "Resale Price (INR)"]
+    ].copy()
+
+    price_resale = (
+        price_resale
+        .groupby("Year of Manufacture")
+        .mean()
+        .reset_index()
     )
 
-    fig_bar.update_layout(
+    fig1 = px.line(
+        price_resale,
+        x="Year of Manufacture",
+        y=["Price (INR)", "Resale Price (INR)"],
+        markers=True,
+        title=f"{model} - Price vs Resale Price",
+    )
+
+    fig1.update_layout(
         template="plotly_dark",
         title_x=0.5,
-        margin=dict(l=20, r=20, t=65, b=30),
-        height=430,
-    )
-
-    # Disable zoom / pan / toolbar
-    fig_bar.update_layout(
-        dragmode=False,
-        hovermode=False,
+        hovermode="x unified",
+        margin=dict(l=20, r=20, t=60, b=20),
+        legend_title_text="",
     )
 
     st.plotly_chart(
-        fig_bar,
+        fig1,
         use_container_width=True,
         config={
             "displayModeBar": False,
             "scrollZoom": False,
             "doubleClick": False,
-            "staticPlot": True,
         },
     )
 
-    # ============================================================
-    # PIE + SCATTER
-    # ============================================================
-    col_chart1, col_chart2 = st.columns(2)
 
-    with col_chart1:
+    # ============================================================
+    # MILEAGE & ENGINE CHARTS
+    # ============================================================
+    chart_col1, chart_col2 = st.columns(2)
+
+    with chart_col1:
 
         st.markdown(
-            f"""
-            <div class="section-title">
-                🥧 Resale Share by {selected_group}
-            </div>
-            """,
+            '<div class="section-title">⛽ Mileage Analysis</div>',
             unsafe_allow_html=True,
         )
 
-        fig_pie = px.pie(
-            grouped_df,
-            names=selected_group,
-            values="Resale Price (INR)",
-            title=f"Resale Price Breakdown ({selected_group})",
-            hole=0.4,
-            color_discrete_sequence=px.colors.qualitative.Dark24,
+        mileage_df = selected_data[
+            ["Year of Manufacture", "Mileage (km/l)"]
+        ].groupby(
+            "Year of Manufacture"
+        ).mean().reset_index()
+
+        fig2 = px.bar(
+            mileage_df,
+            x="Year of Manufacture",
+            y="Mileage (km/l)",
+            title=f"{model} - Mileage by Year",
+            color_discrete_sequence=["#34d399"],
         )
 
-        fig_pie.update_layout(
+        fig2.update_layout(
             template="plotly_dark",
             title_x=0.5,
-            margin=dict(l=10, r=10, t=60, b=10),
-            height=400,
+            margin=dict(l=20, r=20, t=60, b=20),
         )
 
         st.plotly_chart(
-            fig_pie,
+            fig2,
             use_container_width=True,
             config={
                 "displayModeBar": False,
                 "scrollZoom": False,
                 "doubleClick": False,
-                "staticPlot": True,
             },
         )
 
-    with col_chart2:
+
+    with chart_col2:
 
         st.markdown(
-            f"""
-            <div class="section-title">
-                📉 Resale vs Bike Age
-            </div>
-            """,
+            '<div class="section-title">⚙️ Engine Analysis</div>',
             unsafe_allow_html=True,
         )
 
-        fig_scatter = px.scatter(
-            df,
-            x="Bike Age",
-            y="Resale Price (INR)",
-            color=selected_group,
-            size="Engine Capacity (cc)",
-            title=f"Bike Age vs Resale Price ({selected_group})",
-            color_discrete_sequence=px.colors.qualitative.Bold,
+        engine_df = selected_data[
+            ["Year of Manufacture", "Engine Capacity (cc)"]
+        ].groupby(
+            "Year of Manufacture"
+        ).mean().reset_index()
+
+        fig3 = px.bar(
+            engine_df,
+            x="Year of Manufacture",
+            y="Engine Capacity (cc)",
+            title=f"{model} - Engine Capacity by Year",
+            color_discrete_sequence=["#c084fc"],
         )
 
-        fig_scatter.update_layout(
+        fig3.update_layout(
             template="plotly_dark",
             title_x=0.5,
-            margin=dict(l=10, r=10, t=60, b=10),
-            height=400,
+            margin=dict(l=20, r=20, t=60, b=20),
         )
 
         st.plotly_chart(
-            fig_scatter,
+            fig3,
             use_container_width=True,
             config={
                 "displayModeBar": False,
                 "scrollZoom": False,
                 "doubleClick": False,
-                "staticPlot": True,
             },
         )
+
 
     st.divider()
 
+
     # ============================================================
-    # INSIGHTS
+    # MODEL INFORMATION
     # ============================================================
     st.markdown(
-        """
-        <div class="section-title">
-            💡 Resale Market Insights
-        </div>
-        """,
+        '<div class="section-title">📋 Model Information</div>',
+        unsafe_allow_html=True,
+    )
+
+    info_col1, info_col2 = st.columns(2)
+
+    with info_col1:
+
+        if "Brand" in selected_data.columns:
+            brand_name = selected_data["Brand"].mode().iloc[0]
+        else:
+            brand_name = "N/A"
+
+        st.markdown(
+            f"""
+            <div class="model-insight">
+                <div class="model-insight-title">🏷️ Brand</div>
+                <div class="model-insight-text">
+                    {brand_name}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            f"""
+            <div class="model-insight">
+                <div class="model-insight-title">📅 Manufacturing Years</div>
+                <div class="model-insight-text">
+                    {selected_data["Year of Manufacture"].min():.0f}
+                    -
+                    {selected_data["Year of Manufacture"].max():.0f}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with info_col2:
+
+        st.markdown(
+            f"""
+            <div class="model-insight"
+                 style="border-left-color:#fbbf24;">
+                <div class="model-insight-title"
+                     style="color:#fbbf24;">
+                    ♻️ Resale Retention
+                </div>
+                <div class="model-insight-text">
+                    This model retains approximately
+                    <b>{resale_percentage:.1f}%</b>
+                    of its average original price.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            f"""
+            <div class="model-insight"
+                 style="border-left-color:#34d399;">
+                <div class="model-insight-title"
+                     style="color:#34d399;">
+                    🏍️ Records Available
+                </div>
+                <div class="model-insight-text">
+                    Analysis is based on
+                    <b>{len(selected_data)}</b>
+                    available records for this model.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+
+    # ============================================================
+    # KEY INSIGHT
+    # ============================================================
+    st.markdown(
+        '<div class="section-title">💡 Key Model Insight</div>',
         unsafe_allow_html=True,
     )
 
     st.markdown(
         f"""
-        <div class="insight-box"
-             style="border-left:4px solid #10b981;">
-            <div class="insight-title"
-                 style="color:#10b981;">
-                🏆 Top Performance
+        <div class="model-insight"
+             style="border-left-color:#38bdf8;">
+            <div class="model-insight-title">
+                📌 {model}
             </div>
-
-            <div>
-                <b>{top_group_item}</b> leads the
-                <b>{selected_group}</b> category with an
-                average resale price of
-                <b>₹{top_group_val:,.0f}</b>.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.markdown(
-        f"""
-        <div class="insight-box"
-             style="border-left:4px solid #38bdf8;">
-            <div class="insight-title"
-                 style="color:#38bdf8;">
-                📉 Lower Resale Category
-            </div>
-
-            <div>
-                <b>{lowest_group_item}</b> has the lowest average
-                resale valuation of
-                <b>₹{lowest_group_val:,.0f}</b>.
+            <div class="model-insight-text">
+                The selected model has an average price of
+                <b>₹{avg_price:,.0f}</b>, average resale value of
+                <b>₹{avg_resale:,.0f}</b>, mileage of
+                <b>{avg_mileage:.1f} km/l</b> and engine capacity of
+                <b>{avg_engine:,.0f} cc</b>.
             </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
-
 
 
 
