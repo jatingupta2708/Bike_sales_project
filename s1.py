@@ -2222,70 +2222,74 @@ elif opt == "State Analysis":
 elif opt == "About Project":
 
     st.markdown("""
-    <style>
-    .about-box {
-        background: linear-gradient(135deg, #172554, #0f172a);
-        padding: 30px;
-        border-radius: 16px;
-        border: 1px solid #294b91;
-        margin: 20px 0;
-    }
+<style>
+.stApp {
+    background: #0b1120;
+}
 
-    .about-title {
-        color: white;
-        font-size: 30px;
-        font-weight: 800;
-        margin-bottom: 10px;
-    }
+.about-box {
+    background: linear-gradient(135deg, #172554, #0f172a);
+    border: 1px solid #294b91;
+    border-radius: 16px;
+    padding: 30px;
+    margin: 20px 0;
+}
 
-    .about-text {
-        color: #cbd5e1;
-        font-size: 16px;
-        line-height: 1.7;
-    }
+.about-title {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
 
-    .info-box {
-        background: #111827;
-        padding: 22px;
-        border-radius: 14px;
-        border: 1px solid #263449;
-        margin: 15px 0;
-    }
+.about-text {
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.7;
+}
 
-    .info-title {
-        color: white;
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
+.info-box {
+    background: #111827;
+    border: 1px solid #263449;
+    border-radius: 14px;
+    padding: 22px;
+    margin: 18px 0;
+}
 
-    .info-text {
-        color: #b8c4d6;
-        font-size: 15px;
-        line-height: 1.7;
-    }
+.info-title {
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
 
-    .tech-box {
-        background: #111827;
-        padding: 18px;
-        border-radius: 12px;
-        border: 1px solid #29364a;
-        text-align: center;
-    }
+.info-text {
+    color: #b8c4d6;
+    font-size: 15px;
+    line-height: 1.8;
+}
 
-    .tech-name {
-        color: #60a5fa;
-        font-size: 16px;
-        font-weight: 700;
-    }
+.tech-box {
+    background: #111827;
+    border: 1px solid #29364a;
+    border-radius: 12px;
+    padding: 18px 10px;
+    text-align: center;
+}
 
-    .tech-text {
-        color: #94a3b8;
-        font-size: 13px;
-        margin-top: 5px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+.tech-name {
+    color: #60a5fa;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.tech-text {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 5px;
+}
+</style>
+""", unsafe_allow_html=True)
 
 
     st.title("📌 About Project")
@@ -2297,124 +2301,96 @@ elif opt == "About Project":
     st.divider()
 
 
-    # Main Project Box
+    st.markdown("""
+<div class="about-box">
+<div class="about-title">🏍️ Bike Sales India</div>
+
+<div class="about-text">
+An interactive data analysis and visualization dashboard
+created to explore and understand the Indian bike market.
+The project transforms raw bike data into meaningful
+insights using statistics, charts and comparisons.
+</div>
+</div>
+""", unsafe_allow_html=True)
+
 
     st.markdown("""
-    <div class="about-box">
+<div class="info-box">
+<div class="info-title">📖 About the Project</div>
 
-        <div class="about-title">
-            🏍️ Bike Sales India
-        </div>
+<div class="info-text">
+<b>Bike Sales India</b> is a data analysis project focused on
+understanding the Indian bike market.
+<br><br>
+The dashboard allows users to explore different bike brands,
+models, prices, resale values, mileage, engine capacity and
+state-wise data.
+<br><br>
+The main goal is to present bike data in a simple,
+interactive and easy-to-understand format.
+</div>
+</div>
+""", unsafe_allow_html=True)
 
-        <div class="about-text">
-            An interactive data analysis and visualization dashboard
-            created to explore and understand the Indian bike market.
-            The project transforms raw bike data into meaningful
-            insights using statistics, charts and comparisons.
-        </div>
-
-    </div>
-    """, unsafe_allow_html=True)
-
-
-    # About Project
 
     st.markdown("""
-    <div class="info-box">
+<div class="info-box">
+<div class="info-title">🎯 Project Objective</div>
 
-        <div class="info-title">
-            📖 About the Project
-        </div>
+<div class="info-text">
+• Compare different bike brands<br>
+• Analyze different bike models<br>
+• Understand bike price ranges<br>
+• Analyze resale values<br>
+• Compare mileage and engine capacity<br>
+• Explore state-wise bike data<br>
+• Understand market trends through charts
+</div>
+</div>
+""", unsafe_allow_html=True)
 
-        <div class="info-text">
-            <b>Bike Sales India</b> is a data analysis project focused
-            on understanding the Indian bike market.
-            <br><br>
-
-            The dashboard allows users to explore different bike
-            brands, models, prices, resale values, mileage,
-            engine capacity and state-wise data.
-            <br><br>
-
-            The main goal is to present bike data in a simple,
-            interactive and easy-to-understand format.
-        </div>
-
-    </div>
-    """, unsafe_allow_html=True)
-
-
-    # Project Objective
 
     st.markdown("""
-    <div class="info-box">
+<div class="info-box">
+<div class="info-title">🛠️ Technologies Used</div>
+</div>
+""", unsafe_allow_html=True)
 
-        <div class="info-title">
-            🎯 Project Objective
-        </div>
-
-        <div class="info-text">
-            • Compare different bike brands<br>
-            • Analyze different bike models<br>
-            • Understand bike price ranges<br>
-            • Analyze resale values<br>
-            • Compare mileage and engine capacity<br>
-            • Explore state-wise bike data<br>
-            • Understand market trends through charts
-        </div>
-
-    </div>
-    """, unsafe_allow_html=True)
-
-
-    # Technologies
-
-    st.markdown("""
-    <div class="info-box">
-
-        <div class="info-title">
-            🛠️ Technologies Used
-        </div>
-
-    </div>
-    """, unsafe_allow_html=True)
 
     t1, t2, t3, t4 = st.columns(4)
 
     with t1:
         st.markdown("""
-        <div class="tech-box">
-            <div class="tech-name">🐍 Python</div>
-            <div class="tech-text">Programming</div>
-        </div>
-        """, unsafe_allow_html=True)
+<div class="tech-box">
+<div class="tech-name">🐍 Python</div>
+<div class="tech-text">Programming</div>
+</div>
+""", unsafe_allow_html=True)
 
     with t2:
         st.markdown("""
-        <div class="tech-box">
-            <div class="tech-name">🐼 Pandas</div>
-            <div class="tech-text">Data Analysis</div>
-        </div>
-        """, unsafe_allow_html=True)
+<div class="tech-box">
+<div class="tech-name">🐼 Pandas</div>
+<div class="tech-text">Data Analysis</div>
+</div>
+""", unsafe_allow_html=True)
 
     with t3:
         st.markdown("""
-        <div class="tech-box">
-            <div class="tech-name">📈 Plotly</div>
-            <div class="tech-text">Visualization</div>
-        </div>
-        """, unsafe_allow_html=True)
+<div class="tech-box">
+<div class="tech-name">📈 Plotly</div>
+<div class="tech-text">Visualization</div>
+</div>
+""", unsafe_allow_html=True)
 
     with t4:
         st.markdown("""
-        <div class="tech-box">
-            <div class="tech-name">📊 Streamlit</div>
-            <div class="tech-text">Dashboard</div>
-        </div>
-        """, unsafe_allow_html=True)
-
-
-
+<div class="tech-box">
+<div class="tech-name">📊 Streamlit</div>
+<div class="tech-text">Dashboard</div>
+</div>
+""", unsafe_allow_html=True)
 
 
 
