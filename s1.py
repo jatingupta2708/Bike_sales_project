@@ -67,23 +67,7 @@ with st.sidebar:
 
 
 
-if opt == 'Dashboard':
-
-    # ============================================================
-    # HTML RENDER HELPER
-    # ============================================================
-
-    def render_html(content):
-        """
-        Render HTML properly.
-        st.html() prevents HTML tags from appearing as plain text.
-        Fallback is provided for older Streamlit versions.
-        """
-        if hasattr(st, "html"):
-            st.html(content)
-        else:
-            st.markdown(content, unsafe_allow_html=True)
-
+elif opt == 'Dashboard':
 
     # ============================================================
     # 1. RESALE-STYLE GLOSSY CSS
@@ -92,9 +76,9 @@ if opt == 'Dashboard':
     st.markdown("""
         <style>
 
-        /* =====================================================
+        /* ==============================
            MAIN BACKGROUND
-        ===================================================== */
+        ============================== */
 
         .stApp {
             background:
@@ -131,18 +115,18 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
-           PAGE TITLES
-        ===================================================== */
+        /* ==============================
+           PAGE TITLE
+        ============================== */
 
         h1, h2, h3 {
             color: #f8fafc !important;
         }
 
 
-        /* =====================================================
+        /* ==============================
            GLOSSY HEADER
-        ===================================================== */
+        ============================== */
 
         .dashboard-header {
             background:
@@ -183,9 +167,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
+        /* ==============================
            GLOSSY KPI CARDS
-        ===================================================== */
+        ============================== */
 
         .dashboard-kpi {
             position: relative;
@@ -207,8 +191,6 @@ if opt == 'Dashboard':
 
             min-height: 125px;
 
-            box-sizing: border-box;
-
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
 
@@ -224,8 +206,35 @@ if opt == 'Dashboard':
             overflow: hidden;
         }
 
+        .dashboard-kpi::before {
+            content: "";
+            position: absolute;
+
+            top: 0;
+            left: -100%;
+
+            width: 70%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    transparent,
+                    rgba(255,255,255,0.08),
+                    transparent
+                );
+
+            transition: left 0.55s ease;
+
+            pointer-events: none;
+        }
+
+        .dashboard-kpi:hover::before {
+            left: 130%;
+        }
+
         .dashboard-kpi:hover {
-            transform: translateY(-5px);
+            transform: translateY(-7px);
 
             border-color: rgba(255,255,255,0.35);
 
@@ -235,9 +244,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
+        /* ==============================
            KPI COLORS
-        ===================================================== */
+        ============================== */
 
         .kpi-blue {
             border-bottom: 3px solid #38bdf8;
@@ -256,9 +265,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
-           KPI TEXT
-        ===================================================== */
+        /* ==============================
+           KPI TOP
+        ============================== */
 
         .dashboard-kpi-title {
             color: #9ca3af;
@@ -293,9 +302,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
+        /* ==============================
            HIGHLIGHT CARDS
-        ===================================================== */
+        ============================== */
 
         .highlight-card {
             background:
@@ -311,11 +320,7 @@ if opt == 'Dashboard':
 
             padding: 18px;
 
-            min-height: 90px;
-
             text-align: center;
-
-            box-sizing: border-box;
 
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -346,8 +351,6 @@ if opt == 'Dashboard':
             text-transform: uppercase;
 
             letter-spacing: 0.6px;
-
-            margin-bottom: 7px;
         }
 
         .highlight-value {
@@ -361,9 +364,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
-           SELECTBOX / MULTISELECT
-        ===================================================== */
+        /* ==============================
+           SELECTBOX
+        ============================== */
 
         div[data-baseweb="select"] > div {
             background: rgba(30,41,59,0.85) !important;
@@ -374,9 +377,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
+        /* ==============================
            DIVIDER
-        ===================================================== */
+        ============================== */
 
         hr {
             border: none !important;
@@ -396,9 +399,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
+        /* ==============================
            PLOTLY CONTAINERS
-        ===================================================== */
+        ============================== */
 
         div[data-testid="stPlotlyChart"] {
             background: rgba(15,23,42,0.35);
@@ -411,9 +414,9 @@ if opt == 'Dashboard':
         }
 
 
-        /* =====================================================
+        /* ==============================
            BLOCK CONTAINER
-        ===================================================== */
+        ============================== */
 
         .block-container {
             padding-top: 2rem;
@@ -429,7 +432,7 @@ if opt == 'Dashboard':
     # 2. HEADER
     # ============================================================
 
-    render_html("""
+    st.markdown("""
         <div class="dashboard-header">
 
             <h1>🏍️ MOTO VISION INDIA</h1>
@@ -439,7 +442,7 @@ if opt == 'Dashboard':
             </p>
 
         </div>
-    """)
+    """, unsafe_allow_html=True)
 
 
     # ============================================================
@@ -476,11 +479,9 @@ if opt == 'Dashboard':
     k1, k2, k3, k4 = st.columns(4)
 
 
-    # ---------------- KPI 1 ----------------
-
     with k1:
 
-        render_html(
+        st.markdown(
             f"""
             <div class="dashboard-kpi kpi-blue">
 
@@ -497,15 +498,14 @@ if opt == 'Dashboard':
                 </div>
 
             </div>
-            """
+            """,
+            unsafe_allow_html=True
         )
 
 
-    # ---------------- KPI 2 ----------------
-
     with k2:
 
-        render_html(
+        st.markdown(
             f"""
             <div class="dashboard-kpi kpi-green">
 
@@ -522,15 +522,14 @@ if opt == 'Dashboard':
                 </div>
 
             </div>
-            """
+            """,
+            unsafe_allow_html=True
         )
 
 
-    # ---------------- KPI 3 ----------------
-
     with k3:
 
-        render_html(
+        st.markdown(
             f"""
             <div class="dashboard-kpi kpi-amber">
 
@@ -547,15 +546,14 @@ if opt == 'Dashboard':
                 </div>
 
             </div>
-            """
+            """,
+            unsafe_allow_html=True
         )
 
 
-    # ---------------- KPI 4 ----------------
-
     with k4:
 
-        render_html(
+        st.markdown(
             f"""
             <div class="dashboard-kpi kpi-purple">
 
@@ -569,13 +567,16 @@ if opt == 'Dashboard':
 
                 <div class="dashboard-kpi-value">
                     {Average_mileage:.1f}
+
                     <span style="font-size:14px;color:#cbd5e1;">
                         km/l
                     </span>
+
                 </div>
 
             </div>
-            """
+            """,
+            unsafe_allow_html=True
         )
 
 
@@ -605,11 +606,9 @@ if opt == 'Dashboard':
     col1, col2, col3 = st.columns(3)
 
 
-    # ---------------- HIGHLIGHT 1 ----------------
-
     with col1:
 
-        render_html(
+        st.markdown(
             f"""
             <div class="highlight-card">
 
@@ -622,15 +621,14 @@ if opt == 'Dashboard':
                 </div>
 
             </div>
-            """
+            """,
+            unsafe_allow_html=True
         )
 
 
-    # ---------------- HIGHLIGHT 2 ----------------
-
     with col2:
 
-        render_html(
+        st.markdown(
             f"""
             <div class="highlight-card">
 
@@ -643,15 +641,14 @@ if opt == 'Dashboard':
                 </div>
 
             </div>
-            """
+            """,
+            unsafe_allow_html=True
         )
 
 
-    # ---------------- HIGHLIGHT 3 ----------------
-
     with col3:
 
-        render_html(
+        st.markdown(
             f"""
             <div class="highlight-card">
 
@@ -664,7 +661,8 @@ if opt == 'Dashboard':
                 </div>
 
             </div>
-            """
+            """,
+            unsafe_allow_html=True
         )
 
 
@@ -694,7 +692,9 @@ if opt == 'Dashboard':
     col_1, col_2 = st.columns(2)
 
 
-    # ---------------- CHART 1 ----------------
+    # ------------------------------------------------------------
+    # CHART 1
+    # ------------------------------------------------------------
 
     with col_1:
 
@@ -724,6 +724,7 @@ if opt == 'Dashboard':
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             title_x=0.5,
+            title_xanchor="center",
             showlegend=False,
             height=380
         )
@@ -736,7 +737,9 @@ if opt == 'Dashboard':
         )
 
 
-    # ---------------- CHART 2 ----------------
+    # ------------------------------------------------------------
+    # CHART 2
+    # ------------------------------------------------------------
 
     with col_2:
 
@@ -769,6 +772,7 @@ if opt == 'Dashboard':
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             title_x=0.5,
+            title_xanchor="center",
             height=380
         )
 
@@ -787,7 +791,9 @@ if opt == 'Dashboard':
     col_3, col_4 = st.columns(2)
 
 
-    # ---------------- CHART 3 ----------------
+    # ------------------------------------------------------------
+    # CHART 3
+    # ------------------------------------------------------------
 
     with col_3:
 
@@ -811,6 +817,7 @@ if opt == 'Dashboard':
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             title_x=0.5,
+            title_xanchor="center",
             height=380
         )
 
@@ -822,7 +829,9 @@ if opt == 'Dashboard':
         )
 
 
-    # ---------------- CHART 4 ----------------
+    # ------------------------------------------------------------
+    # CHART 4
+    # ------------------------------------------------------------
 
     with col_4:
 
@@ -854,6 +863,7 @@ if opt == 'Dashboard':
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             title_x=0.5,
+            title_xanchor="center",
             height=380
         )
 
@@ -862,8 +872,7 @@ if opt == 'Dashboard':
             fig_scatter,
             use_container_width=True,
             key="dashboard_price_mileage"
-        )
-    
+        )    
 # if opt == 'Dashboard':
 #     # ---------------------------------------------------------
 #     # 1. Glossy & Glassmorphism CSS Styling
