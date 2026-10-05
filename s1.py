@@ -67,7 +67,7 @@ with st.sidebar:
 
 
 
-elif opt == 'Dashboard':
+if opt == 'Dashboard':
 
     import textwrap
 
