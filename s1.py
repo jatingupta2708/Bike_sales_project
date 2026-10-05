@@ -1919,211 +1919,459 @@ elif opt == "Resale Analysis":
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 elif opt == "State Analysis":
 
     # ============================================================
-    # CSS STYLING
+    # CSS STYLING - PROFESSIONAL DARK BLUE THEME
     # ============================================================
     st.markdown(
         """
-        <style>
-        .stApp {
-            background-color: #060a12 !important;
-        }
+<style>
+.stApp {
+    background: linear-gradient(180deg, #0b1120 0%, #080d1a 100%) !important;
+}
 
-        .block-container {
-            max-width: 1400px;
-            padding-top: 1.5rem;
-            padding-bottom: 3rem;
-        }
+.block-container {
+    max-width: 1400px;
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
 
-        h1, h2, h3 {
-            color: #f8fafc !important;
-            font-weight: 700 !important;
-        }
+/* MAIN HEADINGS */
+h1, h2, h3 {
+    color: #f8fafc !important;
+    font-weight: 750 !important;
+}
 
-        [data-testid="stCaptionContainer"] {
-            color: #60a5fa !important;
-            font-size: 13px !important;
-            font-weight: 700 !important;
-        }
+[data-testid="stCaptionContainer"] {
+    color: #60a5fa !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.6px;
+}
 
-        /* 🔵 CUSTOM BLUE CIRCLE KPI CARDS */
-        .kpi-card {
-            background: #0d1322;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-        }
+/* DIVIDER */
+hr {
+    border-color: rgba(148, 163, 184, 0.20) !important;
+}
 
-        .kpi-icon-circle {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(29, 78, 216, 0.1) 100%);
-            border: 1.5px solid #3b82f6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
-            flex-shrink: 0;
-        }
+/* ============================================================
+   KPI CARDS
+   ============================================================ */
 
-        .kpi-content {
-            display: flex;
-            flex-direction: column;
-        }
+.kpi-card {
+    background: linear-gradient(145deg, #172033, #111827);
+    border: 1px solid rgba(96, 165, 250, 0.18);
+    border-radius: 16px;
+    padding: 19px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+    min-height: 72px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    transition: all 0.25s ease;
+}
 
-        .kpi-title {
-            color: #94a3b8;
-            font-size: 13px;
-            font-weight: 600;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+.kpi-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(96, 165, 250, 0.55);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.16);
+}
 
-        .kpi-value {
-            color: #f8fafc;
-            font-size: 20px;
-            font-weight: 800;
-            margin-top: 2px;
-        }
+/* BLUE CIRCLE ICON */
+.kpi-icon-circle {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.35) 0%,
+        rgba(30, 64, 175, 0.12) 100%
+    );
+    border: 1.5px solid #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.30);
+}
 
-        /* Streamlit Button Tweaks inside KPI */
-        div.stButton > button {
-            width: 100%;
-            border-radius: 8px;
-            background-color: #1e293b;
-            color: #93c5fd;
-            border: 1px solid rgba(147, 197, 253, 0.2);
-            transition: all 0.3s ease;
-        }
-        div.stButton > button:hover {
-            background-color: #3b82f6;
-            color: #ffffff;
-            border-color: #3b82f6;
-        }
-        </style>
-        """,
+.kpi-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.kpi-title {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 650;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.kpi-value {
+    color: #f8fafc;
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 3px;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+div.stButton > button {
+    width: 100%;
+    min-height: 38px;
+    border-radius: 9px;
+    background: #111c30;
+    color: #93c5fd;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+div.stButton > button:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: 0 5px 18px rgba(37, 99, 235, 0.25);
+}
+
+/* ============================================================
+   SELECTBOX
+   ============================================================ */
+
+div[data-baseweb="select"] > div {
+    background: #111827;
+    border: 1px solid #29364a;
+    border-radius: 10px;
+}
+
+div[data-baseweb="select"] > div:hover {
+    border-color: #3b82f6;
+}
+
+/* ============================================================
+   DATAFRAME
+   ============================================================ */
+
+[data-testid="stDataFrame"] {
+    border: 1px solid #263449;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* ============================================================
+   INFO BOXES
+   ============================================================ */
+
+div[data-testid="stAlert"] {
+    background: linear-gradient(145deg, #111c30, #0f172a);
+    border: 1px solid rgba(96, 165, 250, 0.20);
+    border-radius: 12px;
+}
+
+/* ============================================================
+   TEXT
+   ============================================================ */
+
+p {
+    color: #b8c4d6;
+}
+
+label {
+    color: #cbd5e1 !important;
+    font-weight: 600 !important;
+}
+</style>
+""",
         unsafe_allow_html=True,
     )
 
+
     # ============================================================
-    # 2. POP-UP MODAL FUNCTION (st.dialog)
+    # POP-UP MODAL FUNCTION
     # ============================================================
     @st.dialog("📍 State Breakdown & Insights")
     def show_state_popup(target_state_name, category_type):
+
         st.subheader(f"{category_type}: {target_state_name}")
-        st.write(f"Detailed market snapshot for **{target_state_name}**:")
+
+        st.write(
+            f"Detailed market snapshot for **{target_state_name}**:"
+        )
 
         state_df = df[df["State"] == target_state_name]
 
         if not state_df.empty:
+
             p_col1, p_col2 = st.columns(2)
+
             with p_col1:
-                st.metric("Avg Price", f"₹{state_df['Price (INR)'].mean():,.0f}")
-                st.metric("Avg Mileage", f"{state_df['Mileage (km/l)'].mean():.1f} km/l")
+                st.metric(
+                    "Avg Price",
+                    f"₹{state_df['Price (INR)'].mean():,.0f}"
+                )
+
+                st.metric(
+                    "Avg Mileage",
+                    f"{state_df['Mileage (km/l)'].mean():.1f} km/l"
+                )
+
             with p_col2:
-                st.metric("Avg Resale", f"₹{state_df['Resale Price (INR)'].mean():,.0f}")
-                st.metric("Avg Engine", f"{state_df['Engine Capacity (cc)'].mean():.0f} cc")
+                st.metric(
+                    "Avg Resale",
+                    f"₹{state_df['Resale Price (INR)'].mean():,.0f}"
+                )
+
+                st.metric(
+                    "Avg Engine",
+                    f"{state_df['Engine Capacity (cc)'].mean():.0f} cc"
+                )
 
             st.markdown("---")
+
             st.markdown("**🏍️ Top Models in this State:**")
-            top_models = state_df["Model"].value_counts().head(3).index.tolist()
+
+            top_models = (
+                state_df["Model"]
+                .value_counts()
+                .head(3)
+                .index
+                .tolist()
+            )
+
             for m in top_models:
                 st.markdown(f"- **{m}**")
+
         else:
             st.info("No detailed records found for this state.")
 
-    # Helper function to render Blue Circle Card
+
+    # ============================================================
+    # KPI CARD FUNCTION
+    # ============================================================
     def render_kpi_card(icon, title, value):
+
         st.markdown(
             f"""
-            <div class="kpi-card">
-                <div class="kpi-icon-circle">{icon}</div>
-                <div class="kpi-content">
-                    <div class="kpi-title">{title}</div>
-                    <div class="kpi-value">{value}</div>
-                </div>
-            </div>
-            """,
+<div class="kpi-card">
+<div class="kpi-icon-circle">{icon}</div>
+
+<div class="kpi-content">
+<div class="kpi-title">{title}</div>
+<div class="kpi-value">{value}</div>
+</div>
+</div>
+""",
             unsafe_allow_html=True,
         )
 
+
     # ============================================================
-    # 3. TITLE SECTION
+    # TITLE SECTION
     # ============================================================
     st.title("🗺️ State Analysis")
-    st.caption("REGIONAL MARKET INTELLIGENCE • INDIAN BIKE MARKET")
+
+    st.caption(
+        "REGIONAL MARKET INTELLIGENCE • INDIAN BIKE MARKET"
+    )
+
     st.write(
         "Analyze bike sales across different Indian states. "
         "Compare average prices, resale values, mileage and "
         "fuel preferences to identify regional market trends."
     )
+
     st.divider()
 
-    # ============================================================
-    # 4. KPI CALCULATIONS
-    # ============================================================
-    total_states = df["State"].nunique()
-    top_state = df["State"].value_counts().idxmax()
-    highest_price_state = df.groupby("State")["Price (INR)"].mean().idxmax()
-    highest_resale_state = df.groupby("State")["Resale Price (INR)"].mean().idxmax()
-    best_mileage_state = df.groupby("State")["Mileage (km/l)"].mean().idxmax()
-    highest_engine_state = df.groupby("State")["Engine Capacity (cc)"].mean().idxmax()
 
     # ============================================================
-    # 5. REGIONAL OVERVIEW (BLUE CIRCLE CARDS + POP-UP BUTTONS)
+    # KPI CALCULATIONS
+    # ============================================================
+    total_states = df["State"].nunique()
+
+    top_state = df["State"].value_counts().idxmax()
+
+    highest_price_state = (
+        df.groupby("State")["Price (INR)"]
+        .mean()
+        .idxmax()
+    )
+
+    highest_resale_state = (
+        df.groupby("State")["Resale Price (INR)"]
+        .mean()
+        .idxmax()
+    )
+
+    best_mileage_state = (
+        df.groupby("State")["Mileage (km/l)"]
+        .mean()
+        .idxmax()
+    )
+
+    highest_engine_state = (
+        df.groupby("State")["Engine Capacity (cc)"]
+        .mean()
+        .idxmax()
+    )
+
+
+    # ============================================================
+    # REGIONAL OVERVIEW
     # ============================================================
     st.subheader("📊 Regional Market Overview")
 
+
     col1, col2, col3 = st.columns(3)
 
+
     with col1:
-        render_kpi_card("🗺️", "Total States", total_states)
-        if st.button("View Overview 🔍", key="btn_total_states"):
-            show_state_popup(top_state, "Top Active State Overview")
+
+        render_kpi_card(
+            "🗺️",
+            "Total States",
+            total_states
+        )
+
+        if st.button(
+            "View Overview 🔍",
+            key="btn_total_states"
+        ):
+            show_state_popup(
+                top_state,
+                "Top Active State Overview"
+            )
+
 
     with col2:
-        render_kpi_card("🏆", "Top Selling State", top_state)
-        if st.button("View Details 🔍", key="btn_top_state"):
-            show_state_popup(top_state, "Top Selling Market")
+
+        render_kpi_card(
+            "🏆",
+            "Top Selling State",
+            top_state
+        )
+
+        if st.button(
+            "View Details 🔍",
+            key="btn_top_state"
+        ):
+            show_state_popup(
+                top_state,
+                "Top Selling Market"
+            )
+
 
     with col3:
-        render_kpi_card("💰", "Highest Avg Price", highest_price_state)
-        if st.button("View Details 🔍", key="btn_high_price"):
-            show_state_popup(highest_price_state, "Highest Avg Price Market")
+
+        render_kpi_card(
+            "💰",
+            "Highest Avg Price",
+            highest_price_state
+        )
+
+        if st.button(
+            "View Details 🔍",
+            key="btn_high_price"
+        ):
+            show_state_popup(
+                highest_price_state,
+                "Highest Avg Price Market"
+            )
+
 
     col4, col5, col6 = st.columns(3)
 
+
     with col4:
-        render_kpi_card("♻️", "Highest Resale", highest_resale_state)
-        if st.button("View Details 🔍", key="btn_high_resale"):
-            show_state_popup(highest_resale_state, "Highest Resale Market")
+
+        render_kpi_card(
+            "♻️",
+            "Highest Resale",
+            highest_resale_state
+        )
+
+        if st.button(
+            "View Details 🔍",
+            key="btn_high_resale"
+        ):
+            show_state_popup(
+                highest_resale_state,
+                "Highest Resale Market"
+            )
+
 
     with col5:
-        render_kpi_card("⛽", "Best Mileage", best_mileage_state)
-        if st.button("View Details 🔍", key="btn_best_mileage"):
-            show_state_popup(best_mileage_state, "Best Mileage Market")
+
+        render_kpi_card(
+            "⛽",
+            "Best Mileage",
+            best_mileage_state
+        )
+
+        if st.button(
+            "View Details 🔍",
+            key="btn_best_mileage"
+        ):
+            show_state_popup(
+                best_mileage_state,
+                "Best Mileage Market"
+            )
+
 
     with col6:
-        render_kpi_card("⚙️", "Highest Engine", highest_engine_state)
-        if st.button("View Details 🔍", key="btn_high_engine"):
-            show_state_popup(highest_engine_state, "Highest Engine Capacity Market")
+
+        render_kpi_card(
+            "⚙️",
+            "Highest Engine",
+            highest_engine_state
+        )
+
+        if st.button(
+            "View Details 🔍",
+            key="btn_high_engine"
+        ):
+            show_state_popup(
+                highest_engine_state,
+                "Highest Engine Capacity Market"
+            )
+
 
     st.divider()
 
+
     # ============================================================
-    # 6. STATE SELECTOR & PERFORMANCE
+    # STATE SELECTOR
     # ============================================================
     st.subheader("🔎 Explore Specific State")
+
 
     state = st.selectbox(
         "Select State",
@@ -2131,26 +2379,62 @@ elif opt == "State Analysis":
         key="state_analysis_select",
     )
 
+
     selected_data = df[df["State"] == state]
 
-    st.subheader(f"📍 {state} — Market Performance")
+
+    st.subheader(
+        f"📍 {state} — Market Performance"
+    )
+
 
     sc1, sc2, sc3, sc4 = st.columns(4)
+
+
     with sc1:
-        render_kpi_card("💰", "Avg Price", f"₹{selected_data['Price (INR)'].mean():,.0f}")
+
+        render_kpi_card(
+            "💰",
+            "Avg Price",
+            f"₹{selected_data['Price (INR)'].mean():,.0f}"
+        )
+
+
     with sc2:
-        render_kpi_card("♻️", "Avg Resale", f"₹{selected_data['Resale Price (INR)'].mean():,.0f}")
+
+        render_kpi_card(
+            "♻️",
+            "Avg Resale",
+            f"₹{selected_data['Resale Price (INR)'].mean():,.0f}"
+        )
+
+
     with sc3:
-        render_kpi_card("⛽", "Avg Mileage", f"{selected_data['Mileage (km/l)'].mean():.1f} km/l")
+
+        render_kpi_card(
+            "⛽",
+            "Avg Mileage",
+            f"{selected_data['Mileage (km/l)'].mean():.1f} km/l"
+        )
+
+
     with sc4:
-        render_kpi_card("⚙️", "Avg Engine", f"{selected_data['Engine Capacity (cc)'].mean():.0f} cc")
+
+        render_kpi_card(
+            "⚙️",
+            "Avg Engine",
+            f"{selected_data['Engine Capacity (cc)'].mean():.0f} cc"
+        )
+
 
     st.divider()
 
+
     # ============================================================
-    # 7. STATE-WISE SUMMARY TABLE
+    # STATE-WISE SUMMARY TABLE
     # ============================================================
     st.subheader("📋 State-wise Market Summary")
+
 
     state_summary = (
         df.groupby("State")
@@ -2163,6 +2447,7 @@ elif opt == "State Analysis":
         .reset_index()
     )
 
+
     state_summary = state_summary.rename(
         columns={
             "Price (INR)": "Average Price (INR)",
@@ -2171,29 +2456,60 @@ elif opt == "State Analysis":
         }
     )
 
-    st.dataframe(state_summary, use_container_width=True, hide_index=True)
+
+    st.dataframe(
+        state_summary,
+        use_container_width=True,
+        hide_index=True
+    )
+
 
     st.divider()
 
+
     # ============================================================
-    # 8. KEY MARKET INSIGHTS
+    # KEY MARKET INSIGHTS
     # ============================================================
     st.subheader("📌 Key Market Insights")
 
+
     insight_col1, insight_col2 = st.columns(2)
 
+
     with insight_col1:
-        st.info(f"🏆 **Top Selling State**\n\n### {top_state}")
-        st.info(f"💰 **Highest Average Price**\n\n### {highest_price_state}")
-        st.info(f"♻️ **Highest Resale Value**\n\n### {highest_resale_state}")
+
+        st.info(
+            f"🏆 **Top Selling State**\n\n"
+            f"### {top_state}"
+        )
+
+        st.info(
+            f"💰 **Highest Average Price**\n\n"
+            f"### {highest_price_state}"
+        )
+
+        st.info(
+            f"♻️ **Highest Resale Value**\n\n"
+            f"### {highest_resale_state}"
+        )
+
 
     with insight_col2:
-        st.info(f"⛽ **Best Mileage**\n\n### {best_mileage_state}")
-        st.info(f"⚙️ **Highest Engine Capacity**\n\n### {highest_engine_state}")
-        st.success(f"📍 **Currently Selected State**\n\n### {state}")
 
+        st.info(
+            f"⛽ **Best Mileage**\n\n"
+            f"### {best_mileage_state}"
+        )
 
+        st.info(
+            f"⚙️ **Highest Engine Capacity**\n\n"
+            f"### {highest_engine_state}"
+        )
 
+        st.success(
+            f"📍 **Currently Selected State**\n\n"
+            f"### {state}"
+        )
 
 
 
