@@ -1072,289 +1072,550 @@ elif opt == 'Brand Analysis':
 
 
 
-elif opt == 'Model Analysis':
-    # ---------------------------------------------------------
-    #  CSS Styling
-    # ---------------------------------------------------------
-    st.markdown("""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+elif opt == "Model Analysis":
+
+    # ============================================================
+    # CSS STYLING
+    # ============================================================
+    st.markdown(
+        """
         <style>
-        /* Main Colorful Cosmic Background */
+
+        /* ================= MAIN BACKGROUND ================= */
+
         .stApp {
-            background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, #0f172a 40%, #030712 100%);
+            background: radial-gradient(
+                circle at 20% 10%,
+                #1e1b4b 0%,
+                #0f172a 45%,
+                #030712 100%
+            );
             color: #f8fafc;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
         }
 
-        /* Vibrant Hero Header Banner */
-        .hero-3d-header {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            padding: 30px 34px;
-            border-radius: 24px;
-            box-shadow: 
-                0 20px 40px -10px rgba(168, 85, 247, 0.45),
-                inset 0 1px 2px rgba(255, 255, 255, 0.4);
-            margin-bottom: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+        /* ================= HERO HEADER ================= */
+
+        .model-header {
+            background: linear-gradient(
+                135deg,
+                rgba(16, 185, 129, 0.20),
+                rgba(6, 182, 212, 0.14)
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 20px;
+
+            padding: 25px 30px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, 0.45),
+                inset 0 1px 2px rgba(255, 255, 255, 0.20);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
 
-        /* ==================== VIBRANT COLORFUL 3D KPI CARDS ==================== */
-        .kpi-3d-wrapper {
-            perspective: 1000px;
-            margin-bottom: 20px;
-        }
-
-        .kpi-3d-card {
-            border-radius: 22px;
-            padding: 22px 24px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            box-shadow: 
-                0 20px 30px -10px rgba(0, 0, 0, 0.7),
-                inset 0 2px 3px rgba(255, 255, 255, 0.3),
-                inset 0 -3px 6px rgba(0, 0, 0, 0.6);
-        }
-
-        /* UNIQUE VIBRANT GRADIENTS FOR EACH CARD */
-        .card-cyan {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
-            border-color: rgba(56, 189, 248, 0.4);
-        }
-        .card-emerald {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
-            border-color: rgba(52, 211, 153, 0.4);
-        }
-        .card-purple {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
-            border-color: rgba(192, 132, 252, 0.4);
-        }
-        .card-amber {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
-            border-color: rgba(251, 191, 36, 0.4);
-        }
-
-        /* 3D Glossy Light Reflection Overlay */
-        .kpi-3d-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 45%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
-            border-radius: 22px 22px 0 0;
-            pointer-events: none;
-        }
-
-        /* VIBRANT HOVER LIFT-OFF EFFECT */
-        .card-cyan:hover {
-            transform: translateY(-10px) rotateX(6deg) scale(1.02);
-            box-shadow: 0 25px 35px -10px rgba(56, 189, 248, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-            border-color: #38bdf8;
-        }
-        .card-emerald:hover {
-            transform: translateY(-10px) rotateX(6deg) scale(1.02);
-            box-shadow: 0 25px 35px -10px rgba(52, 211, 153, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-            border-color: #34d399;
-        }
-        .card-purple:hover {
-            transform: translateY(-10px) rotateX(6deg) scale(1.02);
-            box-shadow: 0 25px 35px -10px rgba(192, 132, 252, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-            border-color: #c084fc;
-        }
-        .card-amber:hover {
-            transform: translateY(-10px) rotateX(6deg) scale(1.02);
-            box-shadow: 0 25px 35px -10px rgba(251, 191, 36, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-            border-color: #fbbf24;
-        }
-
-        .kpi-3d-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-
-        .kpi-3d-title {
-            color: #cbd5e1;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Colorful Glowing Badge Icons */
-        .icon-cyan { background: linear-gradient(135deg, #0284c7, #38bdf8); box-shadow: 0 0 15px rgba(56, 189, 248, 0.6); }
-        .icon-emerald { background: linear-gradient(135deg, #059669, #34d399); box-shadow: 0 0 15px rgba(52, 211, 153, 0.6); }
-        .icon-purple { background: linear-gradient(135deg, #7c3aed, #c084fc); box-shadow: 0 0 15px rgba(192, 132, 252, 0.6); }
-        .icon-amber { background: linear-gradient(135deg, #d97706, #fbbf24); box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
-
-        .kpi-3d-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            color: white;
-        }
-
-        .kpi-3d-value {
+        .model-header h1 {
             color: #ffffff;
+            margin: 0;
             font-size: 32px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
         }
 
-        .kpi-3d-subtext {
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 6px;
+        .model-header p {
+            color: #cbd5e1;
+            margin: 7px 0 0 0;
+            font-size: 15px;
+        }
+
+        /* ================= SECTION HEADINGS ================= */
+
+        .section-title {
+            color: #f8fafc;
+            font-size: 22px;
+            font-weight: 800;
+            margin: 20px 0 15px 0;
+            padding-left: 12px;
+            border-left: 4px solid #38bdf8;
+        }
+
+        /* ================= KPI CARDS ================= */
+
+        .model-kpi {
+            border-radius: 16px;
+            padding: 18px 20px;
+
+            min-height: 135px;
+
+            border: 1px solid rgba(255, 255, 255, 0.13);
+
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.35),
+                inset 0 1px 1px rgba(255, 255, 255, 0.12);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .model-kpi:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 18px 35px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(56, 189, 248, 0.18);
+
+            border-color: rgba(255, 255, 255, 0.30);
+        }
+
+        .kpi-cyan {
+            background: linear-gradient(
+                135deg,
+                rgba(14, 165, 233, 0.20),
+                rgba(15, 23, 42, 0.92)
+            );
+            border-bottom: 3px solid #38bdf8;
+        }
+
+        .kpi-green {
+            background: linear-gradient(
+                135deg,
+                rgba(16, 185, 129, 0.20),
+                rgba(15, 23, 42, 0.92)
+            );
+            border-bottom: 3px solid #34d399;
+        }
+
+        .kpi-purple {
+            background: linear-gradient(
+                135deg,
+                rgba(168, 85, 247, 0.20),
+                rgba(15, 23, 42, 0.92)
+            );
+            border-bottom: 3px solid #c084fc;
+        }
+
+        .kpi-orange {
+            background: linear-gradient(
+                135deg,
+                rgba(245, 158, 11, 0.20),
+                rgba(15, 23, 42, 0.92)
+            );
+            border-bottom: 3px solid #fbbf24;
+        }
+
+        .kpi-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .kpi-label {
+            color: #94a3b8;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .kpi-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 11px;
+
             display: flex;
             align-items: center;
-            gap: 4px;
+            justify-content: center;
+
+            font-size: 19px;
+
+            color: white;
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
-        /* 3D Colorful Insight Boxes */
-        .insight-3d-box {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
-            border-left: 5px solid #a855f7;
-            padding: 18px 22px;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
+        .icon-cyan {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
         }
+
+        .icon-green {
+            background: linear-gradient(135deg, #059669, #34d399);
+            box-shadow: 0 0 12px rgba(52, 211, 153, 0.35);
+        }
+
+        .icon-purple {
+            background: linear-gradient(135deg, #7c3aed, #c084fc);
+            box-shadow: 0 0 12px rgba(192, 132, 252, 0.35);
+        }
+
+        .icon-orange {
+            background: linear-gradient(135deg, #d97706, #fbbf24);
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
+        }
+
+        .kpi-value {
+            color: #ffffff;
+            font-size: 27px;
+            font-weight: 800;
+            margin-top: 3px;
+        }
+
+        .kpi-sub {
+            margin-top: 5px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= INSIGHT CARDS ================= */
+
+        .model-insight {
+            background: linear-gradient(
+                135deg,
+                rgba(30, 41, 59, 0.75),
+                rgba(15, 23, 42, 0.88)
+            );
+
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+
+            box-shadow:
+                0 8px 22px rgba(0, 0, 0, 0.35);
+
+            transition: all 0.3s ease;
+        }
+
+        .model-insight:hover {
+            transform: translateX(4px);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ================= DIVIDER ================= */
+
+        .model-divider {
+            height: 1px;
+            border: 0;
+            margin: 25px 0;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #38bdf8,
+                #a855f7,
+                #ec4899,
+                transparent
+            );
+        }
+
+        /* ================= CHART HEADING ================= */
+
+        .chart-title {
+            color: #f8fafc;
+            font-size: 18px;
+            font-weight: 750;
+            margin: 8px 0 10px 0;
+        }
+
         </style>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True,
+    )
 
-    # ---------------------------------------------------------
-    # 2.  Header
-    # ---------------------------------------------------------
-    st.markdown("""
-        <div class="hero-3d-header">
-            <h1 style="color: white; margin: 0; font-size: 34px; font-weight: 800; letter-spacing: -0.5px;">
-                🚲 Model Analysis Analytics
-            </h1>
-            <p style="color: #f1f5f9; margin-top: 6px; font-size: 16px; margin-bottom: 0;">
-                Vibrant 3D metrics, market trends & model performance matrix.
+
+    # ============================================================
+    # HEADER
+    # ============================================================
+
+    st.markdown(
+        """
+        <div class="model-header">
+            <h1>🚲 Model Analysis Analytics</h1>
+            <p>
+                Explore bike models, pricing, mileage, engine capacity
+                and resale performance.
             </p>
         </div>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True,
+    )
 
-    # ---------------------------------------------------------
-    # 3. Filter data preview
-    # ---------------------------------------------------------
+
+    # ============================================================
+    # FILTERS
+    # ============================================================
+
     col_filter, col_slider = st.columns([1, 1])
 
     with col_filter:
         brand = st.selectbox(
             "🔍 Select Brand Filter",
-            ["All"] + sorted(df["Brand"].dropna().unique().tolist())
+            ["All"] + sorted(
+                df["Brand"].dropna().unique().tolist()
+            )
         )
 
     with col_slider:
-        n_rows = st.slider("📄 Preview Data Rows", min_value=5, max_value=50, value=10, step=5)
+        n_rows = st.slider(
+            "📄 Preview Data Rows",
+            min_value=5,
+            max_value=50,
+            value=10,
+            step=5
+        )
 
-    filtered_df = df if brand == "All" else df[df["Brand"] == brand]
+    filtered_df = (
+        df
+        if brand == "All"
+        else df[df["Brand"] == brand]
+    )
 
-    with st.expander("📊 View Raw Filtered Data Table", expanded=False):
-        st.dataframe(filtered_df.head(n_rows), use_container_width=True)
 
-    st.markdown("<hr style='border:0; height:1px; background:linear-gradient(90deg, #38bdf8, #a855f7, #ec4899); margin:25px 0;'>", unsafe_allow_html=True)
+    # ============================================================
+    # RAW DATA
+    # ============================================================
 
-    # ---------------------------------------------------------
-    # 4.  KPI CARDS
-    # ---------------------------------------------------------
-    st.markdown("### ⚡ Performance Overview")
+    with st.expander(
+        "📊 View Raw Filtered Data Table",
+        expanded=False
+    ):
+        st.dataframe(
+            filtered_df.head(n_rows),
+            use_container_width=True
+        )
+
+
+    st.markdown(
+        """
+        <div class="model-divider"></div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    # ============================================================
+    # KPI CALCULATIONS
+    # ============================================================
+
+    st.markdown(
+        '<div class="section-title">⚡ Performance Overview</div>',
+        unsafe_allow_html=True
+    )
 
     if not filtered_df.empty:
+
         avg_price = filtered_df["Price (INR)"].mean()
         avg_mileage = filtered_df["Mileage (km/l)"].mean()
         avg_engine = filtered_df["Engine Capacity (cc)"].mean()
         avg_resale = filtered_df["Resale Price (INR)"].mean()
-        
-        retention_rate = (avg_resale / avg_price * 100) if avg_price > 0 else 0
+
+        retention_rate = (
+            (avg_resale / avg_price) * 100
+            if avg_price > 0
+            else 0
+        )
+
+
+        # ========================================================
+        # KPI CARDS
+        # ========================================================
 
         k1, k2, k3, k4 = st.columns(4)
 
         with k1:
-            st.markdown(f"""
-                <div class="kpi-3d-wrapper">
-                    <div class="kpi-3d-card card-cyan">
-                        <div class="kpi-3d-top">
-                            <span class="kpi-3d-title">Avg Price</span>
-                            <div class="kpi-3d-icon icon-cyan">💰</div>
+            st.markdown(
+                f"""
+                <div class="model-kpi kpi-cyan">
+
+                    <div class="kpi-top">
+                        <span class="kpi-label">
+                            Avg Price
+                        </span>
+
+                        <div class="kpi-icon icon-cyan">
+                            💰
                         </div>
-                        <div class="kpi-3d-value">₹{avg_price:,.0f}</div>
-                        <div class="kpi-3d-subtext" style="color:#38bdf8;">🏷️ Average MSRP</div>
                     </div>
+
+                    <div class="kpi-value">
+                        ₹{avg_price:,.0f}
+                    </div>
+
+                    <div
+                        class="kpi-sub"
+                        style="color:#38bdf8;"
+                    >
+                        🏷️ Average MSRP
+                    </div>
+
                 </div>
-            """, unsafe_allow_html=True)
+                """,
+                unsafe_allow_html=True
+            )
+
 
         with k2:
-            st.markdown(f"""
-                <div class="kpi-3d-wrapper">
-                    <div class="kpi-3d-card card-emerald">
-                        <div class="kpi-3d-top">
-                            <span class="kpi-3d-title">Avg Mileage</span>
-                            <div class="kpi-3d-icon icon-emerald">⛽</div>
+            st.markdown(
+                f"""
+                <div class="model-kpi kpi-green">
+
+                    <div class="kpi-top">
+                        <span class="kpi-label">
+                            Avg Mileage
+                        </span>
+
+                        <div class="kpi-icon icon-green">
+                            ⛽
                         </div>
-                        <div class="kpi-3d-value">{avg_mileage:.1f} <span style="font-size:16px; font-weight:500;">km/l</span></div>
-                        <div class="kpi-3d-subtext" style="color:#34d399;">⚡ Fuel Economy</div>
                     </div>
+
+                    <div class="kpi-value">
+                        {avg_mileage:.1f}
+                        <span style="font-size:14px;">
+                            km/l
+                        </span>
+                    </div>
+
+                    <div
+                        class="kpi-sub"
+                        style="color:#34d399;"
+                    >
+                        ⚡ Fuel Economy
+                    </div>
+
                 </div>
-            """, unsafe_allow_html=True)
+                """,
+                unsafe_allow_html=True
+            )
+
 
         with k3:
-            st.markdown(f"""
-                <div class="kpi-3d-wrapper">
-                    <div class="kpi-3d-card card-purple">
-                        <div class="kpi-3d-top">
-                            <span class="kpi-3d-title">Avg Engine</span>
-                            <div class="kpi-3d-icon icon-purple">⚙️</div>
+            st.markdown(
+                f"""
+                <div class="model-kpi kpi-purple">
+
+                    <div class="kpi-top">
+                        <span class="kpi-label">
+                            Avg Engine
+                        </span>
+
+                        <div class="kpi-icon icon-purple">
+                            ⚙️
                         </div>
-                        <div class="kpi-3d-value">{avg_engine:.0f} <span style="font-size:16px; font-weight:500;">cc</span></div>
-                        <div class="kpi-3d-subtext" style="color:#c084fc;">🚀 Displacement Size</div>
                     </div>
+
+                    <div class="kpi-value">
+                        {avg_engine:.0f}
+                        <span style="font-size:14px;">
+                            cc
+                        </span>
+                    </div>
+
+                    <div
+                        class="kpi-sub"
+                        style="color:#c084fc;"
+                    >
+                        🚀 Engine Capacity
+                    </div>
+
                 </div>
-            """, unsafe_allow_html=True)
+                """,
+                unsafe_allow_html=True
+            )
+
 
         with k4:
-            st.markdown(f"""
-                <div class="kpi-3d-wrapper">
-                    <div class="kpi-3d-card card-amber">
-                        <div class="kpi-3d-top">
-                            <span class="kpi-3d-title">Avg Resale</span>
-                            <div class="kpi-3d-icon icon-amber">♻️</div>
+            st.markdown(
+                f"""
+                <div class="model-kpi kpi-orange">
+
+                    <div class="kpi-top">
+                        <span class="kpi-label">
+                            Avg Resale
+                        </span>
+
+                        <div class="kpi-icon icon-orange">
+                            ♻️
                         </div>
-                        <div class="kpi-3d-value">₹{avg_resale:,.0f}</div>
-                        <div class="kpi-3d-subtext" style="color:#fbbf24;">📈 {retention_rate:.1f}% Retained</div>
                     </div>
+
+                    <div class="kpi-value">
+                        ₹{avg_resale:,.0f}
+                    </div>
+
+                    <div
+                        class="kpi-sub"
+                        style="color:#fbbf24;"
+                    >
+                        📈 {retention_rate:.1f}% Retained
+                    </div>
+
                 </div>
-            """, unsafe_allow_html=True)
+                """,
+                unsafe_allow_html=True
+            )
 
-    
 
-    st.markdown("<hr style='border:0; height:1px; background:linear-gradient(90deg, #ec4899, #a855f7, #38bdf8); margin:25px 0;'>", unsafe_allow_html=True)
+    # ============================================================
+    # DIVIDER
+    # ============================================================
 
-    # ---------------------------------------------------------
-    # 5. SCATTER PLOTS
-    # ---------------------------------------------------------
-    st.markdown("### 📊 Data Visualization")
+    st.markdown(
+        """
+        <div class="model-divider"></div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+    # ============================================================
+    # DATA VISUALIZATION
+    # ============================================================
+
+    st.markdown(
+        '<div class="section-title">📊 Data Visualization</div>',
+        unsafe_allow_html=True
+    )
 
     chart_col1, chart_col2 = st.columns(2)
 
+
+    # ============================================================
+    # PRICE VS RESALE
+    # ============================================================
+
     with chart_col1:
-        st.markdown("**Price vs Resale Price**")
+
+        st.markdown(
+            '<div class="chart-title">💰 Price vs Resale Price</div>',
+            unsafe_allow_html=True
+        )
+
         st.line_chart(
             filtered_df,
             x="Price (INR)",
@@ -1362,52 +1623,535 @@ elif opt == 'Model Analysis':
             use_container_width=True
         )
 
+
+    # ============================================================
+    # BRAND-WISE PRICE
+    # ============================================================
+
     with chart_col2:
-        st.markdown("**Brand-wise Average Price**")
-        bar_data = filtered_df.groupby("Brand")["Price (INR)"].mean()
+
+        st.markdown(
+            '<div class="chart-title">🏍️ Brand-wise Average Price</div>',
+            unsafe_allow_html=True
+        )
+
+        bar_data = (
+            filtered_df
+            .groupby("Brand")["Price (INR)"]
+            .mean()
+        )
 
         st.bar_chart(
             bar_data,
             use_container_width=True
         )
 
-    # ---------------------------------------------------------
-    # 6. Highlights & Quick Insights
-    # ---------------------------------------------------------
-    st.markdown("### 💡 Market Highlights")
+
+    # ============================================================
+    # MARKET HIGHLIGHTS
+    # ============================================================
+
+    st.markdown(
+        """
+        <div class="model-divider"></div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="section-title">💡 Market Highlights</div>',
+        unsafe_allow_html=True
+    )
+
+
+    # ============================================================
+    # HIGHLIGHT CALCULATIONS
+    # ============================================================
 
     most_popular = df["Model"].mode()[0]
-    highest_price = df.loc[df["Price (INR)"].idxmax(), "Model"]
-    highest_mileage = df.loc[df["Mileage (km/l)"].idxmax(), "Model"]
-    highest_resale = df.loc[df["Resale Price (INR)"].idxmax(), "Model"]
+
+    highest_price = df.loc[
+        df["Price (INR)"].idxmax(),
+        "Model"
+    ]
+
+    highest_mileage = df.loc[
+        df["Mileage (km/l)"].idxmax(),
+        "Model"
+    ]
+
+    highest_resale = df.loc[
+        df["Resale Price (INR)"].idxmax(),
+        "Model"
+    ]
+
+
+    # ============================================================
+    # INSIGHT CARDS
+    # ============================================================
 
     i1, i2 = st.columns(2)
 
+
     with i1:
-        st.markdown(f"""
-            <div class="insight-3d-box">
-                🏆 <b>Most Popular Model:</b>
-                <span style="color:#38bdf8; font-weight:700;">{most_popular}</span>
+
+        st.markdown(
+            f"""
+            <div
+                class="model-insight"
+                style="border-left:4px solid #38bdf8;"
+            >
+                🏆
+                <b>Most Popular Model:</b>
+                <span
+                    style="
+                        color:#38bdf8;
+                        font-weight:700;
+                    "
+                >
+                    {most_popular}
+                </span>
             </div>
 
-            <div class="insight-3d-box">
-                💎 <b>Highest Price Model:</b>
-                <span style="color:#c084fc; font-weight:700;">{highest_price}</span>
+            <div
+                class="model-insight"
+                style="border-left:4px solid #c084fc;"
+            >
+                💎
+                <b>Highest Price Model:</b>
+                <span
+                    style="
+                        color:#c084fc;
+                        font-weight:700;
+                    "
+                >
+                    {highest_price}
+                </span>
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     with i2:
-        st.markdown(f"""
-            <div class="insight-3d-box">
-                ⛽ <b>Highest Mileage Model:</b>
-                <span style="color:#34d399; font-weight:700;">{highest_mileage}</span>
+
+        st.markdown(
+            f"""
+            <div
+                class="model-insight"
+                style="border-left:4px solid #34d399;"
+            >
+                ⛽
+                <b>Highest Mileage Model:</b>
+                <span
+                    style="
+                        color:#34d399;
+                        font-weight:700;
+                    "
+                >
+                    {highest_mileage}
+                </span>
             </div>
 
-            <div class="insight-3d-box">
-                📈 <b>Highest Resale Model:</b>
-                <span style="color:#fbbf24; font-weight:700;">{highest_resale}</span>
+            <div
+                class="model-insight"
+                style="border-left:4px solid #fbbf24;"
+            >
+                📈
+                <b>Highest Resale Model:</b>
+                <span
+                    style="
+                        color:#fbbf24;
+                        font-weight:700;
+                    "
+                >
+                    {highest_resale}
+                </span>
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
+
+
+
+
+
+# elif opt == 'Model Analysis':
+#     # ---------------------------------------------------------
+#     #  CSS Styling
+#     # ---------------------------------------------------------
+#     st.markdown("""
+#         <style>
+#         /* Main Colorful Cosmic Background */
+#         .stApp {
+#             background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, #0f172a 40%, #030712 100%);
+#             color: #f8fafc;
+#             font-family: 'Inter', system-ui, -apple-system, sans-serif;
+#         }
+
+#         /* Vibrant Hero Header Banner */
+#         .hero-3d-header {
+#             background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+#             padding: 30px 34px;
+#             border-radius: 24px;
+#             box-shadow: 
+#                 0 20px 40px -10px rgba(168, 85, 247, 0.45),
+#                 inset 0 1px 2px rgba(255, 255, 255, 0.4);
+#             margin-bottom: 32px;
+#             border: 1px solid rgba(255, 255, 255, 0.25);
+#         }
+
+#         /* ==================== VIBRANT COLORFUL 3D KPI CARDS ==================== */
+#         .kpi-3d-wrapper {
+#             perspective: 1000px;
+#             margin-bottom: 20px;
+#         }
+
+#         .kpi-3d-card {
+#             border-radius: 22px;
+#             padding: 22px 24px;
+#             position: relative;
+#             overflow: hidden;
+#             border: 1px solid rgba(255, 255, 255, 0.2);
+#             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+#             transform-style: preserve-3d;
+#             box-shadow: 
+#                 0 20px 30px -10px rgba(0, 0, 0, 0.7),
+#                 inset 0 2px 3px rgba(255, 255, 255, 0.3),
+#                 inset 0 -3px 6px rgba(0, 0, 0, 0.6);
+#         }
+
+#         /* UNIQUE VIBRANT GRADIENTS FOR EACH CARD */
+#         .card-cyan {
+#             background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
+#             border-color: rgba(56, 189, 248, 0.4);
+#         }
+#         .card-emerald {
+#             background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
+#             border-color: rgba(52, 211, 153, 0.4);
+#         }
+#         .card-purple {
+#             background: linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
+#             border-color: rgba(192, 132, 252, 0.4);
+#         }
+#         .card-amber {
+#             background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(15, 23, 42, 0.9) 100%);
+#             border-color: rgba(251, 191, 36, 0.4);
+#         }
+
+#         /* 3D Glossy Light Reflection Overlay */
+#         .kpi-3d-card::before {
+#             content: '';
+#             position: absolute;
+#             top: 0;
+#             left: 0;
+#             right: 0;
+#             height: 45%;
+#             background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%);
+#             border-radius: 22px 22px 0 0;
+#             pointer-events: none;
+#         }
+
+#         /* VIBRANT HOVER LIFT-OFF EFFECT */
+#         .card-cyan:hover {
+#             transform: translateY(-10px) rotateX(6deg) scale(1.02);
+#             box-shadow: 0 25px 35px -10px rgba(56, 189, 248, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+#             border-color: #38bdf8;
+#         }
+#         .card-emerald:hover {
+#             transform: translateY(-10px) rotateX(6deg) scale(1.02);
+#             box-shadow: 0 25px 35px -10px rgba(52, 211, 153, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+#             border-color: #34d399;
+#         }
+#         .card-purple:hover {
+#             transform: translateY(-10px) rotateX(6deg) scale(1.02);
+#             box-shadow: 0 25px 35px -10px rgba(192, 132, 252, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+#             border-color: #c084fc;
+#         }
+#         .card-amber:hover {
+#             transform: translateY(-10px) rotateX(6deg) scale(1.02);
+#             box-shadow: 0 25px 35px -10px rgba(251, 191, 36, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+#             border-color: #fbbf24;
+#         }
+
+#         .kpi-3d-top {
+#             display: flex;
+#             justify-content: space-between;
+#             align-items: center;
+#             margin-bottom: 14px;
+#         }
+
+#         .kpi-3d-title {
+#             color: #cbd5e1;
+#             font-size: 12px;
+#             font-weight: 700;
+#             text-transform: uppercase;
+#             letter-spacing: 1px;
+#         }
+
+#         /* Colorful Glowing Badge Icons */
+#         .icon-cyan { background: linear-gradient(135deg, #0284c7, #38bdf8); box-shadow: 0 0 15px rgba(56, 189, 248, 0.6); }
+#         .icon-emerald { background: linear-gradient(135deg, #059669, #34d399); box-shadow: 0 0 15px rgba(52, 211, 153, 0.6); }
+#         .icon-purple { background: linear-gradient(135deg, #7c3aed, #c084fc); box-shadow: 0 0 15px rgba(192, 132, 252, 0.6); }
+#         .icon-amber { background: linear-gradient(135deg, #d97706, #fbbf24); box-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
+
+#         .kpi-3d-icon {
+#             width: 44px;
+#             height: 44px;
+#             border-radius: 14px;
+#             display: flex;
+#             align-items: center;
+#             justify-content: center;
+#             font-size: 22px;
+#             border: 1px solid rgba(255, 255, 255, 0.4);
+#             color: white;
+#         }
+
+#         .kpi-3d-value {
+#             color: #ffffff;
+#             font-size: 32px;
+#             font-weight: 800;
+#             letter-spacing: -0.5px;
+#             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+#         }
+
+#         .kpi-3d-subtext {
+#             font-size: 13px;
+#             font-weight: 600;
+#             margin-top: 6px;
+#             display: flex;
+#             align-items: center;
+#             gap: 4px;
+#         }
+
+#         /* 3D Colorful Insight Boxes */
+#         .insight-3d-box {
+#             background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+#             border-left: 5px solid #a855f7;
+#             padding: 18px 22px;
+#             border-radius: 16px;
+#             margin-bottom: 14px;
+#             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+#             border-top: 1px solid rgba(255, 255, 255, 0.1);
+#             border-right: 1px solid rgba(255, 255, 255, 0.1);
+#             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+#             backdrop-filter: blur(12px);
+#         }
+#         </style>
+#     """, unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+#     # 2.  Header
+#     # ---------------------------------------------------------
+#     st.markdown("""
+#         <div class="hero-3d-header">
+#             <h1 style="color: white; margin: 0; font-size: 34px; font-weight: 800; letter-spacing: -0.5px;">
+#                 🚲 Model Analysis Analytics
+#             </h1>
+#             <p style="color: #f1f5f9; margin-top: 6px; font-size: 16px; margin-bottom: 0;">
+#                 Vibrant 3D metrics, market trends & model performance matrix.
+#             </p>
+#         </div>
+#     """, unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+#     # 3. Filter data preview
+#     # ---------------------------------------------------------
+#     col_filter, col_slider = st.columns([1, 1])
+
+#     with col_filter:
+#         brand = st.selectbox(
+#             "🔍 Select Brand Filter",
+#             ["All"] + sorted(df["Brand"].dropna().unique().tolist())
+#         )
+
+#     with col_slider:
+#         n_rows = st.slider("📄 Preview Data Rows", min_value=5, max_value=50, value=10, step=5)
+
+#     filtered_df = df if brand == "All" else df[df["Brand"] == brand]
+
+#     with st.expander("📊 View Raw Filtered Data Table", expanded=False):
+#         st.dataframe(filtered_df.head(n_rows), use_container_width=True)
+
+#     st.markdown("<hr style='border:0; height:1px; background:linear-gradient(90deg, #38bdf8, #a855f7, #ec4899); margin:25px 0;'>", unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+#     # 4.  KPI CARDS
+#     # ---------------------------------------------------------
+#     st.markdown("### ⚡ Performance Overview")
+
+#     if not filtered_df.empty:
+#         avg_price = filtered_df["Price (INR)"].mean()
+#         avg_mileage = filtered_df["Mileage (km/l)"].mean()
+#         avg_engine = filtered_df["Engine Capacity (cc)"].mean()
+#         avg_resale = filtered_df["Resale Price (INR)"].mean()
+        
+#         retention_rate = (avg_resale / avg_price * 100) if avg_price > 0 else 0
+
+#         k1, k2, k3, k4 = st.columns(4)
+
+#         with k1:
+#             st.markdown(f"""
+#                 <div class="kpi-3d-wrapper">
+#                     <div class="kpi-3d-card card-cyan">
+#                         <div class="kpi-3d-top">
+#                             <span class="kpi-3d-title">Avg Price</span>
+#                             <div class="kpi-3d-icon icon-cyan">💰</div>
+#                         </div>
+#                         <div class="kpi-3d-value">₹{avg_price:,.0f}</div>
+#                         <div class="kpi-3d-subtext" style="color:#38bdf8;">🏷️ Average MSRP</div>
+#                     </div>
+#                 </div>
+#             """, unsafe_allow_html=True)
+
+#         with k2:
+#             st.markdown(f"""
+#                 <div class="kpi-3d-wrapper">
+#                     <div class="kpi-3d-card card-emerald">
+#                         <div class="kpi-3d-top">
+#                             <span class="kpi-3d-title">Avg Mileage</span>
+#                             <div class="kpi-3d-icon icon-emerald">⛽</div>
+#                         </div>
+#                         <div class="kpi-3d-value">{avg_mileage:.1f} <span style="font-size:16px; font-weight:500;">km/l</span></div>
+#                         <div class="kpi-3d-subtext" style="color:#34d399;">⚡ Fuel Economy</div>
+#                     </div>
+#                 </div>
+#             """, unsafe_allow_html=True)
+
+#         with k3:
+#             st.markdown(f"""
+#                 <div class="kpi-3d-wrapper">
+#                     <div class="kpi-3d-card card-purple">
+#                         <div class="kpi-3d-top">
+#                             <span class="kpi-3d-title">Avg Engine</span>
+#                             <div class="kpi-3d-icon icon-purple">⚙️</div>
+#                         </div>
+#                         <div class="kpi-3d-value">{avg_engine:.0f} <span style="font-size:16px; font-weight:500;">cc</span></div>
+#                         <div class="kpi-3d-subtext" style="color:#c084fc;">🚀 Displacement Size</div>
+#                     </div>
+#                 </div>
+#             """, unsafe_allow_html=True)
+
+#         with k4:
+#             st.markdown(f"""
+#                 <div class="kpi-3d-wrapper">
+#                     <div class="kpi-3d-card card-amber">
+#                         <div class="kpi-3d-top">
+#                             <span class="kpi-3d-title">Avg Resale</span>
+#                             <div class="kpi-3d-icon icon-amber">♻️</div>
+#                         </div>
+#                         <div class="kpi-3d-value">₹{avg_resale:,.0f}</div>
+#                         <div class="kpi-3d-subtext" style="color:#fbbf24;">📈 {retention_rate:.1f}% Retained</div>
+#                     </div>
+#                 </div>
+#             """, unsafe_allow_html=True)
+
+    
+
+#     st.markdown("<hr style='border:0; height:1px; background:linear-gradient(90deg, #ec4899, #a855f7, #38bdf8); margin:25px 0;'>", unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+#     # 5. SCATTER PLOTS
+#     # ---------------------------------------------------------
+#     st.markdown("### 📊 Data Visualization")
+
+#     chart_col1, chart_col2 = st.columns(2)
+
+#     with chart_col1:
+#         st.markdown("**Price vs Resale Price**")
+#         st.line_chart(
+#             filtered_df,
+#             x="Price (INR)",
+#             y="Resale Price (INR)",
+#             use_container_width=True
+#         )
+
+#     with chart_col2:
+#         st.markdown("**Brand-wise Average Price**")
+#         bar_data = filtered_df.groupby("Brand")["Price (INR)"].mean()
+
+#         st.bar_chart(
+#             bar_data,
+#             use_container_width=True
+#         )
+
+#     # ---------------------------------------------------------
+#     # 6. Highlights & Quick Insights
+#     # ---------------------------------------------------------
+#     st.markdown("### 💡 Market Highlights")
+
+#     most_popular = df["Model"].mode()[0]
+#     highest_price = df.loc[df["Price (INR)"].idxmax(), "Model"]
+#     highest_mileage = df.loc[df["Mileage (km/l)"].idxmax(), "Model"]
+#     highest_resale = df.loc[df["Resale Price (INR)"].idxmax(), "Model"]
+
+#     i1, i2 = st.columns(2)
+
+#     with i1:
+#         st.markdown(f"""
+#             <div class="insight-3d-box">
+#                 🏆 <b>Most Popular Model:</b>
+#                 <span style="color:#38bdf8; font-weight:700;">{most_popular}</span>
+#             </div>
+
+#             <div class="insight-3d-box">
+#                 💎 <b>Highest Price Model:</b>
+#                 <span style="color:#c084fc; font-weight:700;">{highest_price}</span>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     with i2:
+#         st.markdown(f"""
+#             <div class="insight-3d-box">
+#                 ⛽ <b>Highest Mileage Model:</b>
+#                 <span style="color:#34d399; font-weight:700;">{highest_mileage}</span>
+#             </div>
+
+#             <div class="insight-3d-box">
+#                 📈 <b>Highest Resale Model:</b>
+#                 <span style="color:#fbbf24; font-weight:700;">{highest_resale}</span>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 555555555555555555555555555555555555555555555555555555555555
