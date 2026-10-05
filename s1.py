@@ -67,7 +67,7 @@ with st.sidebar:
 
 
 
-elif opt == 'Dashboard':
+if opt == 'Dashboard':
 
     # ============================================================
     # 1. RESALE-STYLE GLOSSY CSS
