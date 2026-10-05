@@ -2198,730 +2198,1584 @@ elif opt == "State Analysis":
 
 
 
-
-
-
-
-
-
 elif opt == "About Project":
 
-    # ============================================================
-    # 1. PROFESSIONAL GLOWY CSS STYLING
-    # ============================================================
+    # =========================================================
+    # ABOUT PROJECT PAGE
+    # =========================================================
+
+    st.markdown("""
+elif opt == "About Project":
+
+    # =========================================================
+    # ABOUT PROJECT PAGE
+    # =========================================================
+
+    st.markdown("""
+<style>
+
+.stApp {
+    background: #0b1120;
+}
+
+.block-container {
+    max-width: 1150px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* PAGE TITLE */
+.about-title {
+    color: #ffffff;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #172554, #0f172a);
+    border: 1px solid #294b91;
+    border-radius: 18px;
+    padding: 30px;
+    margin: 20px 0 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.hero-title {
+    color: #ffffff;
+    font-size: 29px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.hero-text {
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* SECTION TITLE */
+.section-title {
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 750;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* INFO BOX */
+.info-box {
+    background: #111827;
+    border: 1px solid #263449;
+    border-radius: 15px;
+    padding: 23px;
+    margin-bottom: 22px;
+}
+
+.info-text {
+    color: #b8c4d6;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+.info-text:last-child {
+    margin-bottom: 0;
+}
+
+/* MODULE CARDS */
+.module {
+    background: #111827;
+    border: 1px solid #29364a;
+    border-radius: 14px;
+    padding: 20px;
+    min-height: 145px;
+    margin-bottom: 18px;
+    transition: 0.2s;
+}
+
+.module:hover {
+    border-color: #3b82f6;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.module-title {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 750;
+    margin-bottom: 10px;
+}
+
+.module-text {
+    color: #aebbd0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* TECHNOLOGY CARDS */
+.tech {
+    background: #111827;
+    border: 1px solid #29364a;
+    border-radius: 13px;
+    padding: 20px 10px;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: 0.2s;
+}
+
+.tech:hover {
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+.tech-name {
+    color: #60a5fa;
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.tech-role {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* HIGHLIGHT BOX */
+.highlight {
+    background: #111827;
+    border: 1px solid #29364a;
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.highlight-number {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.highlight-label {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.8;
+    padding: 25px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # PAGE HEADER
+    # =========================================================
 
     st.markdown(
-        """
-        <style>
-
-        /* ========================================================
-           MAIN BACKGROUND
-           ======================================================== */
-
-        .stApp {
-            background:
-                radial-gradient(
-                    circle at 10% 0%,
-                    rgba(37, 99, 235, 0.09),
-                    transparent 25%
-                ),
-                radial-gradient(
-                    circle at 95% 10%,
-                    rgba(124, 58, 237, 0.07),
-                    transparent 25%
-                ),
-                #060a12;
-
-            color: #e5e7eb;
-        }
-
-
-        /* ========================================================
-           MAIN CONTENT
-           ======================================================== */
-
-        .block-container {
-            padding-top: 2.2rem;
-            padding-bottom: 2rem;
-            max-width: 1250px;
-        }
-
-
-        /* ========================================================
-           PAGE TITLE
-           ======================================================== */
-
-        h1 {
-            color: #f8fafc !important;
-            font-size: 34px !important;
-            font-weight: 800 !important;
-            letter-spacing: -0.6px;
-
-            text-shadow:
-                0 0 18px rgba(59, 130, 246, 0.18);
-        }
-
-
-        h2 {
-            color: #f1f5f9 !important;
-            font-size: 23px !important;
-            font-weight: 750 !important;
-            letter-spacing: -0.2px;
-        }
-
-
-        h3 {
-            color: #f8fafc !important;
-            font-size: 17px !important;
-            font-weight: 700 !important;
-        }
-
-
-        /* ========================================================
-           NORMAL TEXT
-           ======================================================== */
-
-        .stMarkdown p {
-            color: #9ca8ba;
-            font-size: 14.5px;
-            line-height: 1.75;
-        }
-
-
-        /* ========================================================
-           DIVIDER
-           ======================================================== */
-
-        hr {
-            border: none !important;
-            height: 1px !important;
-
-            background: linear-gradient(
-                90deg,
-                rgba(37, 99, 235, 0),
-                rgba(59, 130, 246, 0.55),
-                rgba(124, 58, 237, 0.40),
-                rgba(37, 99, 235, 0)
-            ) !important;
-
-            box-shadow:
-                0 0 8px rgba(59, 130, 246, 0.18);
-        }
-
-
-        /* ========================================================
-           PREMIUM CARDS
-           ======================================================== */
-
-        div[data-testid="stVerticalBlockBorderWrapper"] {
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(15, 23, 42, 0.96),
-                    rgba(9, 14, 25, 0.98)
-                );
-
-            border: 1px solid rgba(71, 85, 105, 0.38);
-
-            border-radius: 14px;
-
-            padding: 20px;
-
-            box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.025);
-
-            transition:
-                transform 0.22s ease,
-                border-color 0.22s ease,
-                box-shadow 0.22s ease;
-        }
-
-
-        /* Card hover */
-
-        div[data-testid="stVerticalBlockBorderWrapper"]:hover {
-
-            transform: translateY(-2px);
-
-            border-color: rgba(59, 130, 246, 0.42);
-
-            box-shadow:
-                0 12px 30px rgba(0, 0, 0, 0.34),
-                0 0 18px rgba(37, 99, 235, 0.09),
-                inset 0 1px 0 rgba(255, 255, 255, 0.035);
-        }
-
-
-        /* ========================================================
-           CARD HEADINGS
-           ======================================================== */
-
-        div[data-testid="stVerticalBlockBorderWrapper"] h3 {
-
-            color: #f8fafc !important;
-
-            margin-bottom: 7px !important;
-
-            text-shadow:
-                0 0 10px rgba(96, 165, 250, 0.12);
-        }
-
-
-        /* ========================================================
-           METRIC CARDS
-           ======================================================== */
-
-        [data-testid="stMetric"] {
-
-            background:
-                linear-gradient(
-                    145deg,
-                    #101827,
-                    #0a101d
-                );
-
-            border: 1px solid rgba(51, 65, 85, 0.55);
-
-            border-radius: 12px;
-
-            padding: 16px 17px;
-
-            box-shadow:
-                0 6px 18px rgba(0, 0, 0, 0.24);
-
-            transition:
-                transform 0.2s ease,
-                border-color 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-
-        [data-testid="stMetric"]:hover {
-
-            transform: translateY(-2px);
-
-            border-color: rgba(59, 130, 246, 0.45);
-
-            box-shadow:
-                0 8px 22px rgba(0, 0, 0, 0.30),
-                0 0 14px rgba(37, 99, 235, 0.10);
-        }
-
-
-        [data-testid="stMetricLabel"] {
-
-            color: #8b98ab !important;
-
-            font-size: 12px !important;
-
-            font-weight: 600 !important;
-
-            letter-spacing: 0.3px;
-        }
-
-
-        [data-testid="stMetricValue"] {
-
-            color: #f8fafc !important;
-
-            font-size: 22px !important;
-
-            font-weight: 800 !important;
-
-            letter-spacing: -0.3px;
-        }
-
-
-        /* ========================================================
-           BUTTONS
-           ======================================================== */
-
-        .stButton > button {
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #1d4ed8,
-                    #4338ca
-                );
-
-            color: #ffffff;
-
-            border: 1px solid rgba(96, 165, 250, 0.30);
-
-            border-radius: 8px;
-
-            font-size: 13px;
-
-            font-weight: 650;
-
-            padding: 8px 17px;
-
-            box-shadow:
-                0 4px 14px rgba(37, 99, 235, 0.16);
-
-            transition: all 0.2s ease;
-        }
-
-
-        .stButton > button:hover {
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #4f46e5
-                );
-
-            border-color: rgba(96, 165, 250, 0.55);
-
-            transform: translateY(-1px);
-
-            box-shadow:
-                0 6px 18px rgba(37, 99, 235, 0.25);
-
-            color: #ffffff;
-        }
-
-
-        /* ========================================================
-           SIDEBAR
-           ======================================================== */
-
-        section[data-testid="stSidebar"] {
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #11141d 0%,
-                    #0d1018 100%
-                ) !important;
-
-            border-right: 1px solid rgba(51, 65, 85, 0.35);
-
-            box-shadow:
-                5px 0 25px rgba(0, 0, 0, 0.15);
-        }
-
-
-        /* Sidebar links */
-
-        section[data-testid="stSidebar"] .nav-link {
-
-            color: #aab4c3 !important;
-
-            border-radius: 8px !important;
-
-            transition:
-                background 0.2s ease,
-                color 0.2s ease;
-        }
-
-
-        /* Sidebar hover */
-
-        section[data-testid="stSidebar"] .nav-link:hover {
-
-            background: rgba(59, 130, 246, 0.08) !important;
-
-            color: #ffffff !important;
-        }
-
-
-        /* Selected sidebar */
-
-        section[data-testid="stSidebar"] .nav-link-selected {
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ef4444,
-                    #dc2626
-                ) !important;
-
-            color: #ffffff !important;
-
-            font-weight: 700 !important;
-
-            box-shadow:
-                0 4px 14px rgba(239, 68, 68, 0.20);
-
-            border: 1px solid rgba(248, 113, 113, 0.18);
-        }
-
-
-        /* ========================================================
-           SCROLLBAR
-           ======================================================== */
-
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #060a12;
-        }
-
-        ::-webkit-scrollbar-thumb {
-
-            background:
-                linear-gradient(
-                    #334155,
-                    #475569
-                );
-
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
-        }
-
-
-        /* ========================================================
-           FOOTER / CAPTION
-           ======================================================== */
-
-        .stCaption {
-
-            color: #64748b !important;
-
-            font-size: 12px !important;
-
-            text-align: center;
-
-            letter-spacing: 0.2px;
-        }
-
-
-        /* ========================================================
-           MOBILE / SMALL SCREEN
-           ======================================================== */
-
-        @media (max-width: 900px) {
-
-            h1 {
-                font-size: 28px !important;
-            }
-
-            h2 {
-                font-size: 21px !important;
-            }
-
-            .block-container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-        }
-
-        </style>
-        """,
-        unsafe_allow_html=True,
+        '<div class="about-title">📌 About Project</div>',
+        unsafe_allow_html=True
     )
 
-
-    # ============================================================
-    # 2. PAGE TITLE
-    # ============================================================
-
-    st.title("📌 About Project")
-
-    st.write(
-        "Bike Sales India – Data Analysis & Visualization Dashboard"
+    st.markdown(
+        '<div class="subtitle">Bike Sales India – Data Analysis & Visualization Dashboard</div>',
+        unsafe_allow_html=True
     )
 
     st.divider()
 
 
-    # ============================================================
-    # 3. PROJECT INTRODUCTION
-    # ============================================================
+    # =========================================================
+    # HERO SECTION
+    # =========================================================
 
-    with st.container(border=True):
+    st.markdown("""
+<div class="hero">
+    <div class="hero-title">
+        🏍️ Bike Sales India
+    </div>
 
-        st.subheader("🏍️ MotoVision India")
-
-        st.write(
-            "Bike Sales India is an interactive data analysis and "
-            "visualization project developed to explore the Indian "
-            "bike market."
-        )
-
-        st.write(
-            "The dashboard converts raw bike data into meaningful "
-            "insights using statistics, charts and comparisons."
-        )
-
-
-    # ============================================================
-    # 4. ABOUT THE PROJECT
-    # ============================================================
-
-    st.subheader("📖 About the Project")
-
-    with st.container(border=True):
-
-        st.write(
-            "This project focuses on analyzing different aspects of "
-            "the Indian bike market."
-        )
-
-        st.write(
-            "Users can explore brands, models, prices, resale values, "
-            "mileage, engine capacity and state-wise bike data."
-        )
-
-        st.write(
-            "The main purpose is to make large amounts of bike data "
-            "easy to understand through an interactive dashboard."
-        )
+    <div class="hero-text">
+        An interactive data analysis and visualization dashboard
+        created to explore and understand the Indian bike market.
+        The project transforms raw bike data into meaningful
+        insights using statistics, charts and comparisons.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 
-    # ============================================================
-    # 5. PROJECT OBJECTIVE
-    # ============================================================
+    # =========================================================
+    # ABOUT THE PROJECT
+    # =========================================================
 
-    st.subheader("🎯 Project Objective")
+    st.markdown(
+        '<div class="section-title">📖 About the Project</div>',
+        unsafe_allow_html=True
+    )
 
-    with st.container(border=True):
+    st.markdown("""
+<div class="info-box">
 
-        st.write(
-            "The main objective of this project is to identify useful "
-            "patterns and trends in the Indian bike market."
-        )
+    <div class="info-text">
+        <b>Bike Sales India</b> is a data analysis project focused on
+        understanding the Indian bike market.
+    </div>
 
-        st.write("The dashboard helps users to:")
+    <div class="info-text">
+        The dashboard allows users to explore different bike brands,
+        models, prices, resale values, mileage, engine capacity and
+        state-wise data.
+    </div>
 
-        st.write(
-            """
-            • Compare different bike brands and models  
-            • Analyze bike prices and price ranges  
-            • Study resale values  
-            • Compare mileage and engine capacity  
-            • Explore state-wise bike data  
-            • Understand market trends through visualizations
-            """
-        )
+    <div class="info-text">
+        The main goal is to present large amounts of bike data in a
+        simple, interactive and easy-to-understand format.
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
 
 
-    # ============================================================
-    # 6. DASHBOARD MODULES
-    # ============================================================
+    # =========================================================
+    # PROJECT OBJECTIVE
+    # =========================================================
 
-    st.subheader("📊 Dashboard Modules")
+    st.markdown(
+        '<div class="section-title">🎯 Project Objective</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown("""
+<div class="info-box">
+
+    <div class="info-text">
+        The objective of this project is to identify useful patterns,
+        comparisons and trends in the Indian bike market.
+    </div>
+
+    <div class="info-text">
+        <b>Users can easily:</b>
+    </div>
+
+    <ul style="
+        color:#b8c4d6;
+        line-height:2;
+        font-size:15px;
+        margin-top:5px;
+    ">
+        <li>Compare different bike brands</li>
+        <li>Analyze different bike models</li>
+        <li>Understand bike price ranges</li>
+        <li>Analyze resale values</li>
+        <li>Compare mileage and engine capacity</li>
+        <li>Explore state-wise bike data</li>
+        <li>Understand market trends through charts</li>
+    </ul>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # DASHBOARD MODULES
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">📊 Dashboard Modules</div>',
+        unsafe_allow_html=True
+    )
 
     c1, c2, c3 = st.columns(3)
 
-
     with c1:
-
-        with st.container(border=True):
-
-            st.subheader("📊 Data Overview")
-
-            st.write(
-                "Provides an overall summary of the bike dataset "
-                "with important statistics and visualizations."
-            )
-
+        st.markdown("""
+<div class="module">
+    <div class="module-title">📊 Data Overview</div>
+    <div class="module-text">
+        Provides an overall summary of the bike dataset
+        with important statistics and visualizations.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
     with c2:
-
-        with st.container(border=True):
-
-            st.subheader("🏢 Brand Analysis")
-
-            st.write(
-                "Compare different bike brands and understand "
-                "their market performance."
-            )
-
+        st.markdown("""
+<div class="module">
+    <div class="module-title">🏢 Brand Analysis</div>
+    <div class="module-text">
+        Compare different bike brands and understand
+        their market performance.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
     with c3:
-
-        with st.container(border=True):
-
-            st.subheader("⚙️ Model Analysis")
-
-            st.write(
-                "Analyze and compare different bike models "
-                "using important parameters."
-            )
+        st.markdown("""
+<div class="module">
+    <div class="module-title">⚙️ Model Analysis</div>
+    <div class="module-text">
+        Analyze and compare different bike models
+        using important parameters.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 
     c4, c5, c6 = st.columns(3)
 
-
     with c4:
-
-        with st.container(border=True):
-
-            st.subheader("💰 Price Analysis")
-
-            st.write(
-                "Explore bike prices and understand different "
-                "price segments."
-            )
-
+        st.markdown("""
+<div class="module">
+    <div class="module-title">💰 Price Analysis</div>
+    <div class="module-text">
+        Explore bike prices and understand
+        different price segments.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
     with c5:
-
-        with st.container(border=True):
-
-            st.subheader("♻️ Resale Analysis")
-
-            st.write(
-                "Analyze resale prices and understand the "
-                "value of different bikes."
-            )
-
+        st.markdown("""
+<div class="module">
+    <div class="module-title">♻️ Resale Analysis</div>
+    <div class="module-text">
+        Analyze resale prices and understand
+        the value of different bikes.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
     with c6:
+        st.markdown("""
+<div class="module">
+    <div class="module-title">📍 State Analysis</div>
+    <div class="module-text">
+        Explore state-wise bike data and identify
+        regional market patterns.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-        with st.container(border=True):
 
-            st.subheader("📍 State Analysis")
+    # =========================================================
+    # TECHNOLOGIES
+    # =========================================================
 
-            st.write(
-                "Explore state-wise bike data and identify "
-                "regional market patterns."
-            )
+    st.markdown(
+        '<div class="section-title">🛠️ Technologies Used</div>',
+        unsafe_allow_html=True
+    )
 
-
-    # ============================================================
-    # 7. TECHNOLOGIES USED
-    # ============================================================
-
-    st.subheader("🛠️ Technologies Used")
-
-    t1, t2, t3, t4, t5 = st.columns(5)
-
+    t1, t2, t3, t4 = st.columns(4)
 
     with t1:
-        st.metric(
-            "Language",
-            "Python"
-        )
-
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">🐍 Python</div>
+    <div class="tech-role">Programming</div>
+</div>
+""", unsafe_allow_html=True)
 
     with t2:
-        st.metric(
-            "Dashboard",
-            "Streamlit"
-        )
-
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">📊 Streamlit</div>
+    <div class="tech-role">Dashboard</div>
+</div>
+""", unsafe_allow_html=True)
 
     with t3:
-        st.metric(
-            "Charts",
-            "Plotly"
-        )
-
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">📈 Plotly</div>
+    <div class="tech-role">Visualization</div>
+</div>
+""", unsafe_allow_html=True)
 
     with t4:
-        st.metric(
-            "Data",
-            "NumPy"
-        )
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">🐼 Pandas</div>
+    <div class="tech-role">Data Analysis</div>
+</div>
+""", unsafe_allow_html=True)
 
 
-    with t5:
-        st.metric(
-            "Image",
-            "PIL"
-        )
+    # =========================================================
+    # PROJECT OUTCOME
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">🚀 Project Outcome</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown("""
+<div class="info-box">
+
+    <div class="info-text">
+        This project provides a simple and interactive way to
+        understand the Indian bike market.
+    </div>
+
+    <div class="info-text">
+        Users can quickly compare brands, models, prices,
+        resale values and state-wise trends.
+    </div>
+
+    <div class="info-text">
+        Overall, the project demonstrates how Python,
+        Pandas, Plotly and Streamlit can transform raw data
+        into meaningful visual insights.
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
 
 
-    # ============================================================
-    # 8. PROJECT OUTCOME
-    # ============================================================
+    # =========================================================
+    # PROJECT HIGHLIGHTS
+    # =========================================================
 
-    st.subheader("🚀 Project Outcome")
-
-    with st.container(border=True):
-
-        st.write(
-            "This dashboard provides a simple and interactive way "
-            "to understand the Indian bike market."
-        )
-
-        st.write(
-            "Instead of manually analyzing raw data, users can "
-            "quickly compare brands, models, prices, resale values "
-            "and state-wise trends."
-        )
-
-        st.write(
-            "The project demonstrates how Python and Streamlit can "
-            "be used to convert raw data into useful visual insights."
-        )
-
-
-    # ============================================================
-    # 9. PROJECT HIGHLIGHTS
-    # ============================================================
-
-    st.subheader("✨ Project Highlights")
+    st.markdown(
+        '<div class="section-title">✨ Project Highlights</div>',
+        unsafe_allow_html=True
+    )
 
     h1, h2, h3, h4 = st.columns(4)
 
-
     with h1:
-
-        with st.container(border=True):
-
-            st.metric(
-                "Analysis",
-                "6+"
-            )
-
-            st.caption(
-                "Major analytical sections"
-            )
-
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">6+</div>
+    <div class="highlight-label">Major analytical sections</div>
+</div>
+""", unsafe_allow_html=True)
 
     with h2:
-
-        with st.container(border=True):
-
-            st.metric(
-                "Visualization",
-                "Interactive"
-            )
-
-            st.caption(
-                "Charts and comparisons"
-            )
-
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">Interactive</div>
+    <div class="highlight-label">Visual insights</div>
+</div>
+""", unsafe_allow_html=True)
 
     with h3:
-
-        with st.container(border=True):
-
-            st.metric(
-                "Platform",
-                "Web"
-            )
-
-            st.caption(
-                "Streamlit dashboard"
-            )
-
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">Streamlit</div>
+    <div class="highlight-label">Interactive web dashboard</div>
+</div>
+""", unsafe_allow_html=True)
 
     with h4:
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">India</div>
+    <div class="highlight-label">Indian bike market</div>
+</div>
+""", unsafe_allow_html=True)
 
-        with st.container(border=True):
 
-            st.metric(
-                "Focus",
-                "India"
-            )
+    # =========================================================
+    # FOOTER
+    # =========================================================
 
-            st.caption(
-                "Indian bike market"
-            )
+    st.divider()
+
+    st.markdown("""
+<div class="footer">
+    🏍️ <b>Bike Sales India</b><br>
+    Data Analysis & Visualization Dashboard<br>
+    Developed using Python, Pandas, Plotly and Streamlit
+</div>
+""", unsafe_allow_html=True)
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.highlight-label {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.8;
+    padding: 25px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # PAGE HEADER
+    # =========================================================
+
+    st.markdown(
+        '<div class="about-title">📌 About Project</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="subtitle">Bike Sales India – Data Analysis & Visualization Dashboard</div>',
+        unsafe_allow_html=True
+    )
+
+    st.divider()
+
+
+    # =========================================================
+    # HERO SECTION
+    # =========================================================
+
+    st.markdown("""
+<div class="hero">
+    <div class="hero-title">
+        🏍️ Bike Sales India
+    </div>
+
+    <div class="hero-text">
+        An interactive data analysis and visualization dashboard
+        created to explore and understand the Indian bike market.
+        The project transforms raw bike data into meaningful
+        insights using statistics, charts and comparisons.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # ABOUT THE PROJECT
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">📖 About the Project</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown("""
+<div class="info-box">
+
+    <div class="info-text">
+        <b>Bike Sales India</b> is a data analysis project focused on
+        understanding the Indian bike market.
+    </div>
+
+    <div class="info-text">
+        The dashboard allows users to explore different bike brands,
+        models, prices, resale values, mileage, engine capacity and
+        state-wise data.
+    </div>
+
+    <div class="info-text">
+        The main goal is to present large amounts of bike data in a
+        simple, interactive and easy-to-understand format.
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # PROJECT OBJECTIVE
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">🎯 Project Objective</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown("""
+<div class="info-box">
+
+    <div class="info-text">
+        The objective of this project is to identify useful patterns,
+        comparisons and trends in the Indian bike market.
+    </div>
+
+    <div class="info-text">
+        <b>Users can easily:</b>
+    </div>
+
+    <ul style="
+        color:#b8c4d6;
+        line-height:2;
+        font-size:15px;
+        margin-top:5px;
+    ">
+        <li>Compare different bike brands</li>
+        <li>Analyze different bike models</li>
+        <li>Understand bike price ranges</li>
+        <li>Analyze resale values</li>
+        <li>Compare mileage and engine capacity</li>
+        <li>Explore state-wise bike data</li>
+        <li>Understand market trends through charts</li>
+    </ul>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # DASHBOARD MODULES
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">📊 Dashboard Modules</div>',
+        unsafe_allow_html=True
+    )
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        st.markdown("""
+<div class="module">
+    <div class="module-title">📊 Data Overview</div>
+    <div class="module-text">
+        Provides an overall summary of the bike dataset
+        with important statistics and visualizations.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+    with c2:
+        st.markdown("""
+<div class="module">
+    <div class="module-title">🏢 Brand Analysis</div>
+    <div class="module-text">
+        Compare different bike brands and understand
+        their market performance.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+    with c3:
+        st.markdown("""
+<div class="module">
+    <div class="module-title">⚙️ Model Analysis</div>
+    <div class="module-text">
+        Analyze and compare different bike models
+        using important parameters.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+
+    c4, c5, c6 = st.columns(3)
+
+    with c4:
+        st.markdown("""
+<div class="module">
+    <div class="module-title">💰 Price Analysis</div>
+    <div class="module-text">
+        Explore bike prices and understand
+        different price segments.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+    with c5:
+        st.markdown("""
+<div class="module">
+    <div class="module-title">♻️ Resale Analysis</div>
+    <div class="module-text">
+        Analyze resale prices and understand
+        the value of different bikes.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+    with c6:
+        st.markdown("""
+<div class="module">
+    <div class="module-title">📍 State Analysis</div>
+    <div class="module-text">
+        Explore state-wise bike data and identify
+        regional market patterns.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # TECHNOLOGIES
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">🛠️ Technologies Used</div>',
+        unsafe_allow_html=True
+    )
+
+    t1, t2, t3, t4 = st.columns(4)
+
+    with t1:
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">🐍 Python</div>
+    <div class="tech-role">Programming</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with t2:
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">📊 Streamlit</div>
+    <div class="tech-role">Dashboard</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with t3:
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">📈 Plotly</div>
+    <div class="tech-role">Visualization</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with t4:
+        st.markdown("""
+<div class="tech">
+    <div class="tech-name">🐼 Pandas</div>
+    <div class="tech-role">Data Analysis</div>
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # PROJECT OUTCOME
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">🚀 Project Outcome</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown("""
+<div class="info-box">
+
+    <div class="info-text">
+        This project provides a simple and interactive way to
+        understand the Indian bike market.
+    </div>
+
+    <div class="info-text">
+        Users can quickly compare brands, models, prices,
+        resale values and state-wise trends.
+    </div>
+
+    <div class="info-text">
+        Overall, the project demonstrates how Python,
+        Pandas, Plotly and Streamlit can transform raw data
+        into meaningful visual insights.
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # PROJECT HIGHLIGHTS
+    # =========================================================
+
+    st.markdown(
+        '<div class="section-title">✨ Project Highlights</div>',
+        unsafe_allow_html=True
+    )
+
+    h1, h2, h3, h4 = st.columns(4)
+
+    with h1:
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">6+</div>
+    <div class="highlight-label">Major analytical sections</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with h2:
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">Interactive</div>
+    <div class="highlight-label">Visual insights</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with h3:
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">Streamlit</div>
+    <div class="highlight-label">Interactive web dashboard</div>
+</div>
+""", unsafe_allow_html=True)
+
+    with h4:
+        st.markdown("""
+<div class="highlight">
+    <div class="highlight-number">India</div>
+    <div class="highlight-label">Indian bike market</div>
+</div>
+""", unsafe_allow_html=True)
+
+
+    # =========================================================
+    # FOOTER
+    # =========================================================
+
+    st.divider()
+
+    st.markdown("""
+<div class="footer">
+    🏍️ <b>Bike Sales India</b><br>
+    Data Analysis & Visualization Dashboard<br>
+    Developed using Python, Pandas, Plotly and Streamlit
+</div>
+""", unsafe_allow_html=True)
+
+
+
+
+
+# elif opt == "About Project":
+
+#     # ============================================================
+#     # 1. PROFESSIONAL GLOWY CSS STYLING
+#     # ============================================================
+
+#     st.markdown(
+#         """
+#         <style>
+
+#         /* ========================================================
+#            MAIN BACKGROUND
+#            ======================================================== */
+
+#         .stApp {
+#             background:
+#                 radial-gradient(
+#                     circle at 10% 0%,
+#                     rgba(37, 99, 235, 0.09),
+#                     transparent 25%
+#                 ),
+#                 radial-gradient(
+#                     circle at 95% 10%,
+#                     rgba(124, 58, 237, 0.07),
+#                     transparent 25%
+#                 ),
+#                 #060a12;
+
+#             color: #e5e7eb;
+#         }
+
+
+#         /* ========================================================
+#            MAIN CONTENT
+#            ======================================================== */
+
+#         .block-container {
+#             padding-top: 2.2rem;
+#             padding-bottom: 2rem;
+#             max-width: 1250px;
+#         }
+
+
+#         /* ========================================================
+#            PAGE TITLE
+#            ======================================================== */
+
+#         h1 {
+#             color: #f8fafc !important;
+#             font-size: 34px !important;
+#             font-weight: 800 !important;
+#             letter-spacing: -0.6px;
+
+#             text-shadow:
+#                 0 0 18px rgba(59, 130, 246, 0.18);
+#         }
+
+
+#         h2 {
+#             color: #f1f5f9 !important;
+#             font-size: 23px !important;
+#             font-weight: 750 !important;
+#             letter-spacing: -0.2px;
+#         }
+
+
+#         h3 {
+#             color: #f8fafc !important;
+#             font-size: 17px !important;
+#             font-weight: 700 !important;
+#         }
+
+
+#         /* ========================================================
+#            NORMAL TEXT
+#            ======================================================== */
+
+#         .stMarkdown p {
+#             color: #9ca8ba;
+#             font-size: 14.5px;
+#             line-height: 1.75;
+#         }
+
+
+#         /* ========================================================
+#            DIVIDER
+#            ======================================================== */
+
+#         hr {
+#             border: none !important;
+#             height: 1px !important;
+
+#             background: linear-gradient(
+#                 90deg,
+#                 rgba(37, 99, 235, 0),
+#                 rgba(59, 130, 246, 0.55),
+#                 rgba(124, 58, 237, 0.40),
+#                 rgba(37, 99, 235, 0)
+#             ) !important;
+
+#             box-shadow:
+#                 0 0 8px rgba(59, 130, 246, 0.18);
+#         }
+
+
+#         /* ========================================================
+#            PREMIUM CARDS
+#            ======================================================== */
+
+#         div[data-testid="stVerticalBlockBorderWrapper"] {
+
+#             background:
+#                 linear-gradient(
+#                     145deg,
+#                     rgba(15, 23, 42, 0.96),
+#                     rgba(9, 14, 25, 0.98)
+#                 );
+
+#             border: 1px solid rgba(71, 85, 105, 0.38);
+
+#             border-radius: 14px;
+
+#             padding: 20px;
+
+#             box-shadow:
+#                 0 8px 25px rgba(0, 0, 0, 0.25),
+#                 inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+#             transition:
+#                 transform 0.22s ease,
+#                 border-color 0.22s ease,
+#                 box-shadow 0.22s ease;
+#         }
+
+
+#         /* Card hover */
+
+#         div[data-testid="stVerticalBlockBorderWrapper"]:hover {
+
+#             transform: translateY(-2px);
+
+#             border-color: rgba(59, 130, 246, 0.42);
+
+#             box-shadow:
+#                 0 12px 30px rgba(0, 0, 0, 0.34),
+#                 0 0 18px rgba(37, 99, 235, 0.09),
+#                 inset 0 1px 0 rgba(255, 255, 255, 0.035);
+#         }
+
+
+#         /* ========================================================
+#            CARD HEADINGS
+#            ======================================================== */
+
+#         div[data-testid="stVerticalBlockBorderWrapper"] h3 {
+
+#             color: #f8fafc !important;
+
+#             margin-bottom: 7px !important;
+
+#             text-shadow:
+#                 0 0 10px rgba(96, 165, 250, 0.12);
+#         }
+
+
+#         /* ========================================================
+#            METRIC CARDS
+#            ======================================================== */
+
+#         [data-testid="stMetric"] {
+
+#             background:
+#                 linear-gradient(
+#                     145deg,
+#                     #101827,
+#                     #0a101d
+#                 );
+
+#             border: 1px solid rgba(51, 65, 85, 0.55);
+
+#             border-radius: 12px;
+
+#             padding: 16px 17px;
+
+#             box-shadow:
+#                 0 6px 18px rgba(0, 0, 0, 0.24);
+
+#             transition:
+#                 transform 0.2s ease,
+#                 border-color 0.2s ease,
+#                 box-shadow 0.2s ease;
+#         }
+
+
+#         [data-testid="stMetric"]:hover {
+
+#             transform: translateY(-2px);
+
+#             border-color: rgba(59, 130, 246, 0.45);
+
+#             box-shadow:
+#                 0 8px 22px rgba(0, 0, 0, 0.30),
+#                 0 0 14px rgba(37, 99, 235, 0.10);
+#         }
+
+
+#         [data-testid="stMetricLabel"] {
+
+#             color: #8b98ab !important;
+
+#             font-size: 12px !important;
+
+#             font-weight: 600 !important;
+
+#             letter-spacing: 0.3px;
+#         }
+
+
+#         [data-testid="stMetricValue"] {
+
+#             color: #f8fafc !important;
+
+#             font-size: 22px !important;
+
+#             font-weight: 800 !important;
+
+#             letter-spacing: -0.3px;
+#         }
+
+
+#         /* ========================================================
+#            BUTTONS
+#            ======================================================== */
+
+#         .stButton > button {
+
+#             background:
+#                 linear-gradient(
+#                     135deg,
+#                     #1d4ed8,
+#                     #4338ca
+#                 );
+
+#             color: #ffffff;
+
+#             border: 1px solid rgba(96, 165, 250, 0.30);
+
+#             border-radius: 8px;
+
+#             font-size: 13px;
+
+#             font-weight: 650;
+
+#             padding: 8px 17px;
+
+#             box-shadow:
+#                 0 4px 14px rgba(37, 99, 235, 0.16);
+
+#             transition: all 0.2s ease;
+#         }
+
+
+#         .stButton > button:hover {
+
+#             background:
+#                 linear-gradient(
+#                     135deg,
+#                     #2563eb,
+#                     #4f46e5
+#                 );
+
+#             border-color: rgba(96, 165, 250, 0.55);
+
+#             transform: translateY(-1px);
+
+#             box-shadow:
+#                 0 6px 18px rgba(37, 99, 235, 0.25);
+
+#             color: #ffffff;
+#         }
+
+
+#         /* ========================================================
+#            SIDEBAR
+#            ======================================================== */
+
+#         section[data-testid="stSidebar"] {
+
+#             background:
+#                 linear-gradient(
+#                     180deg,
+#                     #11141d 0%,
+#                     #0d1018 100%
+#                 ) !important;
+
+#             border-right: 1px solid rgba(51, 65, 85, 0.35);
+
+#             box-shadow:
+#                 5px 0 25px rgba(0, 0, 0, 0.15);
+#         }
+
+
+#         /* Sidebar links */
+
+#         section[data-testid="stSidebar"] .nav-link {
+
+#             color: #aab4c3 !important;
+
+#             border-radius: 8px !important;
+
+#             transition:
+#                 background 0.2s ease,
+#                 color 0.2s ease;
+#         }
+
+
+#         /* Sidebar hover */
+
+#         section[data-testid="stSidebar"] .nav-link:hover {
+
+#             background: rgba(59, 130, 246, 0.08) !important;
+
+#             color: #ffffff !important;
+#         }
+
+
+#         /* Selected sidebar */
+
+#         section[data-testid="stSidebar"] .nav-link-selected {
+
+#             background:
+#                 linear-gradient(
+#                     90deg,
+#                     #ef4444,
+#                     #dc2626
+#                 ) !important;
+
+#             color: #ffffff !important;
+
+#             font-weight: 700 !important;
+
+#             box-shadow:
+#                 0 4px 14px rgba(239, 68, 68, 0.20);
+
+#             border: 1px solid rgba(248, 113, 113, 0.18);
+#         }
+
+
+#         /* ========================================================
+#            SCROLLBAR
+#            ======================================================== */
+
+#         ::-webkit-scrollbar {
+#             width: 7px;
+#         }
+
+#         ::-webkit-scrollbar-track {
+#             background: #060a12;
+#         }
+
+#         ::-webkit-scrollbar-thumb {
+
+#             background:
+#                 linear-gradient(
+#                     #334155,
+#                     #475569
+#                 );
+
+#             border-radius: 10px;
+#         }
+
+#         ::-webkit-scrollbar-thumb:hover {
+#             background: #64748b;
+#         }
+
+
+#         /* ========================================================
+#            FOOTER / CAPTION
+#            ======================================================== */
+
+#         .stCaption {
+
+#             color: #64748b !important;
+
+#             font-size: 12px !important;
+
+#             text-align: center;
+
+#             letter-spacing: 0.2px;
+#         }
+
+
+#         /* ========================================================
+#            MOBILE / SMALL SCREEN
+#            ======================================================== */
+
+#         @media (max-width: 900px) {
+
+#             h1 {
+#                 font-size: 28px !important;
+#             }
+
+#             h2 {
+#                 font-size: 21px !important;
+#             }
+
+#             .block-container {
+#                 padding-left: 1rem;
+#                 padding-right: 1rem;
+#             }
+#         }
+
+#         </style>
+#         """,
+#         unsafe_allow_html=True,
+#     )
+
+
+#     # ============================================================
+#     # 2. PAGE TITLE
+#     # ============================================================
+
+#     st.title("📌 About Project")
+
+#     st.write(
+#         "Bike Sales India – Data Analysis & Visualization Dashboard"
+#     )
+
+#     st.divider()
+
+
+#     # ============================================================
+#     # 3. PROJECT INTRODUCTION
+#     # ============================================================
+
+#     with st.container(border=True):
+
+#         st.subheader("🏍️ MotoVision India")
+
+#         st.write(
+#             "Bike Sales India is an interactive data analysis and "
+#             "visualization project developed to explore the Indian "
+#             "bike market."
+#         )
+
+#         st.write(
+#             "The dashboard converts raw bike data into meaningful "
+#             "insights using statistics, charts and comparisons."
+#         )
+
+
+#     # ============================================================
+#     # 4. ABOUT THE PROJECT
+#     # ============================================================
+
+#     st.subheader("📖 About the Project")
+
+#     with st.container(border=True):
+
+#         st.write(
+#             "This project focuses on analyzing different aspects of "
+#             "the Indian bike market."
+#         )
+
+#         st.write(
+#             "Users can explore brands, models, prices, resale values, "
+#             "mileage, engine capacity and state-wise bike data."
+#         )
+
+#         st.write(
+#             "The main purpose is to make large amounts of bike data "
+#             "easy to understand through an interactive dashboard."
+#         )
+
+
+#     # ============================================================
+#     # 5. PROJECT OBJECTIVE
+#     # ============================================================
+
+#     st.subheader("🎯 Project Objective")
+
+#     with st.container(border=True):
+
+#         st.write(
+#             "The main objective of this project is to identify useful "
+#             "patterns and trends in the Indian bike market."
+#         )
+
+#         st.write("The dashboard helps users to:")
+
+#         st.write(
+#             """
+#             • Compare different bike brands and models  
+#             • Analyze bike prices and price ranges  
+#             • Study resale values  
+#             • Compare mileage and engine capacity  
+#             • Explore state-wise bike data  
+#             • Understand market trends through visualizations
+#             """
+#         )
+
+
+#     # ============================================================
+#     # 6. DASHBOARD MODULES
+#     # ============================================================
+
+#     st.subheader("📊 Dashboard Modules")
+
+#     c1, c2, c3 = st.columns(3)
+
+
+#     with c1:
+
+#         with st.container(border=True):
+
+#             st.subheader("📊 Data Overview")
+
+#             st.write(
+#                 "Provides an overall summary of the bike dataset "
+#                 "with important statistics and visualizations."
+#             )
+
+
+#     with c2:
+
+#         with st.container(border=True):
+
+#             st.subheader("🏢 Brand Analysis")
+
+#             st.write(
+#                 "Compare different bike brands and understand "
+#                 "their market performance."
+#             )
+
+
+#     with c3:
+
+#         with st.container(border=True):
+
+#             st.subheader("⚙️ Model Analysis")
+
+#             st.write(
+#                 "Analyze and compare different bike models "
+#                 "using important parameters."
+#             )
+
+
+#     c4, c5, c6 = st.columns(3)
+
+
+#     with c4:
+
+#         with st.container(border=True):
+
+#             st.subheader("💰 Price Analysis")
+
+#             st.write(
+#                 "Explore bike prices and understand different "
+#                 "price segments."
+#             )
+
+
+#     with c5:
+
+#         with st.container(border=True):
+
+#             st.subheader("♻️ Resale Analysis")
+
+#             st.write(
+#                 "Analyze resale prices and understand the "
+#                 "value of different bikes."
+#             )
+
+
+#     with c6:
+
+#         with st.container(border=True):
+
+#             st.subheader("📍 State Analysis")
+
+#             st.write(
+#                 "Explore state-wise bike data and identify "
+#                 "regional market patterns."
+#             )
+
+
+#     # ============================================================
+#     # 7. TECHNOLOGIES USED
+#     # ============================================================
+
+#     st.subheader("🛠️ Technologies Used")
+
+#     t1, t2, t3, t4, t5 = st.columns(5)
+
+
+#     with t1:
+#         st.metric(
+#             "Language",
+#             "Python"
+#         )
+
+
+#     with t2:
+#         st.metric(
+#             "Dashboard",
+#             "Streamlit"
+#         )
+
+
+#     with t3:
+#         st.metric(
+#             "Charts",
+#             "Plotly"
+#         )
+
+
+#     with t4:
+#         st.metric(
+#             "Data",
+#             "NumPy"
+#         )
+
+
+#     with t5:
+#         st.metric(
+#             "Image",
+#             "PIL"
+#         )
+
+
+#     # ============================================================
+#     # 8. PROJECT OUTCOME
+#     # ============================================================
+
+#     st.subheader("🚀 Project Outcome")
+
+#     with st.container(border=True):
+
+#         st.write(
+#             "This dashboard provides a simple and interactive way "
+#             "to understand the Indian bike market."
+#         )
+
+#         st.write(
+#             "Instead of manually analyzing raw data, users can "
+#             "quickly compare brands, models, prices, resale values "
+#             "and state-wise trends."
+#         )
+
+#         st.write(
+#             "The project demonstrates how Python and Streamlit can "
+#             "be used to convert raw data into useful visual insights."
+#         )
+
+
+#     # ============================================================
+#     # 9. PROJECT HIGHLIGHTS
+#     # ============================================================
+
+#     st.subheader("✨ Project Highlights")
+
+#     h1, h2, h3, h4 = st.columns(4)
+
+
+#     with h1:
+
+#         with st.container(border=True):
+
+#             st.metric(
+#                 "Analysis",
+#                 "6+"
+#             )
+
+#             st.caption(
+#                 "Major analytical sections"
+#             )
+
+
+#     with h2:
+
+#         with st.container(border=True):
+
+#             st.metric(
+#                 "Visualization",
+#                 "Interactive"
+#             )
+
+#             st.caption(
+#                 "Charts and comparisons"
+#             )
+
+
+#     with h3:
+
+#         with st.container(border=True):
+
+#             st.metric(
+#                 "Platform",
+#                 "Web"
+#             )
+
+#             st.caption(
+#                 "Streamlit dashboard"
+#             )
+
+
+#     with h4:
+
+#         with st.container(border=True):
+
+#             st.metric(
+#                 "Focus",
+#                 "India"
+#             )
+
+#             st.caption(
+#                 "Indian bike market"
+#             )
 
 
     # ============================================================
