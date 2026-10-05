@@ -38,325 +38,1136 @@ with st.sidebar:
             ],
             )
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if opt == 'Dashboard':
-    # ---------------------------------------------------------
-    # 1. Glossy & Glassmorphism CSS Styling
-    # ---------------------------------------------------------
+
+    # ============================================================
+    # 1. RESALE-STYLE GLOSSY CSS
+    # ============================================================
+
     st.markdown("""
         <style>
-        /* Modern Obsidian Glossy Background */
+
+        /* ==============================
+           MAIN BACKGROUND
+        ============================== */
+
         .stApp {
-            background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    #164e63 0%,
+                    #0f172a 48%,
+                    #020617 100%
+                ) !important;
+
             color: #f8fafc;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: "Inter", system-ui, -apple-system, sans-serif;
         }
 
-        /* Sidebar Glass Effect */
+        [data-testid="stAppViewContainer"] {
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    #164e63 0%,
+                    #0f172a 48%,
+                    #020617 100%
+                ) !important;
+        }
+
+        [data-testid="stHeader"] {
+            background: transparent !important;
+        }
+
         [data-testid="stSidebar"] {
-            background: rgba(15, 23, 42, 0.6) !important;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(15, 23, 42, 0.75) !important;
+            border-right: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
 
-        /* ==================== GLOSSY GLASS KPI CARDS ==================== */
-        .kpi-card-glossy {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+
+        /* ==============================
+           PAGE TITLE
+        ============================== */
+
+        h1, h2, h3 {
+            color: #f8fafc !important;
+        }
+
+
+        /* ==============================
+           GLOSSY HEADER
+        ============================== */
+
+        .dashboard-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(16,185,129,0.20),
+                    rgba(6,182,212,0.14)
+                );
+
+            border: 1px solid rgba(255,255,255,0.15);
+
             border-radius: 20px;
-            padding: 22px 24px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            padding: 24px 28px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,0.45),
+                inset 0 1px 2px rgba(255,255,255,0.18);
+
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
-        /* Glass Surface Reflection (Gloss Effect) */
-        .kpi-card-glossy::before {
-            content: '';
+        .dashboard-header h1 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 2.3rem;
+            font-weight: 800;
+        }
+
+        .dashboard-header p {
+            color: #cbd5e1;
+            margin-top: 6px;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+
+        /* ==============================
+           GLOSSY KPI CARDS
+        ============================== */
+
+        .dashboard-kpi {
+            position: relative;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.08),
+                    rgba(255,255,255,0.02)
+                );
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            min-height: 125px;
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.45),
+                inset 0 1px 1px rgba(255,255,255,0.12);
+
+            transition:
+                transform 0.28s ease,
+                box-shadow 0.28s ease,
+                border-color 0.28s ease;
+
+            overflow: hidden;
+        }
+
+        .dashboard-kpi::before {
+            content: "";
             position: absolute;
+
             top: 0;
-            left: -50%;
-            width: 200%;
-            height: 50%;
-            background: linear-gradient(
-                180deg, 
-                rgba(255, 255, 255, 0.15) 0%, 
-                rgba(255, 255, 255, 0) 100%
-            );
-            transform: rotate(-10deg);
+            left: -100%;
+
+            width: 70%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    transparent,
+                    rgba(255,255,255,0.08),
+                    transparent
+                );
+
+            transition: left 0.55s ease;
+
             pointer-events: none;
         }
 
-        /* Glossy Card Variants with Soft Neon Tint */
-        .card-blue {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
-            border-color: rgba(96, 165, 250, 0.3);
-        }
-        .card-green {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
-            border-color: rgba(52, 211, 153, 0.3);
-        }
-        .card-amber {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
-            border-color: rgba(251, 191, 36, 0.3);
-        }
-        .card-purple {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
-            border-color: rgba(192, 132, 252, 0.3);
+        .dashboard-kpi:hover::before {
+            left: 130%;
         }
 
-        /* Hover Lift & Dynamic Glow Effect */
-        .card-blue:hover {
-            transform: translateY(-8px);
-            border-color: rgba(96, 165, 250, 0.6);
-            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3);
-        }
-        .card-green:hover {
-            transform: translateY(-8px);
-            border-color: rgba(52, 211, 153, 0.6);
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.3);
-        }
-        .card-amber:hover {
-            transform: translateY(-8px);
-            border-color: rgba(251, 191, 36, 0.6);
-            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.3);
-        }
-        .card-purple:hover {
-            transform: translateY(-8px);
-            border-color: rgba(192, 132, 252, 0.6);
-            box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+        .dashboard-kpi:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(255,255,255,0.35);
+
+            box-shadow:
+                0 18px 38px rgba(0,0,0,0.48),
+                0 0 22px rgba(16,185,129,0.18);
         }
 
-        .kpi-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #cbd5e1;
-            font-size: 12px;
+
+        /* KPI COLORS */
+
+        .kpi-blue {
+            border-bottom: 3px solid #38bdf8;
+        }
+
+        .kpi-green {
+            border-bottom: 3px solid #10b981;
+        }
+
+        .kpi-amber {
+            border-bottom: 3px solid #f59e0b;
+        }
+
+        .kpi-purple {
+            border-bottom: 3px solid #a78bfa;
+        }
+
+
+        /* KPI TOP */
+
+        .dashboard-kpi-title {
+            color: #9ca3af;
+
+            font-size: 0.75rem;
+
             font-weight: 700;
+
             text-transform: uppercase;
-            letter-spacing: 1px;
+
+            letter-spacing: 0.7px;
         }
 
-        .kpi-number {
-            font-size: 30px;
-            font-weight: 800;
+        .dashboard-kpi-icon {
+            font-size: 1.35rem;
+
+            margin-top: 7px;
+            margin-bottom: 3px;
+        }
+
+        .dashboard-kpi-value {
             color: #ffffff;
-            margin-top: 10px;
-            letter-spacing: -0.5px;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+            font-size: 1.55rem;
+
+            font-weight: 900;
+
+            margin-top: 4px;
+
+            text-shadow:
+                0 3px 10px rgba(0,0,0,0.45);
         }
 
-        /* Glossy Highlight Cards */
-        .tag-card-glossy {
-            background: rgba(30, 41, 59, 0.3);
+
+        /* ==============================
+           HIGHLIGHT CARDS
+        ============================== */
+
+        .highlight-card {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.015)
+                );
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 14px;
+
+            padding: 18px;
+
+            text-align: center;
+
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 16px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+
+            box-shadow:
+                0 8px 24px rgba(0,0,0,0.35);
+
+            transition: 0.28s ease;
         }
 
-        .tag-card-glossy:hover {
-            border-color: rgba(168, 85, 247, 0.5);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
-            background: rgba(30, 41, 59, 0.5);
+        .highlight-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(16,185,129,0.35);
+
+            box-shadow:
+                0 14px 30px rgba(0,0,0,0.42),
+                0 0 18px rgba(16,185,129,0.12);
         }
 
-        .tag-title-glossy {
+        .highlight-title {
             color: #94a3b8;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 6px;
+
+            font-size: 0.75rem;
+
+            font-weight: 700;
+
             text-transform: uppercase;
+
+            letter-spacing: 0.6px;
         }
 
-        .tag-value-glossy {
+        .highlight-value {
             color: #c084fc;
-            font-size: 20px;
-            font-weight: 700;
+
+            font-size: 1.2rem;
+
+            font-weight: 800;
+
+            margin-top: 6px;
         }
+
+
+        /* ==============================
+           SELECTBOX
+        ============================== */
+
+        div[data-baseweb="select"] > div {
+            background: rgba(30,41,59,0.85) !important;
+
+            border: 1px solid rgba(255,255,255,0.10) !important;
+
+            border-radius: 10px !important;
+        }
+
+
+        /* ==============================
+           DIVIDER
+        ============================== */
+
+        hr {
+            border: none !important;
+
+            height: 1px !important;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(16,185,129,0.55),
+                    rgba(6,182,212,0.45),
+                    transparent
+                ) !important;
+
+            margin: 22px 0 !important;
+        }
+
+
+        /* ==============================
+           PLOTLY CONTAINERS
+        ============================== */
+
+        div[data-testid="stPlotlyChart"] {
+            background: rgba(15,23,42,0.35);
+
+            border-radius: 14px;
+
+            padding: 5px;
+
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+
+        /* ==============================
+           BLOCK CONTAINER
+        ============================== */
+
+        .block-container {
+            padding-top: 2rem;
+            padding-bottom: 3rem;
+            max-width: 1400px;
+        }
+
         </style>
     """, unsafe_allow_html=True)
 
-    # ---------------------------------------------------------
-    # 2. Header Section
-    # ---------------------------------------------------------
-    col_text, col_image = st.columns([5, 2])
 
-    with col_text:
-        st.title("🏍️ MOTO VISION INDIA")
-        st.markdown("<p style='color:#94a3b8; font-size:18px;'>Smart Analytics & Market Intelligence for Indian Two-Wheelers</p>", unsafe_allow_html=True)
+    # ============================================================
+    # 2. HEADER
+    # ============================================================
 
-    with col_image:
-        st.image('The journey is the.jpg', use_container_width=True)
+    st.markdown("""
+        <div class="dashboard-header">
 
-    st.markdown("<hr style='border:0; height:1px; background:linear-gradient(90deg, #38bdf8, #a855f7, #ec4899); margin:20px 0;'>", unsafe_allow_html=True)
+            <h1>🏍️ MOTO VISION INDIA</h1>
 
-    # ---------------------------------------------------------
-    
+            <p>
+                Smart Analytics & Market Intelligence for Indian Two-Wheelers
+            </p>
+
+        </div>
+    """, unsafe_allow_html=True)
+
+
+    # ============================================================
+    # 3. BRAND FILTER
+    # ============================================================
+
     st.markdown("### 📊 Market Overview")
-    c = st.multiselect('Select Brand Filter', options=df['Brand'].unique())
-    
-    filtered = df[df['Brand'].isin(c)] if c else df
+
+    c = st.multiselect(
+        "Select Brand Filter",
+        options=df["Brand"].unique()
+    )
+
+    filtered = df[df["Brand"].isin(c)] if c else df
+
+
+    # ============================================================
+    # 4. KPI CALCULATIONS
+    # ============================================================
 
     total_bikes = len(filtered)
-    Average_price = filtered['Price (INR)'].mean() 
-    Average_resale_price = filtered['Resale Price (INR)'].mean()
-    Average_mileage = filtered['Mileage (km/l)'].mean() 
 
-    # ---------------------------------------------------------
-    # 4.  KPI Cards
-    # ---------------------------------------------------------
+    Average_price = filtered["Price (INR)"].mean()
+
+    Average_resale_price = filtered["Resale Price (INR)"].mean()
+
+    Average_mileage = filtered["Mileage (km/l)"].mean()
+
+
+    # ============================================================
+    # 5. GLOSSY KPI CARDS
+    # ============================================================
+
     k1, k2, k3, k4 = st.columns(4)
 
+
     with k1:
-        st.markdown(f"""
-            <div class="kpi-card-glossy card-blue">
-                <div class="kpi-header"><span>Total Inventory</span> <span style="font-size:18px;">🏍️</span></div>
-                <div class="kpi-number">{total_bikes:,}</div>
+
+        st.markdown(
+            f"""
+            <div class="dashboard-kpi kpi-blue">
+
+                <div class="dashboard-kpi-title">
+                    Total Inventory
+                </div>
+
+                <div class="dashboard-kpi-icon">
+                    🏍️
+                </div>
+
+                <div class="dashboard-kpi-value">
+                    {total_bikes:,}
+                </div>
+
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     with k2:
-        st.markdown(f"""
-            <div class="kpi-card-glossy card-green">
-                <div class="kpi-header"><span>Average Price</span> <span style="font-size:18px;">💰</span></div>
-                <div class="kpi-number">₹{Average_price:,.0f}</div>
+
+        st.markdown(
+            f"""
+            <div class="dashboard-kpi kpi-green">
+
+                <div class="dashboard-kpi-title">
+                    Average Price
+                </div>
+
+                <div class="dashboard-kpi-icon">
+                    💰
+                </div>
+
+                <div class="dashboard-kpi-value">
+                    ₹{Average_price:,.0f}
+                </div>
+
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     with k3:
-        st.markdown(f"""
-            <div class="kpi-card-glossy card-amber">
-                <div class="kpi-header"><span>Avg Resale Value</span> <span style="font-size:18px;">💵</span></div>
-                <div class="kpi-number">₹{Average_resale_price:,.0f}</div>
+
+        st.markdown(
+            f"""
+            <div class="dashboard-kpi kpi-amber">
+
+                <div class="dashboard-kpi-title">
+                    Avg Resale Value
+                </div>
+
+                <div class="dashboard-kpi-icon">
+                    💵
+                </div>
+
+                <div class="dashboard-kpi-value">
+                    ₹{Average_resale_price:,.0f}
+                </div>
+
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     with k4:
-        st.markdown(f"""
-            <div class="kpi-card-glossy card-purple">
-                <div class="kpi-header"><span>Avg Mileage</span> <span style="font-size:18px;">⛽</span></div>
-                <div class="kpi-number">{Average_mileage:.1f} <span style="font-size:16px; color:#cbd5e1;">km/l</span></div>
+
+        st.markdown(
+            f"""
+            <div class="dashboard-kpi kpi-purple">
+
+                <div class="dashboard-kpi-title">
+                    Avg Mileage
+                </div>
+
+                <div class="dashboard-kpi-icon">
+                    ⛽
+                </div>
+
+                <div class="dashboard-kpi-value">
+                    {Average_mileage:.1f}
+                    <span style="font-size:14px;color:#cbd5e1;">
+                        km/l
+                    </span>
+                </div>
+
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # ---------------------------------------------------------
-    # 5. Highlight Glossy Cards Row
-    # ---------------------------------------------------------
-    highest_price_brand = df.groupby("Brand")["Price (INR)"].mean().idxmax() if not df.empty else "N/A"
-    highest_resale_brand = df.groupby("Brand")["Resale Price (INR)"].mean().idxmax() if not df.empty else "N/A"
-    best_mileage_brand = df.groupby("Brand")["Mileage (km/l)"].mean().idxmax() if not df.empty else "N/A"
+
+    # ============================================================
+    # 6. HIGHLIGHT CARDS
+    # ============================================================
+
+    highest_price_brand = (
+        df.groupby("Brand")["Price (INR)"].mean().idxmax()
+        if not df.empty else "N/A"
+    )
+
+    highest_resale_brand = (
+        df.groupby("Brand")["Resale Price (INR)"].mean().idxmax()
+        if not df.empty else "N/A"
+    )
+
+    best_mileage_brand = (
+        df.groupby("Brand")["Mileage (km/l)"].mean().idxmax()
+        if not df.empty else "N/A"
+    )
+
 
     col1, col2, col3 = st.columns(3)
 
+
     with col1:
-        st.markdown(f"""
-            <div class="tag-card-glossy">
-                <div class="tag-title-glossy">🏆 Most Premium Brand</div>
-                <div class="tag-value-glossy">{highest_price_brand}</div>
+
+        st.markdown(
+            f"""
+            <div class="highlight-card">
+
+                <div class="highlight-title">
+                    🏆 Most Premium Brand
+                </div>
+
+                <div class="highlight-value">
+                    {highest_price_brand}
+                </div>
+
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     with col2:
-        st.markdown(f"""
-            <div class="tag-card-glossy">
-                <div class="tag-title-glossy">💎 Highest Resale Brand</div>
-                <div class="tag-value-glossy">{highest_resale_brand}</div>
+
+        st.markdown(
+            f"""
+            <div class="highlight-card">
+
+                <div class="highlight-title">
+                    💎 Highest Resale Brand
+                </div>
+
+                <div class="highlight-value">
+                    {highest_resale_brand}
+                </div>
+
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     with col3:
-        st.markdown(f"""
-            <div class="tag-card-glossy">
-                <div class="tag-title-glossy">⛽ Best Mileage Brand</div>
-                <div class="tag-value-glossy">{best_mileage_brand}</div>
+
+        st.markdown(
+            f"""
+            <div class="highlight-card">
+
+                <div class="highlight-title">
+                    ⛽ Best Mileage Brand
+                </div>
+
+                <div class="highlight-value">
+                    {best_mileage_brand}
+                </div>
+
             </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
+
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # ---------------------------------------------------------
-    # 6. Balanced Plotly Charts
-    # ---------------------------------------------------------
-    custom_palette = ["#38bdf8", "#34d399", "#c084fc", "#f43f5e", "#fbbf24", "#22d3ee", "#818cf8", "#f472b6"]
+
+    # ============================================================
+    # 7. CHARTS
+    # ============================================================
+
+    custom_palette = [
+        "#38bdf8",
+        "#34d399",
+        "#c084fc",
+        "#f43f5e",
+        "#fbbf24",
+        "#22d3ee",
+        "#818cf8",
+        "#f472b6"
+    ]
+
+
+    # ------------------------------------------------------------
+    # CHART 1 + CHART 2
+    # ------------------------------------------------------------
 
     col_1, col_2 = st.columns(2)
 
+
     with col_1:
-        top_brands = filtered["Brand"].value_counts().head(8).reset_index()
+
+        top_brands = (
+            filtered["Brand"]
+            .value_counts()
+            .head(8)
+            .reset_index()
+        )
+
         top_brands.columns = ["Brand", "Count"]
 
+
         fig_bar = px.bar(
-            top_brands, x="Brand", y="Count", color="Brand",
-            title="<b>Top 8 Bike Brands by Count</b>", text="Count",
+            top_brands,
+            x="Brand",
+            y="Count",
+            color="Brand",
+            title="<b>Top 8 Bike Brands by Count</b>",
+            text="Count",
             color_discrete_sequence=custom_palette
         )
+
+
         fig_bar.update_layout(
-            template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, showlegend=False, height=380
+            template="plotly_dark",
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            title_x=0.5,
+            showlegend=False,
+            height=380
         )
-        st.plotly_chart(fig_bar, use_container_width=True, key="dashboard_top_brands")
+
+
+        st.plotly_chart(
+            fig_bar,
+            use_container_width=True,
+            key="dashboard_top_brands"
+        )
+
 
     with col_2:
-        fuel = filtered["Fuel Type"].value_counts().reset_index()
+
+        fuel = (
+            filtered["Fuel Type"]
+            .value_counts()
+            .reset_index()
+        )
+
         fuel.columns = ["Fuel Type", "Count"]
 
+
         fig_pie = px.pie(
-            fuel, names="Fuel Type", values="Count", hole=0.5,
+            fuel,
+            names="Fuel Type",
+            values="Count",
+            hole=0.5,
             title="<b>Fuel Type Distribution</b>",
-            color_discrete_sequence=["#38bdf8", "#34d399", "#c084fc", "#fbbf24"]
+            color_discrete_sequence=[
+                "#38bdf8",
+                "#34d399",
+                "#c084fc",
+                "#fbbf24"
+            ]
         )
+
+
         fig_pie.update_layout(
-            template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, height=380
+            template="plotly_dark",
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            title_x=0.5,
+            height=380
         )
-        st.plotly_chart(fig_pie, use_container_width=True, key="dashboard_fuel_dist")
+
+
+        st.plotly_chart(
+            fig_pie,
+            use_container_width=True,
+            key="dashboard_fuel_dist"
+        )
+
+
+    # ------------------------------------------------------------
+    # CHART 3 + CHART 4
+    # ------------------------------------------------------------
 
     col_3, col_4 = st.columns(2)
 
+
     with col_3:
+
         fig_hist = px.histogram(
-            filtered, x='Price (INR)', nbins=25,
-            title='<b>Market Price Distribution</b>',
+            filtered,
+            x="Price (INR)",
+            nbins=25,
+            title="<b>Market Price Distribution</b>",
             color_discrete_sequence=["#818cf8"]
         )
+
+
         fig_hist.update_traces(
-            marker_line_color='rgba(255, 255, 255, 0.6)',
+            marker_line_color="rgba(255,255,255,0.6)",
             marker_line_width=1.2
         )
+
+
         fig_hist.update_layout(
-            template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, height=380
+            template="plotly_dark",
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            title_x=0.5,
+            height=380
         )
-        st.plotly_chart(fig_hist, use_container_width=True, key="dashboard_price_hist")
+
+
+        st.plotly_chart(
+            fig_hist,
+            use_container_width=True,
+            key="dashboard_price_hist"
+        )
+
 
     with col_4:
+
         fig_scatter = px.scatter(
-            filtered, 
-            x="Mileage (km/l)", 
-            y="Price (INR)", 
+            filtered,
+            x="Mileage (km/l)",
+            y="Price (INR)",
             color="Brand",
             title="<b>Price vs Mileage Correlation (Grouped by Brand)</b>",
             hover_data=["Model"],
             color_discrete_sequence=custom_palette
         )
-        fig_scatter.update_traces(marker=dict(size=9, opacity=0.85, line=dict(width=1, color='white')))
-        fig_scatter.update_layout(
-            template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, height=380
+
+
+        fig_scatter.update_traces(
+            marker=dict(
+                size=9,
+                opacity=0.85,
+                line=dict(
+                    width=1,
+                    color="white"
+                )
+            )
         )
-        st.plotly_chart(fig_scatter, use_container_width=True, key="dashboard_price_mileage")
+
+
+        fig_scatter.update_layout(
+            template="plotly_dark",
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            title_x=0.5,
+            height=380
+        )
+
+
+        st.plotly_chart(
+            fig_scatter,
+            use_container_width=True,
+            key="dashboard_price_mileage"
+        )
+    
+# if opt == 'Dashboard':
+#     # ---------------------------------------------------------
+#     # 1. Glossy & Glassmorphism CSS Styling
+#     # ---------------------------------------------------------
+#     st.markdown("""
+#         <style>
+#         /* Modern Obsidian Glossy Background */
+#         .stApp {
+#             background: radial-gradient(circle at 20% 20%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
+#             color: #f8fafc;
+#             font-family: 'Inter', system-ui, -apple-system, sans-serif;
+#         }
+
+#         /* Sidebar Glass Effect */
+#         [data-testid="stSidebar"] {
+#             background: rgba(15, 23, 42, 0.6) !important;
+#             backdrop-filter: blur(16px);
+#             -webkit-backdrop-filter: blur(16px);
+#             border-right: 1px solid rgba(255, 255, 255, 0.08);
+#         }
+
+#         /* ==================== GLOSSY GLASS KPI CARDS ==================== */
+#         .kpi-card-glossy {
+#             background: rgba(255, 255, 255, 0.03);
+#             backdrop-filter: blur(16px);
+#             -webkit-backdrop-filter: blur(16px);
+#             border-radius: 20px;
+#             padding: 22px 24px;
+#             position: relative;
+#             overflow: hidden;
+#             border: 1px solid rgba(255, 255, 255, 0.15);
+#             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+#             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+#         }
+
+#         /* Glass Surface Reflection (Gloss Effect) */
+#         .kpi-card-glossy::before {
+#             content: '';
+#             position: absolute;
+#             top: 0;
+#             left: -50%;
+#             width: 200%;
+#             height: 50%;
+#             background: linear-gradient(
+#                 180deg, 
+#                 rgba(255, 255, 255, 0.15) 0%, 
+#                 rgba(255, 255, 255, 0) 100%
+#             );
+#             transform: rotate(-10deg);
+#             pointer-events: none;
+#         }
+
+#         /* Glossy Card Variants with Soft Neon Tint */
+#         .card-blue {
+#             background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
+#             border-color: rgba(96, 165, 250, 0.3);
+#         }
+#         .card-green {
+#             background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
+#             border-color: rgba(52, 211, 153, 0.3);
+#         }
+#         .card-amber {
+#             background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
+#             border-color: rgba(251, 191, 36, 0.3);
+#         }
+#         .card-purple {
+#             background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%);
+#             border-color: rgba(192, 132, 252, 0.3);
+#         }
+
+#         /* Hover Lift & Dynamic Glow Effect */
+#         .card-blue:hover {
+#             transform: translateY(-8px);
+#             border-color: rgba(96, 165, 250, 0.6);
+#             box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3);
+#         }
+#         .card-green:hover {
+#             transform: translateY(-8px);
+#             border-color: rgba(52, 211, 153, 0.6);
+#             box-shadow: 0 12px 30px rgba(16, 185, 129, 0.3);
+#         }
+#         .card-amber:hover {
+#             transform: translateY(-8px);
+#             border-color: rgba(251, 191, 36, 0.6);
+#             box-shadow: 0 12px 30px rgba(245, 158, 11, 0.3);
+#         }
+#         .card-purple:hover {
+#             transform: translateY(-8px);
+#             border-color: rgba(192, 132, 252, 0.6);
+#             box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+#         }
+
+#         .kpi-header {
+#             display: flex;
+#             justify-content: space-between;
+#             align-items: center;
+#             color: #cbd5e1;
+#             font-size: 12px;
+#             font-weight: 700;
+#             text-transform: uppercase;
+#             letter-spacing: 1px;
+#         }
+
+#         .kpi-number {
+#             font-size: 30px;
+#             font-weight: 800;
+#             color: #ffffff;
+#             margin-top: 10px;
+#             letter-spacing: -0.5px;
+#             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+#         }
+
+#         /* Glossy Highlight Cards */
+#         .tag-card-glossy {
+#             background: rgba(30, 41, 59, 0.3);
+#             backdrop-filter: blur(12px);
+#             -webkit-backdrop-filter: blur(12px);
+#             border-radius: 16px;
+#             padding: 16px;
+#             text-align: center;
+#             border: 1px solid rgba(255, 255, 255, 0.1);
+#             transition: all 0.3s ease;
+#         }
+
+#         .tag-card-glossy:hover {
+#             border-color: rgba(168, 85, 247, 0.5);
+#             transform: translateY(-4px);
+#             box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
+#             background: rgba(30, 41, 59, 0.5);
+#         }
+
+#         .tag-title-glossy {
+#             color: #94a3b8;
+#             font-size: 12px;
+#             font-weight: 600;
+#             margin-bottom: 6px;
+#             text-transform: uppercase;
+#         }
+
+#         .tag-value-glossy {
+#             color: #c084fc;
+#             font-size: 20px;
+#             font-weight: 700;
+#         }
+#         </style>
+#     """, unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+#     # 2. Header Section
+#     # ---------------------------------------------------------
+#     col_text, col_image = st.columns([5, 2])
+
+#     with col_text:
+#         st.title("🏍️ MOTO VISION INDIA")
+#         st.markdown("<p style='color:#94a3b8; font-size:18px;'>Smart Analytics & Market Intelligence for Indian Two-Wheelers</p>", unsafe_allow_html=True)
+
+#     with col_image:
+#         st.image('The journey is the.jpg', use_container_width=True)
+
+#     st.markdown("<hr style='border:0; height:1px; background:linear-gradient(90deg, #38bdf8, #a855f7, #ec4899); margin:20px 0;'>", unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+    
+#     st.markdown("### 📊 Market Overview")
+#     c = st.multiselect('Select Brand Filter', options=df['Brand'].unique())
+    
+#     filtered = df[df['Brand'].isin(c)] if c else df
+
+#     total_bikes = len(filtered)
+#     Average_price = filtered['Price (INR)'].mean() 
+#     Average_resale_price = filtered['Resale Price (INR)'].mean()
+#     Average_mileage = filtered['Mileage (km/l)'].mean() 
+
+#     # ---------------------------------------------------------
+#     # 4.  KPI Cards
+#     # ---------------------------------------------------------
+#     k1, k2, k3, k4 = st.columns(4)
+
+#     with k1:
+#         st.markdown(f"""
+#             <div class="kpi-card-glossy card-blue">
+#                 <div class="kpi-header"><span>Total Inventory</span> <span style="font-size:18px;">🏍️</span></div>
+#                 <div class="kpi-number">{total_bikes:,}</div>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     with k2:
+#         st.markdown(f"""
+#             <div class="kpi-card-glossy card-green">
+#                 <div class="kpi-header"><span>Average Price</span> <span style="font-size:18px;">💰</span></div>
+#                 <div class="kpi-number">₹{Average_price:,.0f}</div>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     with k3:
+#         st.markdown(f"""
+#             <div class="kpi-card-glossy card-amber">
+#                 <div class="kpi-header"><span>Avg Resale Value</span> <span style="font-size:18px;">💵</span></div>
+#                 <div class="kpi-number">₹{Average_resale_price:,.0f}</div>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     with k4:
+#         st.markdown(f"""
+#             <div class="kpi-card-glossy card-purple">
+#                 <div class="kpi-header"><span>Avg Mileage</span> <span style="font-size:18px;">⛽</span></div>
+#                 <div class="kpi-number">{Average_mileage:.1f} <span style="font-size:16px; color:#cbd5e1;">km/l</span></div>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     st.markdown("<br>", unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+#     # 5. Highlight Glossy Cards Row
+#     # ---------------------------------------------------------
+#     highest_price_brand = df.groupby("Brand")["Price (INR)"].mean().idxmax() if not df.empty else "N/A"
+#     highest_resale_brand = df.groupby("Brand")["Resale Price (INR)"].mean().idxmax() if not df.empty else "N/A"
+#     best_mileage_brand = df.groupby("Brand")["Mileage (km/l)"].mean().idxmax() if not df.empty else "N/A"
+
+#     col1, col2, col3 = st.columns(3)
+
+#     with col1:
+#         st.markdown(f"""
+#             <div class="tag-card-glossy">
+#                 <div class="tag-title-glossy">🏆 Most Premium Brand</div>
+#                 <div class="tag-value-glossy">{highest_price_brand}</div>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     with col2:
+#         st.markdown(f"""
+#             <div class="tag-card-glossy">
+#                 <div class="tag-title-glossy">💎 Highest Resale Brand</div>
+#                 <div class="tag-value-glossy">{highest_resale_brand}</div>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     with col3:
+#         st.markdown(f"""
+#             <div class="tag-card-glossy">
+#                 <div class="tag-title-glossy">⛽ Best Mileage Brand</div>
+#                 <div class="tag-value-glossy">{best_mileage_brand}</div>
+#             </div>
+#         """, unsafe_allow_html=True)
+
+#     st.markdown("<br>", unsafe_allow_html=True)
+
+#     # ---------------------------------------------------------
+#     # 6. Balanced Plotly Charts
+#     # ---------------------------------------------------------
+#     custom_palette = ["#38bdf8", "#34d399", "#c084fc", "#f43f5e", "#fbbf24", "#22d3ee", "#818cf8", "#f472b6"]
+
+#     col_1, col_2 = st.columns(2)
+
+#     with col_1:
+#         top_brands = filtered["Brand"].value_counts().head(8).reset_index()
+#         top_brands.columns = ["Brand", "Count"]
+
+#         fig_bar = px.bar(
+#             top_brands, x="Brand", y="Count", color="Brand",
+#             title="<b>Top 8 Bike Brands by Count</b>", text="Count",
+#             color_discrete_sequence=custom_palette
+#         )
+#         fig_bar.update_layout(
+#             template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
+#             plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, showlegend=False, height=380
+#         )
+#         st.plotly_chart(fig_bar, use_container_width=True, key="dashboard_top_brands")
+
+#     with col_2:
+#         fuel = filtered["Fuel Type"].value_counts().reset_index()
+#         fuel.columns = ["Fuel Type", "Count"]
+
+#         fig_pie = px.pie(
+#             fuel, names="Fuel Type", values="Count", hole=0.5,
+#             title="<b>Fuel Type Distribution</b>",
+#             color_discrete_sequence=["#38bdf8", "#34d399", "#c084fc", "#fbbf24"]
+#         )
+#         fig_pie.update_layout(
+#             template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
+#             plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, height=380
+#         )
+#         st.plotly_chart(fig_pie, use_container_width=True, key="dashboard_fuel_dist")
+
+#     col_3, col_4 = st.columns(2)
+
+#     with col_3:
+#         fig_hist = px.histogram(
+#             filtered, x='Price (INR)', nbins=25,
+#             title='<b>Market Price Distribution</b>',
+#             color_discrete_sequence=["#818cf8"]
+#         )
+#         fig_hist.update_traces(
+#             marker_line_color='rgba(255, 255, 255, 0.6)',
+#             marker_line_width=1.2
+#         )
+#         fig_hist.update_layout(
+#             template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
+#             plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, height=380
+#         )
+#         st.plotly_chart(fig_hist, use_container_width=True, key="dashboard_price_hist")
+
+#     with col_4:
+#         fig_scatter = px.scatter(
+#             filtered, 
+#             x="Mileage (km/l)", 
+#             y="Price (INR)", 
+#             color="Brand",
+#             title="<b>Price vs Mileage Correlation (Grouped by Brand)</b>",
+#             hover_data=["Model"],
+#             color_discrete_sequence=custom_palette
+#         )
+#         fig_scatter.update_traces(marker=dict(size=9, opacity=0.85, line=dict(width=1, color='white')))
+#         fig_scatter.update_layout(
+#             template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)",
+#             plot_bgcolor="rgba(0,0,0,0)", title_x=0.5, height=380
+#         )
+#         st.plotly_chart(fig_scatter, use_container_width=True, key="dashboard_price_mileage")
 
 
 # #..................................................................................................
