@@ -69,280 +69,359 @@ with st.sidebar:
 
 if opt == 'Dashboard':
 
-    import textwrap
+    # ============================================================
+    # HTML RENDER HELPER
+    # ============================================================
+
+    def render_html(content):
+        """
+        Render HTML properly.
+        st.html() prevents HTML tags from appearing as plain text.
+        Fallback is provided for older Streamlit versions.
+        """
+        if hasattr(st, "html"):
+            st.html(content)
+        else:
+            st.markdown(content, unsafe_allow_html=True)
+
 
     # ============================================================
     # 1. RESALE-STYLE GLOSSY CSS
     # ============================================================
 
     st.markdown("""
-    <style>
+        <style>
 
-    .stApp {
-        background:
-            radial-gradient(
-                circle at 50% -10%,
-                #164e63 0%,
-                #0f172a 48%,
-                #020617 100%
-            ) !important;
-        color: #f8fafc;
-        font-family: "Inter", system-ui, -apple-system, sans-serif;
-    }
+        /* =====================================================
+           MAIN BACKGROUND
+        ===================================================== */
 
-    [data-testid="stAppViewContainer"] {
-        background:
-            radial-gradient(
-                circle at 50% -10%,
-                #164e63 0%,
-                #0f172a 48%,
-                #020617 100%
-            ) !important;
-    }
+        .stApp {
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    #164e63 0%,
+                    #0f172a 48%,
+                    #020617 100%
+                ) !important;
 
-    [data-testid="stHeader"] {
-        background: transparent !important;
-    }
+            color: #f8fafc;
+            font-family: "Inter", system-ui, -apple-system, sans-serif;
+        }
 
-    [data-testid="stSidebar"] {
-        background: rgba(15, 23, 42, 0.75) !important;
-        border-right: 1px solid rgba(255,255,255,0.08);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-    }
+        [data-testid="stAppViewContainer"] {
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    #164e63 0%,
+                    #0f172a 48%,
+                    #020617 100%
+                ) !important;
+        }
 
-    h1, h2, h3 {
-        color: #f8fafc !important;
-    }
+        [data-testid="stHeader"] {
+            background: transparent !important;
+        }
 
-    /* ==============================
-       HEADER
-    ============================== */
+        [data-testid="stSidebar"] {
+            background: rgba(15, 23, 42, 0.75) !important;
+            border-right: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
 
-    .dashboard-header {
-        background:
-            linear-gradient(
-                135deg,
-                rgba(16,185,129,0.20),
-                rgba(6,182,212,0.14)
-            );
-        border: 1px solid rgba(255,255,255,0.15);
-        border-radius: 20px;
-        padding: 24px 28px;
-        margin-bottom: 22px;
-        box-shadow:
-            0 12px 35px rgba(0,0,0,0.45),
-            inset 0 1px 2px rgba(255,255,255,0.18);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-    }
 
-    .dashboard-header h1 {
-        margin: 0;
-        color: #ffffff;
-        font-size: 2.3rem;
-        font-weight: 800;
-    }
+        /* =====================================================
+           PAGE TITLES
+        ===================================================== */
 
-    .dashboard-header p {
-        color: #cbd5e1;
-        margin-top: 6px;
-        margin-bottom: 0;
-        font-size: 0.95rem;
-    }
+        h1, h2, h3 {
+            color: #f8fafc !important;
+        }
 
-    /* ==============================
-       KPI CARDS
-    ============================== */
 
-    .dashboard-kpi {
-        position: relative;
-        background:
-            linear-gradient(
-                135deg,
-                rgba(255,255,255,0.08),
-                rgba(255,255,255,0.02)
-            );
-        border: 1px solid rgba(255,255,255,0.15);
-        border-radius: 16px;
-        padding: 20px;
-        text-align: center;
-        min-height: 125px;
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        box-shadow:
-            0 10px 30px rgba(0,0,0,0.45),
-            inset 0 1px 1px rgba(255,255,255,0.12);
-        transition:
-            transform 0.28s ease,
-            box-shadow 0.28s ease,
-            border-color 0.28s ease;
-        overflow: hidden;
-    }
+        /* =====================================================
+           GLOSSY HEADER
+        ===================================================== */
 
-    .dashboard-kpi::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 70%;
-        height: 100%;
-        background:
-            linear-gradient(
-                100deg,
-                transparent,
-                rgba(255,255,255,0.08),
-                transparent
-            );
-        transition: left 0.55s ease;
-        pointer-events: none;
-    }
+        .dashboard-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(16,185,129,0.20),
+                    rgba(6,182,212,0.14)
+                );
 
-    .dashboard-kpi:hover::before {
-        left: 130%;
-    }
+            border: 1px solid rgba(255,255,255,0.15);
 
-    .dashboard-kpi:hover {
-        transform: translateY(-7px);
-        border-color: rgba(255,255,255,0.35);
-        box-shadow:
-            0 18px 38px rgba(0,0,0,0.48),
-            0 0 22px rgba(16,185,129,0.18);
-    }
+            border-radius: 20px;
 
-    .kpi-blue {
-        border-bottom: 3px solid #38bdf8;
-    }
+            padding: 24px 28px;
 
-    .kpi-green {
-        border-bottom: 3px solid #10b981;
-    }
+            margin-bottom: 22px;
 
-    .kpi-amber {
-        border-bottom: 3px solid #f59e0b;
-    }
+            box-shadow:
+                0 12px 35px rgba(0,0,0,0.45),
+                inset 0 1px 2px rgba(255,255,255,0.18);
 
-    .kpi-purple {
-        border-bottom: 3px solid #a78bfa;
-    }
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
 
-    .dashboard-kpi-title {
-        color: #9ca3af;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.7px;
-    }
+        .dashboard-header h1 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 2.3rem;
+            font-weight: 800;
+        }
 
-    .dashboard-kpi-icon {
-        font-size: 1.35rem;
-        margin-top: 7px;
-        margin-bottom: 3px;
-    }
+        .dashboard-header p {
+            color: #cbd5e1;
+            margin-top: 6px;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
 
-    .dashboard-kpi-value {
-        color: #ffffff;
-        font-size: 1.55rem;
-        font-weight: 900;
-        margin-top: 4px;
-        text-shadow: 0 3px 10px rgba(0,0,0,0.45);
-    }
 
-    /* ==============================
-       HIGHLIGHT CARDS
-    ============================== */
+        /* =====================================================
+           GLOSSY KPI CARDS
+        ===================================================== */
 
-    .highlight-card {
-        background:
-            linear-gradient(
-                135deg,
-                rgba(255,255,255,0.06),
-                rgba(255,255,255,0.015)
-            );
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 14px;
-        padding: 18px;
-        text-align: center;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow:
-            0 8px 24px rgba(0,0,0,0.35);
-        transition: 0.28s ease;
-    }
+        .dashboard-kpi {
+            position: relative;
 
-    .highlight-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(16,185,129,0.35);
-        box-shadow:
-            0 14px 30px rgba(0,0,0,0.42),
-            0 0 18px rgba(16,185,129,0.12);
-    }
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.08),
+                    rgba(255,255,255,0.02)
+                );
 
-    .highlight-title {
-        color: #94a3b8;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-    }
+            border: 1px solid rgba(255,255,255,0.15);
 
-    .highlight-value {
-        color: #c084fc;
-        font-size: 1.2rem;
-        font-weight: 800;
-        margin-top: 6px;
-    }
+            border-radius: 16px;
 
-    /* ==============================
-       SELECTBOX
-    ============================== */
+            padding: 20px;
 
-    div[data-baseweb="select"] > div {
-        background: rgba(30,41,59,0.85) !important;
-        border: 1px solid rgba(255,255,255,0.10) !important;
-        border-radius: 10px !important;
-    }
+            text-align: center;
 
-    /* ==============================
-       DIVIDER
-    ============================== */
+            min-height: 125px;
 
-    hr {
-        border: none !important;
-        height: 1px !important;
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                rgba(16,185,129,0.55),
-                rgba(6,182,212,0.45),
-                transparent
-            ) !important;
-        margin: 22px 0 !important;
-    }
+            box-sizing: border-box;
 
-    /* ==============================
-       GRAPH CONTAINERS
-    ============================== */
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
 
-    div[data-testid="stPlotlyChart"] {
-        background: rgba(15,23,42,0.35);
-        border-radius: 14px;
-        padding: 5px;
-        border: 1px solid rgba(255,255,255,0.05);
-    }
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.45),
+                inset 0 1px 1px rgba(255,255,255,0.12);
 
-    /* ==============================
-       BLOCK CONTAINER
-    ============================== */
+            transition:
+                transform 0.28s ease,
+                box-shadow 0.28s ease,
+                border-color 0.28s ease;
 
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-        max-width: 1400px;
-    }
+            overflow: hidden;
+        }
 
-    </style>
+        .dashboard-kpi:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(255,255,255,0.35);
+
+            box-shadow:
+                0 18px 38px rgba(0,0,0,0.48),
+                0 0 22px rgba(16,185,129,0.18);
+        }
+
+
+        /* =====================================================
+           KPI COLORS
+        ===================================================== */
+
+        .kpi-blue {
+            border-bottom: 3px solid #38bdf8;
+        }
+
+        .kpi-green {
+            border-bottom: 3px solid #10b981;
+        }
+
+        .kpi-amber {
+            border-bottom: 3px solid #f59e0b;
+        }
+
+        .kpi-purple {
+            border-bottom: 3px solid #a78bfa;
+        }
+
+
+        /* =====================================================
+           KPI TEXT
+        ===================================================== */
+
+        .dashboard-kpi-title {
+            color: #9ca3af;
+
+            font-size: 0.75rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+        .dashboard-kpi-icon {
+            font-size: 1.35rem;
+
+            margin-top: 7px;
+            margin-bottom: 3px;
+        }
+
+        .dashboard-kpi-value {
+            color: #ffffff;
+
+            font-size: 1.55rem;
+
+            font-weight: 900;
+
+            margin-top: 4px;
+
+            text-shadow:
+                0 3px 10px rgba(0,0,0,0.45);
+        }
+
+
+        /* =====================================================
+           HIGHLIGHT CARDS
+        ===================================================== */
+
+        .highlight-card {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.015)
+                );
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 14px;
+
+            padding: 18px;
+
+            min-height: 90px;
+
+            text-align: center;
+
+            box-sizing: border-box;
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 8px 24px rgba(0,0,0,0.35);
+
+            transition: 0.28s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(16,185,129,0.35);
+
+            box-shadow:
+                0 14px 30px rgba(0,0,0,0.42),
+                0 0 18px rgba(16,185,129,0.12);
+        }
+
+        .highlight-title {
+            color: #94a3b8;
+
+            font-size: 0.75rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.6px;
+
+            margin-bottom: 7px;
+        }
+
+        .highlight-value {
+            color: #c084fc;
+
+            font-size: 1.2rem;
+
+            font-weight: 800;
+
+            margin-top: 6px;
+        }
+
+
+        /* =====================================================
+           SELECTBOX / MULTISELECT
+        ===================================================== */
+
+        div[data-baseweb="select"] > div {
+            background: rgba(30,41,59,0.85) !important;
+
+            border: 1px solid rgba(255,255,255,0.10) !important;
+
+            border-radius: 10px !important;
+        }
+
+
+        /* =====================================================
+           DIVIDER
+        ===================================================== */
+
+        hr {
+            border: none !important;
+
+            height: 1px !important;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(16,185,129,0.55),
+                    rgba(6,182,212,0.45),
+                    transparent
+                ) !important;
+
+            margin: 22px 0 !important;
+        }
+
+
+        /* =====================================================
+           PLOTLY CONTAINERS
+        ===================================================== */
+
+        div[data-testid="stPlotlyChart"] {
+            background: rgba(15,23,42,0.35);
+
+            border-radius: 14px;
+
+            padding: 5px;
+
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+
+        /* =====================================================
+           BLOCK CONTAINER
+        ===================================================== */
+
+        .block-container {
+            padding-top: 2rem;
+            padding-bottom: 3rem;
+            max-width: 1400px;
+        }
+
+        </style>
     """, unsafe_allow_html=True)
 
 
@@ -350,17 +429,17 @@ if opt == 'Dashboard':
     # 2. HEADER
     # ============================================================
 
-    header_html = """
-<div class="dashboard-header">
-    <h1>🏍️ MOTO VISION INDIA</h1>
-    <p>Smart Analytics & Market Intelligence for Indian Two-Wheelers</p>
-</div>
-"""
+    render_html("""
+        <div class="dashboard-header">
 
-    st.markdown(
-        textwrap.dedent(header_html),
-        unsafe_allow_html=True
-    )
+            <h1>🏍️ MOTO VISION INDIA</h1>
+
+            <p>
+                Smart Analytics & Market Intelligence for Indian Two-Wheelers
+            </p>
+
+        </div>
+    """)
 
 
     # ============================================================
@@ -397,102 +476,106 @@ if opt == 'Dashboard':
     k1, k2, k3, k4 = st.columns(4)
 
 
+    # ---------------- KPI 1 ----------------
+
     with k1:
 
-        html = f"""
-<div class="dashboard-kpi kpi-blue">
-    <div class="dashboard-kpi-title">
-        Total Inventory
-    </div>
+        render_html(
+            f"""
+            <div class="dashboard-kpi kpi-blue">
 
-    <div class="dashboard-kpi-icon">
-        🏍️
-    </div>
+                <div class="dashboard-kpi-title">
+                    Total Inventory
+                </div>
 
-    <div class="dashboard-kpi-value">
-        {total_bikes:,}
-    </div>
-</div>
-"""
+                <div class="dashboard-kpi-icon">
+                    🏍️
+                </div>
 
-        st.markdown(
-            textwrap.dedent(html),
-            unsafe_allow_html=True
+                <div class="dashboard-kpi-value">
+                    {total_bikes:,}
+                </div>
+
+            </div>
+            """
         )
 
+
+    # ---------------- KPI 2 ----------------
 
     with k2:
 
-        html = f"""
-<div class="dashboard-kpi kpi-green">
-    <div class="dashboard-kpi-title">
-        Average Price
-    </div>
+        render_html(
+            f"""
+            <div class="dashboard-kpi kpi-green">
 
-    <div class="dashboard-kpi-icon">
-        💰
-    </div>
+                <div class="dashboard-kpi-title">
+                    Average Price
+                </div>
 
-    <div class="dashboard-kpi-value">
-        ₹{Average_price:,.0f}
-    </div>
-</div>
-"""
+                <div class="dashboard-kpi-icon">
+                    💰
+                </div>
 
-        st.markdown(
-            textwrap.dedent(html),
-            unsafe_allow_html=True
+                <div class="dashboard-kpi-value">
+                    ₹{Average_price:,.0f}
+                </div>
+
+            </div>
+            """
         )
 
+
+    # ---------------- KPI 3 ----------------
 
     with k3:
 
-        html = f"""
-<div class="dashboard-kpi kpi-amber">
-    <div class="dashboard-kpi-title">
-        Avg Resale Value
-    </div>
+        render_html(
+            f"""
+            <div class="dashboard-kpi kpi-amber">
 
-    <div class="dashboard-kpi-icon">
-        💵
-    </div>
+                <div class="dashboard-kpi-title">
+                    Avg Resale Value
+                </div>
 
-    <div class="dashboard-kpi-value">
-        ₹{Average_resale_price:,.0f}
-    </div>
-</div>
-"""
+                <div class="dashboard-kpi-icon">
+                    💵
+                </div>
 
-        st.markdown(
-            textwrap.dedent(html),
-            unsafe_allow_html=True
+                <div class="dashboard-kpi-value">
+                    ₹{Average_resale_price:,.0f}
+                </div>
+
+            </div>
+            """
         )
 
 
+    # ---------------- KPI 4 ----------------
+
     with k4:
 
-        html = f"""
-<div class="dashboard-kpi kpi-purple">
-    <div class="dashboard-kpi-title">
-        Avg Mileage
-    </div>
+        render_html(
+            f"""
+            <div class="dashboard-kpi kpi-purple">
 
-    <div class="dashboard-kpi-icon">
-        ⛽
-    </div>
+                <div class="dashboard-kpi-title">
+                    Avg Mileage
+                </div>
 
-    <div class="dashboard-kpi-value">
-        {Average_mileage:.1f}
-        <span style="font-size:14px;color:#cbd5e1;">
-            km/l
-        </span>
-    </div>
-</div>
-"""
+                <div class="dashboard-kpi-icon">
+                    ⛽
+                </div>
 
-        st.markdown(
-            textwrap.dedent(html),
-            unsafe_allow_html=True
+                <div class="dashboard-kpi-value">
+                    {Average_mileage:.1f}
+                    <span style="font-size:14px;color:#cbd5e1;">
+                        km/l
+                    </span>
+                </div>
+
+            </div>
+            """
         )
 
 
@@ -522,63 +605,66 @@ if opt == 'Dashboard':
     col1, col2, col3 = st.columns(3)
 
 
+    # ---------------- HIGHLIGHT 1 ----------------
+
     with col1:
 
-        html = f"""
-<div class="highlight-card">
-    <div class="highlight-title">
-        🏆 Most Premium Brand
-    </div>
+        render_html(
+            f"""
+            <div class="highlight-card">
 
-    <div class="highlight-value">
-        {highest_price_brand}
-    </div>
-</div>
-"""
+                <div class="highlight-title">
+                    🏆 Most Premium Brand
+                </div>
 
-        st.markdown(
-            textwrap.dedent(html),
-            unsafe_allow_html=True
+                <div class="highlight-value">
+                    {highest_price_brand}
+                </div>
+
+            </div>
+            """
         )
 
+
+    # ---------------- HIGHLIGHT 2 ----------------
 
     with col2:
 
-        html = f"""
-<div class="highlight-card">
-    <div class="highlight-title">
-        💎 Highest Resale Brand
-    </div>
+        render_html(
+            f"""
+            <div class="highlight-card">
 
-    <div class="highlight-value">
-        {highest_resale_brand}
-    </div>
-</div>
-"""
+                <div class="highlight-title">
+                    💎 Highest Resale Brand
+                </div>
 
-        st.markdown(
-            textwrap.dedent(html),
-            unsafe_allow_html=True
+                <div class="highlight-value">
+                    {highest_resale_brand}
+                </div>
+
+            </div>
+            """
         )
 
 
+    # ---------------- HIGHLIGHT 3 ----------------
+
     with col3:
 
-        html = f"""
-<div class="highlight-card">
-    <div class="highlight-title">
-        ⛽ Best Mileage Brand
-    </div>
+        render_html(
+            f"""
+            <div class="highlight-card">
 
-    <div class="highlight-value">
-        {best_mileage_brand}
-    </div>
-</div>
-"""
+                <div class="highlight-title">
+                    ⛽ Best Mileage Brand
+                </div>
 
-        st.markdown(
-            textwrap.dedent(html),
-            unsafe_allow_html=True
+                <div class="highlight-value">
+                    {best_mileage_brand}
+                </div>
+
+            </div>
+            """
         )
 
 
@@ -607,6 +693,8 @@ if opt == 'Dashboard':
 
     col_1, col_2 = st.columns(2)
 
+
+    # ---------------- CHART 1 ----------------
 
     with col_1:
 
@@ -647,6 +735,8 @@ if opt == 'Dashboard':
             key="dashboard_top_brands"
         )
 
+
+    # ---------------- CHART 2 ----------------
 
     with col_2:
 
@@ -697,6 +787,8 @@ if opt == 'Dashboard':
     col_3, col_4 = st.columns(2)
 
 
+    # ---------------- CHART 3 ----------------
+
     with col_3:
 
         fig_hist = px.histogram(
@@ -729,6 +821,8 @@ if opt == 'Dashboard':
             key="dashboard_price_hist"
         )
 
+
+    # ---------------- CHART 4 ----------------
 
     with col_4:
 
