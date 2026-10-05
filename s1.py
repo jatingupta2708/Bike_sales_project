@@ -1512,20 +1512,176 @@ elif opt== 'Price Analyse':
 # ==========================================
 # 💰 OPTION 1: PRICE ANALYSIS
 # ==========================================
+
+
 if opt == "Price Analysis":
 
+    # ============================================================
+    # PROFESSIONAL PRICE ANALYSIS CSS
+    # ============================================================
     st.markdown(
         """
-        <div class="header-box">
-            <h1 style="color: #ffffff; margin: 0; font-size: 2.2rem;">💰 Price Analysis</h1>
-            <p style="color: #cbd5e1; margin-top: 5px; font-size: 0.95rem;">
-                Analyze bike pricing trends, brand values, and market distribution.
-            </p>
-        </div>
-        """,
+<style>
+
+.header-box {
+    background: linear-gradient(135deg, #123b43 0%, #0d2b3d 55%, #10253b 100%);
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    border-radius: 18px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.header-box h1 {
+    color: #ffffff !important;
+    margin: 0 !important;
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+}
+
+.header-box p {
+    color: #cbd5e1 !important;
+    margin-top: 7px !important;
+    font-size: 0.96rem !important;
+}
+
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+
+.price-section-title {
+    background: linear-gradient(
+        90deg,
+        rgba(30, 64, 175, 0.18),
+        rgba(15, 23, 42, 0.05)
+    );
+    border-left: 4px solid #3b82f6;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 26px 0 15px 0;
+    color: #f8fafc;
+    font-size: 21px;
+    font-weight: 750;
+}
+
+
+/* ============================================================
+   KPI CARDS
+   ============================================================ */
+
+.price-kpi {
+    background: linear-gradient(145deg, #182338, #101827);
+    border: 1px solid rgba(96, 165, 250, 0.20);
+    border-radius: 16px;
+    padding: 20px 18px;
+    min-height: 112px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.24);
+    transition: all 0.25s ease;
+}
+
+.price-kpi:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96, 165, 250, 0.65);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+}
+
+.kpi-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.kpi-label {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.kpi-number {
+    color: #f8fafc;
+    font-size: 23px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+
+/* ============================================================
+   INSIGHT CARDS
+   ============================================================ */
+
+.insight-card {
+    background: linear-gradient(145deg, #111c30, #0f172a);
+    border: 1px solid rgba(96, 165, 250, 0.22);
+    border-left: 4px solid #3b82f6;
+    border-radius: 12px;
+    padding: 17px 20px;
+    margin: 12px 0;
+    color: #cbd5e1;
+    font-size: 15px;
+    line-height: 1.6;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    transition: all 0.25s ease;
+}
+
+.insight-card:hover {
+    transform: translateX(3px);
+    border-left-color: #60a5fa;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.14);
+}
+
+
+/* ============================================================
+   GRAPH CONTAINER
+   ============================================================ */
+
+.graph-box {
+    background: #0d1422;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 14px;
+    padding: 5px;
+    margin-bottom: 22px;
+}
+
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+hr {
+    border-color: rgba(148, 163, 184, 0.18) !important;
+}
+
+</style>
+""",
         unsafe_allow_html=True
     )
 
+
+    # ============================================================
+    # HEADER
+    # ============================================================
+    st.markdown(
+        """
+<div class="header-box">
+
+<h1>💰 Price Analysis</h1>
+
+<p>
+Analyze bike pricing trends, brand values, and market distribution.
+</p>
+
+</div>
+""",
+        unsafe_allow_html=True
+    )
+
+
+    # ============================================================
+    # KPI CALCULATIONS
+    # ============================================================
     avg_price = df["Price (INR)"].mean()
     avg_resale = df["Resale Price (INR)"].mean()
     highest_price = df["Price (INR)"].max()
@@ -1533,25 +1689,112 @@ if opt == "Price Analysis":
     price_gap = highest_price - lowest_price
     retention_pct = (avg_resale / avg_price) * 100
 
-    # KPI Cards
+
+    # ============================================================
+    # KPI CARDS
+    # ============================================================
     col1, col2, col3, col4 = st.columns(4)
 
+
     with col1:
-        st.metric("💰 Average Price", f"₹{avg_price:,.0f}")
+
+        st.markdown(
+            f"""
+<div class="price-kpi">
+
+<div class="kpi-icon">💰</div>
+
+<div class="kpi-label">
+Average Price
+</div>
+
+<div class="kpi-number">
+₹{avg_price:,.0f}
+</div>
+
+</div>
+""",
+            unsafe_allow_html=True
+        )
+
 
     with col2:
-        st.metric("💵 Average Resale", f"₹{avg_resale:,.0f}")
+
+        st.markdown(
+            f"""
+<div class="price-kpi">
+
+<div class="kpi-icon">💵</div>
+
+<div class="kpi-label">
+Average Resale
+</div>
+
+<div class="kpi-number">
+₹{avg_resale:,.0f}
+</div>
+
+</div>
+""",
+            unsafe_allow_html=True
+        )
+
 
     with col3:
-        st.metric("📈 Highest Price", f"₹{highest_price:,.0f}")
+
+        st.markdown(
+            f"""
+<div class="price-kpi">
+
+<div class="kpi-icon">📈</div>
+
+<div class="kpi-label">
+Highest Price
+</div>
+
+<div class="kpi-number">
+₹{highest_price:,.0f}
+</div>
+
+</div>
+""",
+            unsafe_allow_html=True
+        )
+
 
     with col4:
-        st.metric("📊 Price Range Gap", f"₹{price_gap:,.0f}")
+
+        st.markdown(
+            f"""
+<div class="price-kpi">
+
+<div class="kpi-icon">📊</div>
+
+<div class="kpi-label">
+Price Range Gap
+</div>
+
+<div class="kpi-number">
+₹{price_gap:,.0f}
+</div>
+
+</div>
+""",
+            unsafe_allow_html=True
+        )
+
 
     st.divider()
 
-    # Histogram
-    st.subheader("📊 Price Distribution")
+
+    # ============================================================
+    # HISTOGRAM
+    # ============================================================
+    st.markdown(
+        '<div class="price-section-title">📊 Price Distribution</div>',
+        unsafe_allow_html=True
+    )
+
 
     fig1 = px.histogram(
         df,
@@ -1561,22 +1804,45 @@ if opt == "Price Analysis":
         color_discrete_sequence=["#6366f1"]
     )
 
+
     fig1.update_traces(
         marker_line_color="#0f172a",
         marker_line_width=1.5
     )
 
+
     fig1.update_layout(
         template="plotly_dark",
-        title_x=0.5
+        title_x=0.5,
+        title_font_size=18,
+        title_font_color="#f8fafc",
+        paper_bgcolor="#0d1422",
+        plot_bgcolor="#0d1422",
+        font=dict(color="#cbd5e1")
     )
 
-    st.plotly_chart(fig1, use_container_width=True)
 
-    # Bar Chart
-    st.subheader("🏍 Average Price by Brand")
+    st.plotly_chart(
+        fig1,
+        use_container_width=True
+    )
 
-    brand_price = df.groupby("Brand")["Price (INR)"].mean().reset_index()
+
+    # ============================================================
+    # BRAND PRICE BAR CHART
+    # ============================================================
+    st.markdown(
+        '<div class="price-section-title">🏍️ Average Price by Brand</div>',
+        unsafe_allow_html=True
+    )
+
+
+    brand_price = (
+        df.groupby("Brand")["Price (INR)"]
+        .mean()
+        .reset_index()
+    )
+
 
     fig2 = px.bar(
         brand_price,
@@ -1586,19 +1852,37 @@ if opt == "Price Analysis":
         title="Average Price by Brand"
     )
 
+
     fig2.update_layout(
         template="plotly_dark",
-        title_x=0.5
+        title_x=0.5,
+        title_font_size=18,
+        title_font_color="#f8fafc",
+        paper_bgcolor="#0d1422",
+        plot_bgcolor="#0d1422",
+        font=dict(color="#cbd5e1")
     )
 
-    st.plotly_chart(fig2, use_container_width=True)
 
-    # Price vs Mileage
-    st.subheader("⛽ Price vs Mileage")
+    st.plotly_chart(
+        fig2,
+        use_container_width=True
+    )
+
+
+    # ============================================================
+    # PRICE VS MILEAGE
+    # ============================================================
+    st.markdown(
+        '<div class="price-section-title">⛽ Price vs Mileage</div>',
+        unsafe_allow_html=True
+    )
+
 
     mileage_data = df.groupby("Brand")[
         ["Mileage (km/l)", "Price (INR)"]
     ].mean().reset_index()
+
 
     fig3 = px.scatter(
         mileage_data,
@@ -1608,14 +1892,37 @@ if opt == "Price Analysis":
         title="Average Price vs Average Mileage by Brand"
     )
 
-    st.plotly_chart(fig3, use_container_width=True)
 
-    # Price vs Resale
-    st.subheader("♻️ Price vs Resale Price")
+    fig3.update_layout(
+        template="plotly_dark",
+        title_x=0.5,
+        title_font_size=18,
+        title_font_color="#f8fafc",
+        paper_bgcolor="#0d1422",
+        plot_bgcolor="#0d1422",
+        font=dict(color="#cbd5e1")
+    )
+
+
+    st.plotly_chart(
+        fig3,
+        use_container_width=True
+    )
+
+
+    # ============================================================
+    # PRICE VS RESALE
+    # ============================================================
+    st.markdown(
+        '<div class="price-section-title">♻️ Price vs Resale Price</div>',
+        unsafe_allow_html=True
+    )
+
 
     brand_resale_data = df.groupby("Brand")[
         ["Price (INR)", "Resale Price (INR)"]
     ].mean().reset_index()
+
 
     fig4 = px.scatter(
         brand_resale_data,
@@ -1625,14 +1932,37 @@ if opt == "Price Analysis":
         title="Average Price vs Average Resale Price by Brand"
     )
 
-    st.plotly_chart(fig4, use_container_width=True)
 
-    # Line Chart
-    st.subheader("📅 Average Price Trend")
+    fig4.update_layout(
+        template="plotly_dark",
+        title_x=0.5,
+        title_font_size=18,
+        title_font_color="#f8fafc",
+        paper_bgcolor="#0d1422",
+        plot_bgcolor="#0d1422",
+        font=dict(color="#cbd5e1")
+    )
+
+
+    st.plotly_chart(
+        fig4,
+        use_container_width=True
+    )
+
+
+    # ============================================================
+    # YEARLY PRICE TREND
+    # ============================================================
+    st.markdown(
+        '<div class="price-section-title">📅 Average Price Trend</div>',
+        unsafe_allow_html=True
+    )
+
 
     year_price = df.groupby("Year of Manufacture")[
         "Price (INR)"
     ].mean().reset_index()
+
 
     fig5 = px.line(
         year_price,
@@ -1642,41 +1972,283 @@ if opt == "Price Analysis":
         title="Average Price by Manufacturing Year"
     )
 
-    st.plotly_chart(fig5, use_container_width=True)
 
-    # Key Insights
-    st.subheader("💡 Key Insights")
+    fig5.update_layout(
+        template="plotly_dark",
+        title_x=0.5,
+        title_font_size=18,
+        title_font_color="#f8fafc",
+        paper_bgcolor="#0d1422",
+        plot_bgcolor="#0d1422",
+        font=dict(color="#cbd5e1")
+    )
 
+
+    st.plotly_chart(
+        fig5,
+        use_container_width=True
+    )
+
+
+    # ============================================================
+    # KEY INSIGHTS
+    # ============================================================
     st.markdown(
-        f"""
-        <div class="insight-card">
-            📍 <b>Market Price Range:</b>
-            Bikes range from ₹{lowest_price:,.0f} to ₹{highest_price:,.0f}.
-        </div>
-        """,
+        '<div class="price-section-title">💡 Key Insights</div>',
         unsafe_allow_html=True
     )
 
-    st.markdown(
-        f"""
-        <div class="insight-card">
-            📊 <b>Average Valuation:</b>
-            The average bike price is ₹{avg_price:,.0f}.
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
     st.markdown(
         f"""
-        <div class="insight-card">
-            ♻️ <b>Resale Value:</b>
-            The average resale price is ₹{avg_resale:,.0f},
-            which is about {retention_pct:.1f}% of the average price.
-        </div>
-        """,
+<div class="insight-card">
+📍 <b>Market Price Range:</b>
+Bikes range from ₹{lowest_price:,.0f} to ₹{highest_price:,.0f}.
+</div>
+""",
         unsafe_allow_html=True
     )
+
+
+    st.markdown(
+        f"""
+<div class="insight-card">
+📊 <b>Average Valuation:</b>
+The average bike price is ₹{avg_price:,.0f}.
+</div>
+""",
+        unsafe_allow_html=True
+    )
+
+
+    st.markdown(
+        f"""
+<div class="insight-card">
+♻️ <b>Resale Value:</b>
+The average resale price is ₹{avg_resale:,.0f},
+which is about {retention_pct:.1f}% of the average price.
+</div>
+""",
+        unsafe_allow_html=True
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# if opt == "Price Analysis":
+
+#     st.markdown(
+#         """
+#         <div class="header-box">
+#             <h1 style="color: #ffffff; margin: 0; font-size: 2.2rem;">💰 Price Analysis</h1>
+#             <p style="color: #cbd5e1; margin-top: 5px; font-size: 0.95rem;">
+#                 Analyze bike pricing trends, brand values, and market distribution.
+#             </p>
+#         </div>
+#         """,
+#         unsafe_allow_html=True
+#     )
+
+#     avg_price = df["Price (INR)"].mean()
+#     avg_resale = df["Resale Price (INR)"].mean()
+#     highest_price = df["Price (INR)"].max()
+#     lowest_price = df["Price (INR)"].min()
+#     price_gap = highest_price - lowest_price
+#     retention_pct = (avg_resale / avg_price) * 100
+
+#     # KPI Cards
+#     col1, col2, col3, col4 = st.columns(4)
+
+#     with col1:
+#         st.metric("💰 Average Price", f"₹{avg_price:,.0f}")
+
+#     with col2:
+#         st.metric("💵 Average Resale", f"₹{avg_resale:,.0f}")
+
+#     with col3:
+#         st.metric("📈 Highest Price", f"₹{highest_price:,.0f}")
+
+#     with col4:
+#         st.metric("📊 Price Range Gap", f"₹{price_gap:,.0f}")
+
+#     st.divider()
+
+#     # Histogram
+#     st.subheader("📊 Price Distribution")
+
+#     fig1 = px.histogram(
+#         df,
+#         x="Price (INR)",
+#         nbins=30,
+#         title="Distribution of Bike Prices",
+#         color_discrete_sequence=["#6366f1"]
+#     )
+
+#     fig1.update_traces(
+#         marker_line_color="#0f172a",
+#         marker_line_width=1.5
+#     )
+
+#     fig1.update_layout(
+#         template="plotly_dark",
+#         title_x=0.5
+#     )
+
+#     st.plotly_chart(fig1, use_container_width=True)
+
+#     # Bar Chart
+#     st.subheader("🏍 Average Price by Brand")
+
+#     brand_price = df.groupby("Brand")["Price (INR)"].mean().reset_index()
+
+#     fig2 = px.bar(
+#         brand_price,
+#         x="Brand",
+#         y="Price (INR)",
+#         color="Brand",
+#         title="Average Price by Brand"
+#     )
+
+#     fig2.update_layout(
+#         template="plotly_dark",
+#         title_x=0.5
+#     )
+
+#     st.plotly_chart(fig2, use_container_width=True)
+
+#     # Price vs Mileage
+#     st.subheader("⛽ Price vs Mileage")
+
+#     mileage_data = df.groupby("Brand")[
+#         ["Mileage (km/l)", "Price (INR)"]
+#     ].mean().reset_index()
+
+#     fig3 = px.scatter(
+#         mileage_data,
+#         x="Mileage (km/l)",
+#         y="Price (INR)",
+#         color="Brand",
+#         title="Average Price vs Average Mileage by Brand"
+#     )
+
+#     st.plotly_chart(fig3, use_container_width=True)
+
+#     # Price vs Resale
+#     st.subheader("♻️ Price vs Resale Price")
+
+#     brand_resale_data = df.groupby("Brand")[
+#         ["Price (INR)", "Resale Price (INR)"]
+#     ].mean().reset_index()
+
+#     fig4 = px.scatter(
+#         brand_resale_data,
+#         x="Price (INR)",
+#         y="Resale Price (INR)",
+#         color="Brand",
+#         title="Average Price vs Average Resale Price by Brand"
+#     )
+
+#     st.plotly_chart(fig4, use_container_width=True)
+
+#     # Line Chart
+#     st.subheader("📅 Average Price Trend")
+
+#     year_price = df.groupby("Year of Manufacture")[
+#         "Price (INR)"
+#     ].mean().reset_index()
+
+#     fig5 = px.line(
+#         year_price,
+#         x="Year of Manufacture",
+#         y="Price (INR)",
+#         markers=True,
+#         title="Average Price by Manufacturing Year"
+#     )
+
+#     st.plotly_chart(fig5, use_container_width=True)
+
+#     # Key Insights
+#     st.subheader("💡 Key Insights")
+
+#     st.markdown(
+#         f"""
+#         <div class="insight-card">
+#             📍 <b>Market Price Range:</b>
+#             Bikes range from ₹{lowest_price:,.0f} to ₹{highest_price:,.0f}.
+#         </div>
+#         """,
+#         unsafe_allow_html=True
+#     )
+
+#     st.markdown(
+#         f"""
+#         <div class="insight-card">
+#             📊 <b>Average Valuation:</b>
+#             The average bike price is ₹{avg_price:,.0f}.
+#         </div>
+#         """,
+#         unsafe_allow_html=True
+#     )
+
+#     st.markdown(
+#         f"""
+#         <div class="insight-card">
+#             ♻️ <b>Resale Value:</b>
+#             The average resale price is ₹{avg_resale:,.0f},
+#             which is about {retention_pct:.1f}% of the average price.
+#         </div>
+#         """,
+#         unsafe_allow_html=True
+#     )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 elif opt == "Resale Analysis":
 
