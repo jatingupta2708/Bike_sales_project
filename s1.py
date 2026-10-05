@@ -2052,242 +2052,242 @@ hr {
 
 
 
-elif opt == "Resale Analysis":
-    st.markdown(
-        """
-        <style>
-        /* 🌌 Deep Dark Ambient Glow Background for Main Container & Page */
-        [data-testid="stAppViewContainer"] {
-            background: radial-gradient(circle at 50% -10%, #1e293b 0%, #0f172a 45%, #020617 100%) !important;
-        }
+# elif opt == "Resale Analysis":
+#     st.markdown(
+#         """
+#         <style>
+#         /* 🌌 Deep Dark Ambient Glow Background for Main Container & Page */
+#         [data-testid="stAppViewContainer"] {
+#             background: radial-gradient(circle at 50% -10%, #1e293b 0%, #0f172a 45%, #020617 100%) !important;
+#         }
 
-        [data-testid="stHeader"] {
-            background: transparent !important;
-        }
+#         [data-testid="stHeader"] {
+#             background: transparent !important;
+#         }
 
-        /* 🌟 Glossy Header */
-        .glossy-header {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.15));
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+#         /* 🌟 Glossy Header */
+#         .glossy-header {
+#             background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.15));
+#             border: 1px solid rgba(255, 255, 255, 0.18);
+#             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+#             backdrop-filter: blur(20px);
+#             -webkit-backdrop-filter: blur(20px);
+#             border-radius: 20px;
+#             padding: 24px;
+#             text-align: center;
+#             margin-bottom: 20px;
+#         }
 
-        /* 💎 Glossy KPI Card with Smooth Hover Pop-Up Effect */
-        .glossy-kpi-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-        }
+#         /* 💎 Glossy KPI Card with Smooth Hover Pop-Up Effect */
+#         .glossy-kpi-card {
+#             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+#             border-radius: 16px;
+#             padding: 20px;
+#             text-align: center;
+#             border: 1px solid rgba(255, 255, 255, 0.15);
+#             backdrop-filter: blur(14px);
+#             -webkit-backdrop-filter: blur(14px);
+#             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+#             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+#             cursor: pointer;
+#         }
 
-        /* 🚀 Pop-Up Effect on Hover */
-        .glossy-kpi-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-            border-color: rgba(255, 255, 255, 0.45);
-        }
+#         /* 🚀 Pop-Up Effect on Hover */
+#         .glossy-kpi-card:hover {
+#             transform: translateY(-10px) scale(1.03);
+#             box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+#             border-color: rgba(255, 255, 255, 0.45);
+#         }
 
-        /* 💡 Glossy Insight Cards */
-        .glossy-insight-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 14px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-        }
+#         /* 💡 Glossy Insight Cards */
+#         .glossy-insight-card {
+#             background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+#             border: 1px solid rgba(255, 255, 255, 0.12);
+#             backdrop-filter: blur(12px);
+#             -webkit-backdrop-filter: blur(12px);
+#             border-radius: 14px;
+#             padding: 18px;
+#             margin-bottom: 14px;
+#             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+#             transition: all 0.3s ease;
+#         }
 
-        .glossy-insight-card:hover {
-            border-color: rgba(255, 255, 255, 0.35);
-            transform: translateX(5px);
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
+#         .glossy-insight-card:hover {
+#             border-color: rgba(255, 255, 255, 0.35);
+#             transform: translateX(5px);
+#         }
+#         </style>
+#         """,
+#         unsafe_allow_html=True,
+#     )
 
-    # 2. Header Block
-    st.markdown(
-        """
-        <div class="glossy-header">
-            <h1 style="color: #ffffff; margin: 0; font-size: 2.3rem; font-weight: 800;">⚡ Bike Resale Analytics </h1>
-            <p style="color: #cbd5e1; margin-top: 6px; font-size: 0.95rem;">Interactive market analytics with real-time category grouping.</p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+#     # 2. Header Block
+#     st.markdown(
+#         """
+#         <div class="glossy-header">
+#             <h1 style="color: #ffffff; margin: 0; font-size: 2.3rem; font-weight: 800;">⚡ Bike Resale Analytics </h1>
+#             <p style="color: #cbd5e1; margin-top: 6px; font-size: 0.95rem;">Interactive market analytics with real-time category grouping.</p>
+#         </div>
+#         """,
+#         unsafe_allow_html=True,
+#     )
 
-    # 3. 🎯 TOP SELECT BOX 
-    selected_group = st.selectbox(
-    "🎛️ Select Category",
-    ["Brand", "Fuel Type", "Year of Manufacture", "Owner Type"]
-    )
+#     # 3. 🎯 TOP SELECT BOX 
+#     selected_group = st.selectbox(
+#     "🎛️ Select Category",
+#     ["Brand", "Fuel Type", "Year of Manufacture", "Owner Type"]
+#     )
 
-    current_year = 2026
-    df["Bike Age"] = current_year - df["Year of Manufacture"]
+#     current_year = 2026
+#     df["Bike Age"] = current_year - df["Year of Manufacture"]
 
-    grouped_df = df.groupby(selected_group)["Resale Price (INR)"].mean().reset_index()
+#     grouped_df = df.groupby(selected_group)["Resale Price (INR)"].mean().reset_index()
 
-    grouped_df = grouped_df.sort_values(
-        "Resale Price (INR)",
-        ascending=False
-    )
+#     grouped_df = grouped_df.sort_values(
+#         "Resale Price (INR)",
+#         ascending=False
+#     )
 
-    top_group_item = grouped_df.iloc[0][selected_group]
-    top_group_val = grouped_df.iloc[0]["Resale Price (INR)"]
+#     top_group_item = grouped_df.iloc[0][selected_group]
+#     top_group_val = grouped_df.iloc[0]["Resale Price (INR)"]
 
-    lowest_group_item = grouped_df.iloc[-1][selected_group]
-    lowest_group_val = grouped_df.iloc[-1]["Resale Price (INR)"]
+#     lowest_group_item = grouped_df.iloc[-1][selected_group]
+#     lowest_group_val = grouped_df.iloc[-1]["Resale Price (INR)"]
 
-    avg_resale = df["Resale Price (INR)"].mean()
+#     avg_resale = df["Resale Price (INR)"].mean()
 
-    total_categories = df[selected_group].nunique()
-
-
-    # 4. Dynamic Glossy Pop-Up KPI Cards Row (Changes with Select Box)
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        st.markdown(
-            f"""
-            <div class="glossy-kpi-card" style="border-bottom: 3px solid #10b981;">
-                <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Top {selected_group}</div>
-                <div style="font-size: 1.5rem; font-weight: 900; color: #10b981; margin: 6px 0;">{top_group_item}</div>
-                <div style="color: #cbd5e1; font-size: 0.75rem;">Avg: ₹{top_group_val:,.0f}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col2:
-        st.markdown(
-            f"""
-            <div class="glossy-kpi-card" style="border-bottom: 3px solid #38bdf8;">
-                <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Lowest {selected_group}</div>
-                <div style="font-size: 1.5rem; font-weight: 900; color: #38bdf8; margin: 6px 0;">{lowest_group_item}</div>
-                <div style="color: #cbd5e1; font-size: 0.75rem;">Avg: ₹{lowest_group_val:,.0f}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col3:
-        st.markdown(
-            f"""
-            <div class="glossy-kpi-card" style="border-bottom: 3px solid #f43f5e;">
-                <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Overall Avg Resale</div>
-                <div style="font-size: 1.5rem; font-weight: 900; color: #f43f5e; margin: 6px 0;">₹{avg_resale:,.0f}</div>
-                <div style="color: #cbd5e1; font-size: 0.75rem;">All Bikes Mean</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col4:
-        st.markdown(
-            f"""
-            <div class="glossy-kpi-card" style="border-bottom: 3px solid #f59e0b;">
-                <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Total {selected_group}s</div>
-                <div style="font-size: 1.5rem; font-weight: 900; color: #f59e0b; margin: 6px 0;">{total_categories}</div>
-                <div style="color: #cbd5e1; font-size: 0.75rem;">Unique Groups</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.divider()
-
-    # 5. Dynamic Charts Section
-    st.subheader(f"📊 Average Resale Price by {selected_group}")
-
-    fig_bar = px.bar(
-    grouped_df,
-    x=selected_group,
-    y="Resale Price (INR)",
-    title=f"Average Resale Price Grouped by {selected_group}",
-    color="Resale Price (INR)",
-    color_continuous_scale="Mint",
-    text_auto=".0f"
-    )
-
-    st.plotly_chart(fig_bar, use_container_width=True)
-
-    col_chart1, col_chart2 = st.columns(2)
-
-    with col_chart1:
-        st.subheader(f"⛽ Resale Share by {selected_group}")
-
-        fig_pie = px.pie(
-            grouped_df,
-            names=selected_group,
-            values="Resale Price (INR)",
-            title=f"Resale Price Breakdown ({selected_group})",
-            hole=0.4,
-            color_discrete_sequence=px.colors.qualitative.Dark24
-        )
-
-        st.plotly_chart(fig_pie, use_container_width=True)
+#     total_categories = df[selected_group].nunique()
 
 
-    with col_chart2:
-        st.subheader(f"📉 Resale vs Bike Age (Grouped by {selected_group})")
+#     # 4. Dynamic Glossy Pop-Up KPI Cards Row (Changes with Select Box)
+#     col1, col2, col3, col4 = st.columns(4)
 
-        fig_scatter = px.scatter(
-            df,
-            x="Bike Age",
-            y="Resale Price (INR)",
-            color=selected_group,
-            size="Engine Capacity (cc)",
-            title=f"Bike Age vs Resale Price Scatter ({selected_group})",
-            color_discrete_sequence=px.colors.qualitative.Bold
-        )
+#     with col1:
+#         st.markdown(
+#             f"""
+#             <div class="glossy-kpi-card" style="border-bottom: 3px solid #10b981;">
+#                 <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Top {selected_group}</div>
+#                 <div style="font-size: 1.5rem; font-weight: 900; color: #10b981; margin: 6px 0;">{top_group_item}</div>
+#                 <div style="color: #cbd5e1; font-size: 0.75rem;">Avg: ₹{top_group_val:,.0f}</div>
+#             </div>
+#             """,
+#             unsafe_allow_html=True,
+#         )
 
-        st.plotly_chart(fig_scatter, use_container_width=True)
+#     with col2:
+#         st.markdown(
+#             f"""
+#             <div class="glossy-kpi-card" style="border-bottom: 3px solid #38bdf8;">
+#                 <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Lowest {selected_group}</div>
+#                 <div style="font-size: 1.5rem; font-weight: 900; color: #38bdf8; margin: 6px 0;">{lowest_group_item}</div>
+#                 <div style="color: #cbd5e1; font-size: 0.75rem;">Avg: ₹{lowest_group_val:,.0f}</div>
+#             </div>
+#             """,
+#             unsafe_allow_html=True,
+#         )
 
-    # 6. Dynamic Glossy Insights
-    st.subheader("💡 Dynamic Resale Insights")
+#     with col3:
+#         st.markdown(
+#             f"""
+#             <div class="glossy-kpi-card" style="border-bottom: 3px solid #f43f5e;">
+#                 <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Overall Avg Resale</div>
+#                 <div style="font-size: 1.5rem; font-weight: 900; color: #f43f5e; margin: 6px 0;">₹{avg_resale:,.0f}</div>
+#                 <div style="color: #cbd5e1; font-size: 0.75rem;">All Bikes Mean</div>
+#             </div>
+#             """,
+#             unsafe_allow_html=True,
+#         )
 
-    st.markdown(
-        f"""
-        <div class="glossy-insight-card" style="border-left: 5px solid #10b981;">
-            <div style="font-weight: bold; color: #10b981; font-size: 1rem;">🏆 Top Performance in {selected_group}</div>
-            <div style="color: #cbd5e1; margin-top: 4px; font-size: 0.9rem;">
-                <b>{top_group_item}</b> leads this category with the highest average resale price of <b>₹{top_group_val:,.0f}</b>.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+#     with col4:
+#         st.markdown(
+#             f"""
+#             <div class="glossy-kpi-card" style="border-bottom: 3px solid #f59e0b;">
+#                 <div style="color: #9ca3af; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Total {selected_group}s</div>
+#                 <div style="font-size: 1.5rem; font-weight: 900; color: #f59e0b; margin: 6px 0;">{total_categories}</div>
+#                 <div style="color: #cbd5e1; font-size: 0.75rem;">Unique Groups</div>
+#             </div>
+#             """,
+#             unsafe_allow_html=True,
+#         )
 
-    st.markdown(
-        f"""
-        <div class="glossy-insight-card" style="border-left: 5px solid #38bdf8;">
-            <div style="font-weight: bold; color: #38bdf8; font-size: 1rem;">📉 Budget Category in {selected_group}</div>
-            <div style="color: #cbd5e1; margin-top: 4px; font-size: 0.9rem;">
-                <b>{lowest_group_item}</b> sits at the lower end of the resale market with an average valuation of <b>₹{lowest_group_val:,.0f}</b>.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+#     st.divider()
+
+#     # 5. Dynamic Charts Section
+#     st.subheader(f"📊 Average Resale Price by {selected_group}")
+
+#     fig_bar = px.bar(
+#     grouped_df,
+#     x=selected_group,
+#     y="Resale Price (INR)",
+#     title=f"Average Resale Price Grouped by {selected_group}",
+#     color="Resale Price (INR)",
+#     color_continuous_scale="Mint",
+#     text_auto=".0f"
+#     )
+
+#     st.plotly_chart(fig_bar, use_container_width=True)
+
+#     col_chart1, col_chart2 = st.columns(2)
+
+#     with col_chart1:
+#         st.subheader(f"⛽ Resale Share by {selected_group}")
+
+#         fig_pie = px.pie(
+#             grouped_df,
+#             names=selected_group,
+#             values="Resale Price (INR)",
+#             title=f"Resale Price Breakdown ({selected_group})",
+#             hole=0.4,
+#             color_discrete_sequence=px.colors.qualitative.Dark24
+#         )
+
+#         st.plotly_chart(fig_pie, use_container_width=True)
+
+
+#     with col_chart2:
+#         st.subheader(f"📉 Resale vs Bike Age (Grouped by {selected_group})")
+
+#         fig_scatter = px.scatter(
+#             df,
+#             x="Bike Age",
+#             y="Resale Price (INR)",
+#             color=selected_group,
+#             size="Engine Capacity (cc)",
+#             title=f"Bike Age vs Resale Price Scatter ({selected_group})",
+#             color_discrete_sequence=px.colors.qualitative.Bold
+#         )
+
+#         st.plotly_chart(fig_scatter, use_container_width=True)
+
+#     # 6. Dynamic Glossy Insights
+#     st.subheader("💡 Dynamic Resale Insights")
+
+#     st.markdown(
+#         f"""
+#         <div class="glossy-insight-card" style="border-left: 5px solid #10b981;">
+#             <div style="font-weight: bold; color: #10b981; font-size: 1rem;">🏆 Top Performance in {selected_group}</div>
+#             <div style="color: #cbd5e1; margin-top: 4px; font-size: 0.9rem;">
+#                 <b>{top_group_item}</b> leads this category with the highest average resale price of <b>₹{top_group_val:,.0f}</b>.
+#             </div>
+#         </div>
+#         """,
+#         unsafe_allow_html=True,
+#     )
+
+#     st.markdown(
+#         f"""
+#         <div class="glossy-insight-card" style="border-left: 5px solid #38bdf8;">
+#             <div style="font-weight: bold; color: #38bdf8; font-size: 1rem;">📉 Budget Category in {selected_group}</div>
+#             <div style="color: #cbd5e1; margin-top: 4px; font-size: 0.9rem;">
+#                 <b>{lowest_group_item}</b> sits at the lower end of the resale market with an average valuation of <b>₹{lowest_group_val:,.0f}</b>.
+#             </div>
+#         </div>
+#         """,
+#         unsafe_allow_html=True,
+#     )
             
 
-#staaaaatttttteeeeeeeee anallysissssssss..................................................................
+# #staaaaatttttteeeeeeeee anallysissssssss..................................................................
 
 
 
