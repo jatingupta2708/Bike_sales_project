@@ -45,7 +45,43 @@ with st.sidebar:
 
 
 
+# ==============================
+# GLOBAL LIGHT GREEN GLOW
+# ==============================
 
+st.markdown("""
+<style>
+
+.stApp,
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(74, 222, 128, 0.16),
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(34, 197, 94, 0.10),
+            transparent 40%
+        ),
+        #030509 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+if opt == 'Dashboard':
+    # dashboard code...
+
+
+elif opt == 'Brand Analysis':
+    # brand analysis code...
+
+
+elif opt == 'Data Overview':
+    # data overview code...
 
 
 
