@@ -72,15 +72,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-if opt == 'Dashboard':
-    # dashboard code...
 
-
-elif opt == 'Brand Analysis':
-    # brand analysis code...
-
-
-elif opt == 'Data Overview':
     # data overview code...
 
 
