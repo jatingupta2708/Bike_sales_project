@@ -2227,40 +2227,78 @@ elif opt == "About Project":
     background: #0b1120;
 }
 
+.block-container {
+    max-width: 1150px;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* PAGE TITLE */
+.about-heading {
+    color: #ffffff;
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+
+.about-subtitle {
+    color: #94a3b8;
+    font-size: 16px;
+    margin-bottom: 22px;
+}
+
+/* HERO CARD */
 .about-box {
-    background: linear-gradient(135deg, #172554, #0f172a);
-    border: 1px solid #294b91;
-    border-radius: 16px;
-    padding: 30px;
-    margin: 20px 0;
+    background: linear-gradient(135deg, #172554 0%, #0f172a 100%);
+    border: 1px solid #31518f;
+    border-radius: 18px;
+    padding: 32px;
+    margin: 22px 0 28px 0;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+    transition: 0.25s ease;
+}
+
+.about-box:hover {
+    border-color: #4f7edb;
+    transform: translateY(-2px);
 }
 
 .about-title {
     color: #ffffff;
     font-size: 30px;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .about-text {
     color: #cbd5e1;
     font-size: 16px;
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
+/* INFORMATION CARDS */
 .info-box {
-    background: #111827;
+    background: linear-gradient(145deg, #111827, #0f172a);
     border: 1px solid #263449;
-    border-radius: 14px;
-    padding: 22px;
+    border-radius: 16px;
+    padding: 25px;
     margin: 18px 0;
+    box-shadow: 0 7px 20px rgba(0,0,0,0.18);
+    transition: 0.25s ease;
+}
+
+.info-box:hover {
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
 .info-title {
     color: #ffffff;
     font-size: 21px;
-    font-weight: 700;
-    margin-bottom: 12px;
+    font-weight: 750;
+    margin-bottom: 14px;
 }
 
 .info-text {
@@ -2269,41 +2307,70 @@ elif opt == "About Project":
     line-height: 1.8;
 }
 
+/* TECHNOLOGY CARDS */
 .tech-box {
-    background: #111827;
+    background: linear-gradient(145deg, #111827, #0f172a);
     border: 1px solid #29364a;
-    border-radius: 12px;
-    padding: 18px 10px;
+    border-radius: 14px;
+    padding: 22px 10px;
     text-align: center;
+    min-height: 90px;
+    transition: 0.25s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.tech-box:hover {
+    border-color: #60a5fa;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
 
 .tech-name {
     color: #60a5fa;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 750;
 }
 
 .tech-text {
     color: #94a3b8;
     font-size: 13px;
-    margin-top: 5px;
+    margin-top: 7px;
+}
+
+/* SMALL ACCENT LINE */
+.accent-line {
+    width: 55px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 10px;
+    margin: 8px 0 18px 0;
 }
 </style>
 """, unsafe_allow_html=True)
 
 
-    st.title("📌 About Project")
+    # PAGE HEADER
 
     st.markdown(
-        "Bike Sales India – Data Analysis & Visualization Dashboard"
+        '<div class="about-heading">📌 About Project</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="about-subtitle">Bike Sales India – Data Analysis & Visualization Dashboard</div>',
+        unsafe_allow_html=True
     )
 
     st.divider()
 
 
+    # HERO SECTION
+
     st.markdown("""
 <div class="about-box">
 <div class="about-title">🏍️ Bike Sales India</div>
+
+<div class="accent-line"></div>
 
 <div class="about-text">
 An interactive data analysis and visualization dashboard
@@ -2315,9 +2382,13 @@ insights using statistics, charts and comparisons.
 """, unsafe_allow_html=True)
 
 
+    # ABOUT PROJECT
+
     st.markdown("""
 <div class="info-box">
 <div class="info-title">📖 About the Project</div>
+
+<div class="accent-line"></div>
 
 <div class="info-text">
 <b>Bike Sales India</b> is a data analysis project focused on
@@ -2334,9 +2405,13 @@ interactive and easy-to-understand format.
 """, unsafe_allow_html=True)
 
 
+    # PROJECT OBJECTIVE
+
     st.markdown("""
 <div class="info-box">
 <div class="info-title">🎯 Project Objective</div>
+
+<div class="accent-line"></div>
 
 <div class="info-text">
 • Compare different bike brands<br>
@@ -2351,14 +2426,19 @@ interactive and easy-to-understand format.
 """, unsafe_allow_html=True)
 
 
+    # TECHNOLOGIES
+
     st.markdown("""
 <div class="info-box">
 <div class="info-title">🛠️ Technologies Used</div>
+
+<div class="accent-line"></div>
 </div>
 """, unsafe_allow_html=True)
 
 
     t1, t2, t3, t4 = st.columns(4)
+
 
     with t1:
         st.markdown("""
@@ -2368,6 +2448,7 @@ interactive and easy-to-understand format.
 </div>
 """, unsafe_allow_html=True)
 
+
     with t2:
         st.markdown("""
 <div class="tech-box">
@@ -2375,6 +2456,7 @@ interactive and easy-to-understand format.
 <div class="tech-text">Data Analysis</div>
 </div>
 """, unsafe_allow_html=True)
+
 
     with t3:
         st.markdown("""
@@ -2384,6 +2466,7 @@ interactive and easy-to-understand format.
 </div>
 """, unsafe_allow_html=True)
 
+
     with t4:
         st.markdown("""
 <div class="tech-box">
@@ -2391,8 +2474,6 @@ interactive and easy-to-understand format.
 <div class="tech-text">Dashboard</div>
 </div>
 """, unsafe_allow_html=True)
-
-
 
 # elif opt == "About Project":
 
