@@ -2279,11 +2279,24 @@ elif opt == 'Brand Analysis':
     # ==========================================
     # CHARTS SECTION 1
     # ==========================================
+        # ==========================================
+    # CHARTS SECTION 1
+    # 2 CIRCLE CHARTS TOGETHER
+    # ==========================================
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown(f'<div class="chart-box-3d"><div class="chart-head-title">💰 Price Spectrum by {group_col}</div>', unsafe_allow_html=True)
-        brand_price = df_filtered.groupby(group_col)["Price (INR)"].mean().reset_index()
+        st.markdown(
+            f'<div class="chart-box-3d"><div class="chart-head-title">💰 Price Spectrum by {group_col}</div>',
+            unsafe_allow_html=True
+        )
+
+        brand_price = (
+            df_filtered.groupby(group_col)["Price (INR)"]
+            .mean()
+            .reset_index()
+        )
+
         fig1 = px.treemap(
             brand_price,
             path=[group_col],
@@ -2291,12 +2304,62 @@ elif opt == 'Brand Analysis':
             color="Price (INR)",
             color_continuous_scale="Viridis"
         )
-        st.plotly_chart(apply_pro_plotly_theme(fig1), use_container_width=True)
+
+        st.plotly_chart(
+            apply_pro_plotly_theme(fig1),
+            use_container_width=True
+        )
+
         st.markdown('</div>', unsafe_allow_html=True)
 
+
     with col2:
-        st.markdown(f'<div class="chart-box-3d"><div class="chart-head-title">⛽ Mileage & Efficiency Scatter</div>', unsafe_allow_html=True)
-        brand_mileage = df_filtered.groupby(group_col)["Mileage (km/l)"].mean().reset_index()
+        st.markdown(
+            '<div class="chart-box-3d"><div class="chart-head-title">⚙️ Engine vs Fuel Type Hierarchy</div>',
+            unsafe_allow_html=True
+        )
+
+        # Dynamic Sunburst Path Handling
+        sunburst_path = (
+            ["Fuel Type", "Brand"]
+            if brand == "All Brands"
+            else ["Fuel Type", group_col]
+        )
+
+        fig4 = px.sunburst(
+            df_filtered,
+            path=sunburst_path,
+            values="Engine Capacity (cc)",
+            color="Engine Capacity (cc)",
+            color_continuous_scale="Plasma"
+        )
+
+        st.plotly_chart(
+            apply_pro_plotly_theme(fig4),
+            use_container_width=True
+        )
+
+        st.markdown('</div>', unsafe_allow_html=True)
+
+
+    # ==========================================
+    # CHARTS SECTION 2
+    # MILEAGE SCATTER + OWNERSHIP
+    # ==========================================
+    col3, col4 = st.columns(2)
+
+    with col3:
+        st.markdown(
+            '<div class="chart-box-3d"><div class="chart-head-title">⛽ Mileage & Efficiency Scatter</div>',
+            unsafe_allow_html=True
+        )
+
+        brand_mileage = (
+            df_filtered.groupby(group_col)["Mileage (km/l)"]
+            .mean()
+            .reset_index()
+        )
+
         fig2 = px.scatter(
             brand_mileage,
             x=group_col,
@@ -2306,64 +2369,93 @@ elif opt == 'Brand Analysis':
             hover_name=group_col,
             color_continuous_scale="Tealgrn"
         )
-        st.plotly_chart(apply_pro_plotly_theme(fig2), use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
-    # ==========================================
-    # CHARTS SECTION 2
-    # ==========================================
-    col3, col4 = st.columns(2)
-
-    with col3:
-        st.markdown(f'<div class="chart-box-3d"><div class="chart-head-title">📈 Resale Valuation Trend</div>', unsafe_allow_html=True)
-        resale = df_filtered.groupby(group_col)["Resale Price (INR)"].mean().reset_index()
-        fig3 = px.line(
-            resale,
-            x=group_col,
-            y="Resale Price (INR)",
-            markers=True,
-            line_shape='spline'
+        st.plotly_chart(
+            apply_pro_plotly_theme(fig2),
+            use_container_width=True
         )
-        fig3.update_traces(line_color="#0ea5e9", line_width=4, marker=dict(size=10, color="#a855f7"))
-        st.plotly_chart(apply_pro_plotly_theme(fig3), use_container_width=True)
+
         st.markdown('</div>', unsafe_allow_html=True)
+
 
     with col4:
-
-        
-        st.markdown('<div class="chart-box-3d"><div class="chart-head-title">⚙️ Engine vs Fuel Type Hierarchy</div>', unsafe_allow_html=True)
-        # Dynamic Sunburst Path Handling to prevent blank graph
-        sunburst_path = ["Fuel Type", "Brand"] if brand == "All Brands" else ["Fuel Type", group_col]
-        fig4 = px.sunburst(
-            df_filtered,
-            path=sunburst_path,
-            values="Engine Capacity (cc)",
-            color="Engine Capacity (cc)",
-            color_continuous_scale="Plasma"
+        st.markdown(
+            '<div class="chart-box-3d"><div class="chart-head-title">👥 Bike Ownership Distribution</div>',
+            unsafe_allow_html=True
         )
-        st.plotly_chart(apply_pro_plotly_theme(fig4), use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
-    # ==========================================
-    # CHARTS SECTION 3
-    # ==========================================
-    col5, col6 = st.columns(2)
+        owner = (
+            df_filtered["Owner Type"]
+            .value_counts()
+            .reset_index()
+        )
 
-    with col6:
-        st.markdown('<div class="chart-box-3d"><div class="chart-head-title">👥 Bike Ownership Distribution</div>', unsafe_allow_html=True)
-        owner = df_filtered["Owner Type"].value_counts().reset_index()
         owner.columns = ["Owner Type", "Count"]
+
         fig5 = px.pie(
             owner,
             names="Owner Type",
             values="Count",
             hole=0.6,
-            color_discrete_sequence=['#0ea5e9', '#6366f1', '#a855f7', '#ec4899']
+            color_discrete_sequence=[
+                '#0ea5e9',
+                '#6366f1',
+                '#a855f7',
+                '#ec4899'
+            ]
         )
-        st.plotly_chart(apply_pro_plotly_theme(fig5), use_container_width=True)
+
+        st.plotly_chart(
+            apply_pro_plotly_theme(fig5),
+            use_container_width=True
+        )
+
         st.markdown('</div>', unsafe_allow_html=True)
 
 
+    # ==========================================
+    # CHARTS SECTION 3
+    # RESALE LINE GRAPH - FULL WIDTH
+    # ==========================================
+
+    st.markdown(
+        '<div class="chart-box-3d"><div class="chart-head-title">📈 Resale Valuation Trend</div>',
+        unsafe_allow_html=True
+    )
+
+    resale = (
+        df_filtered.groupby(group_col)["Resale Price (INR)"]
+        .mean()
+        .reset_index()
+    )
+
+    fig3 = px.line(
+        resale,
+        x=group_col,
+        y="Resale Price (INR)",
+        markers=True,
+        line_shape="spline"
+    )
+
+    fig3.update_traces(
+        line_color="#0ea5e9",
+        line_width=4,
+        marker=dict(
+            size=10,
+            color="#a855f7"
+        )
+    )
+
+    fig3.update_layout(
+        height=500
+    )
+
+    st.plotly_chart(
+        apply_pro_plotly_theme(fig3),
+        use_container_width=True
+    )
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 #4444444Model AnALYSIS ..............................................................................................
