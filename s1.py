@@ -362,287 +362,436 @@ if opt == 'Dashboard':
 # #..................................................................................................
 
 
-elif opt=='Data Overview':
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+elif opt == "Data Overview":
 
     rows = df.shape[0]
     cols = df.shape[1]
 
-    st.markdown("""
-    <div style="
-    background:linear-gradient(135deg,#2563EB,#1E3A8A);
-    padding:25px;
-    border-radius:18px;
-    box-shadow:0 8px 25px rgba(37,99,235,.3);
-    margin-bottom:20px;">
+    # ============================================================
+    # HEADER
+    # ============================================================
+    st.markdown(
+        """
+        <div class="dataset-header">
+            <h1>📊 Dataset Overview</h1>
+            <p>
+                Explore, inspect and understand the Bike Sales India dataset.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    <h1 style="color:white;margin:0;">
-    📊 Dataset Overview
-    </h1>
-
-    <p style="color:#E2E8F0;margin-top:8px;">
-    Explore, inspect and understand the Bike Sales India dataset.
-    </p>
-
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <style>
-    .stApp {
-        background:
-        radial-gradient(circle at top left,#1e3a8a,transparent 35%),
-        radial-gradient(circle at bottom right,#7c3aed,transparent 35%),
-        #020617;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-
-
-#========================================
-#  KPI CARDS
-#======================================
-    st.markdown("""
+    # ============================================================
+    # CSS - CLEAN PROFESSIONAL GLOW
+    # ============================================================
+    st.markdown(
+        """
         <style>
 
         /* ==============================
-        Global Theme
+           MAIN PAGE
         ============================== */
 
-        .stApp{
-            background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
+        [data-testid="stAppViewContainer"] {
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(37, 99, 235, 0.16),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(124, 58, 237, 0.14),
+                    transparent 32%
+                ),
+                #020617 !important;
         }
 
-        h1, h2, h3{
-            color: #ffffff;
-            font-family: "Inter", sans-serif;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+        [data-testid="stHeader"] {
+            background: transparent !important;
         }
 
-        /* ==============================
-        Dataset Info Cards
-        ============================== */
-
-        .dataset-info{
-            display:flex;
-            gap:18px;
-            flex-wrap:wrap;
-            margin-bottom:28px;
-        }
-
-        .dataset-info-item{
-            flex:1;
-            min-width:180px;
-            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            padding:22px 18px;
-            border-radius:18px;
-            color:#ffffff;
-            text-align:center;
-            border:1px solid rgba(255,255,255,0.08);
-            box-shadow:
-                0 10px 25px rgba(0,0,0,0.35),
-                inset 0 1px 0 rgba(255,255,255,0.04);
-            transition: all .35s ease;
-            font-size:16px;
-            font-weight:500;
-            position:relative;
-            overflow:hidden;
-            backdrop-filter: blur(6px);
-        }
-
-        .dataset-info-item::before{
-            content:"";
-            position:absolute;
-            top:0;
-            left:-120%;
-            width:100%;
-            height:100%;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(255,255,255,0.08),
-                transparent
-            );
-            transition: left .6s ease;
-        }
-
-        .dataset-info-item:hover::before{
-            left:120%;
-        }
-
-        .dataset-info-item:hover{
-            transform: translateY(-6px);
-            border-color: rgba(255,255,0,0.35);
-            box-shadow:
-                0 18px 35px rgba(0,0,0,0.45),
-                0 0 20px rgba(255,255,0,0.08);
-        }
-
-        .dataset-info-item strong{
-            display:block;
-            color:#FFFF00;
-            font-size:14px;
-            text-transform: uppercase;
-            letter-spacing: .8px;
-            margin-bottom:10px;
-            opacity: .95;
-        }
-
-        /* ==============================
-        Dataframe
-        ============================== */
-
-        div[data-testid="stDataFrame"]{
-            border-radius:20px !important;
-            overflow:hidden !important;
-            border:1px solid rgba(255,255,255,.08);
-            box-shadow:
-                0 10px 28px rgba(0,0,0,.35),
-                inset 0 1px 0 rgba(255,255,255,.03);
-            background:#111827;
-        }
-
-        /* ==============================
-        Tabs
-        ============================== */
-
-        button[data-baseweb="tab"]{
-            background: rgba(30,41,59,0.9);
-            color: #e5e7eb;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius:12px;
-            margin-right:8px;
-            padding:10px 18px;
-            font-weight:600;
-            transition: all .3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,.18);
-        }
-
-        button[data-baseweb="tab"]:hover{
-            background:#2563eb;
-            color:#ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(37,99,235,.35);
-        }
-
-        /* Active Tab */
-
-        button[aria-selected="true"]{
-            background:#2563eb !important;
-            color:#ffffff !important;
-            border-color:#3b82f6 !important;
-            box-shadow: 0 10px 22px rgba(37,99,235,.38);
-        }
-
-        /* ==============================
-        Slider
-        ============================== */
-
-        div[data-testid="stSlider"]{
-            padding-top:12px;
-            padding-bottom:4px;
-        }
-
-        /* ==============================
-        Download Button
-        ============================== */
-
-        .stDownloadButton button{
-            width:100%;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color:#ffffff;
-            border:none;
-            border-radius:12px;
-            font-weight:700;
-            padding:0.65rem 1rem;
-            transition: all .3s ease;
-            box-shadow: 0 10px 22px rgba(37,99,235,.28);
-        }
-
-        .stDownloadButton button:hover{
-            background: linear-gradient(135deg, #1d4ed8, #1e40af);
-            transform: translateY(-2px);
-            box-shadow: 0 14px 26px rgba(37,99,235,.36);
-        }
-
-        /* ==============================
-        Expander
-        ============================== */
-
-        details{
-            background: rgba(30,41,59,0.92);
-            border-radius:14px;
-            border:1px solid rgba(255,255,255,.08);
-            padding:10px 12px;
-            box-shadow:
-                0 6px 18px rgba(0,0,0,.22),
-                inset 0 1px 0 rgba(255,255,255,.03);
-        }
-
-        details summary{
-            color:#ffffff;
-            font-weight:600;
-            cursor:pointer;
-        }
-
-        /* ==============================
-        Extra Polishing
-        ============================== */
-
-        .block-container{
+        .block-container {
+            max-width: 1400px;
             padding-top: 2rem;
-            padding-bottom: 2rem;
+            padding-bottom: 3rem;
         }
 
-        section[data-testid="stSidebar"]{
-            background: #0f172a;
-            border-right: 1px solid rgba(255,255,255,.06);
+        h1, h2, h3, h4 {
+            color: #f8fafc !important;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        .dataset-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1e3a8a
+                );
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            border-radius: 18px;
+            padding: 25px 28px;
+            margin-bottom: 24px;
+            box-shadow:
+                0 10px 30px rgba(37, 99, 235, 0.25);
+        }
+
+        .dataset-header h1 {
+            color: #ffffff !important;
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        .dataset-header p {
+            color: #e2e8f0;
+            margin: 7px 0 0 0;
+            font-size: 0.95rem;
+        }
+
+
+        /* ==============================
+           DATASET INFO CARDS
+        ============================== */
+
+        .dataset-info {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .dataset-info-item {
+            flex: 1;
+            min-width: 180px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1e293b,
+                    #0f172a
+                );
+
+            padding: 22px 18px;
+            border-radius: 16px;
+
+            color: #ffffff;
+            text-align: center;
+
+            border: 1px solid rgba(96, 165, 250, 0.18);
+
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.32);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dataset-info-item:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(96, 165, 250, 0.55);
+
+            box-shadow:
+                0 12px 28px rgba(0, 0, 0, 0.4),
+                0 0 22px rgba(37, 99, 235, 0.22);
+        }
+
+        .dataset-info-item strong {
+            display: block;
+
+            color: #60a5fa;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+
+            margin-bottom: 9px;
+        }
+
+
+        /* ==============================
+           TABS
+        ============================== */
+
+        button[data-baseweb="tab"] {
+            background: #111827 !important;
+            color: #cbd5e1 !important;
+
+            border: 1px solid rgba(148, 163, 184, 0.16) !important;
+            border-radius: 10px !important;
+
+            padding: 9px 16px !important;
+            margin-right: 6px !important;
+
+            font-weight: 600 !important;
+
+            transition:
+                all 0.25s ease !important;
+        }
+
+        button[data-baseweb="tab"]:hover {
+            color: #ffffff !important;
+
+            border-color: #3b82f6 !important;
+
+            box-shadow:
+                0 0 16px rgba(37, 99, 235, 0.25) !important;
+        }
+
+        button[data-baseweb="tab"][aria-selected="true"] {
+            background: #2563eb !important;
+            color: #ffffff !important;
+
+            border-color: #60a5fa !important;
+
+            box-shadow:
+                0 0 18px rgba(37, 99, 235, 0.35) !important;
+        }
+
+
+        /* ==============================
+           DATAFRAME
+        ============================== */
+
+        div[data-testid="stDataFrame"] {
+            border-radius: 14px !important;
+
+            overflow: hidden !important;
+
+            border: 1px solid rgba(96, 165, 250, 0.18) !important;
+
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.28) !important;
+        }
+
+
+        /* ==============================
+           SLIDER
+        ============================== */
+
+        div[data-testid="stSlider"] {
+            padding-top: 8px;
+            padding-bottom: 4px;
+        }
+
+
+        /* ==============================
+           DOWNLOAD BUTTON
+        ============================== */
+
+        .stDownloadButton button {
+            width: 100%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #1d4ed8
+                ) !important;
+
+            color: #ffffff !important;
+
+            border: 1px solid rgba(96, 165, 250, 0.35) !important;
+
+            border-radius: 10px !important;
+
+            font-weight: 700 !important;
+
+            padding: 0.65rem 1rem !important;
+
+            transition: all 0.25s ease !important;
+
+            box-shadow:
+                0 6px 18px rgba(37, 99, 235, 0.25) !important;
+        }
+
+        .stDownloadButton button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 24px rgba(37, 99, 235, 0.38) !important;
+        }
+
+
+        /* ==============================
+           EXPANDER
+        ============================== */
+
+        details {
+            background: #111827 !important;
+
+            border-radius: 12px !important;
+
+            border: 1px solid rgba(148, 163, 184, 0.15) !important;
+
+            box-shadow:
+                0 6px 18px rgba(0, 0, 0, 0.22) !important;
+        }
+
+        details summary {
+            color: #f8fafc !important;
+            font-weight: 600 !important;
+        }
+
+
+        /* ==============================
+           SELECTBOX / INPUTS
+        ============================== */
+
+        div[data-baseweb="select"] > div {
+            background: #111827 !important;
+            border-color: rgba(148, 163, 184, 0.2) !important;
+        }
+
+
+        /* ==============================
+           SIDEBAR
+        ============================== */
+
+        section[data-testid="stSidebar"] {
+            background: #0f172a !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         </style>
-    """, unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=True
+    )
 
 
+    # ============================================================
+    # DATASET KPI CARDS
+    # ============================================================
+
+    st.markdown(
+        f"""
+        <div class="dataset-info">
+
+            <div class="dataset-info-item">
+                <strong>Rows</strong>
+                {rows}
+            </div>
+
+            <div class="dataset-info-item">
+                <strong>Columns</strong>
+                {cols}
+            </div>
+
+            <div class="dataset-info-item">
+                <strong>Brands</strong>
+                {df['Brand'].nunique()}
+            </div>
+
+            <div class="dataset-info-item">
+                <strong>Models</strong>
+                {df['Model'].nunique()}
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
+    # ============================================================
+    # TABS
+    # ============================================================
 
-    st.markdown(f"""
-    <div class='dataset-info'>
-        <span class="dataset-info-item"><strong>Rows:</strong> {rows}</span>
-        <span class="dataset-info-item"><strong>Columns:</strong> {cols}</span>
-        <span class="dataset-info-item"><strong>Brands:</strong> {df['Brand'].nunique()}</span>
-        <span class="dataset-info-item"><strong>Models:</strong> {df['Model'].nunique()}</span>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-
-
-    
+    tab1, tab2, tab3 = st.tabs(
+        [
+            "📄 Data Preview",
+            "🔍 Column Details",
+            "📈 Summary"
+        ]
+    )
 
 
+    # ============================================================
+    # TAB 1: DATA PREVIEW
+    # ============================================================
 
-    tab1, tab2, tab3 = st.tabs(["📄 Data Preview", "🔍 Column Details", "📈 Summary"])
-
-    # ======================== TAB 1: DATA Preview ========================
     with tab1:
+
         col_left, col_right = st.columns([3, 1])
+
         with col_left:
             st.subheader("Preview Filtered Data")
+
         with col_right:
-            # Slider to choose number of rows to display
-            n_rows = st.slider("Rows to show", min_value=10, max_value=200, value=20, step=10)
 
-        # Display the first n rows
-        st.dataframe(df.head(n_rows), use_container_width=True)
+            n_rows = st.slider(
+                "Rows to show",
+                min_value=10,
+                max_value=200,
+                value=20,
+                step=10
+            )
 
-        # Optionally show the last few rows
+        st.dataframe(
+            df.head(n_rows),
+            use_container_width=True
+        )
+
         with st.expander("Show last rows"):
-             st.dataframe(df.tail(10), use_container_width=True)
 
-        # Download button for the filtered data
-        csv = df.to_csv(index=False).encode('utf-8')
+            st.dataframe(
+                df.tail(10),
+                use_container_width=True
+            )
+
+        csv = df.to_csv(index=False).encode("utf-8")
+
         st.download_button(
             label="📥 Download filtered data as CSV",
             data=csv,
@@ -651,55 +800,462 @@ elif opt=='Data Overview':
             use_container_width=True,
         )
 
-    # ======================== TAB 2: COLUMN DETAILS ========================
+
+    # ============================================================
+    # TAB 2: COLUMN DETAILS
+    # ============================================================
+
     with tab2:
 
-        # Display as a styled table
-        # Compute missing values and give the column a clear name
-        missing_df = df.isna().sum().reset_index(name='Missing Count')
+        missing_df = (
+            df.isna()
+            .sum()
+            .reset_index(name="Missing Count")
+        )
 
-# Optionally rename the first column as well
-        missing_df.rename(columns={'index': 'Column Name'}, inplace=True)
+        missing_df.rename(
+            columns={
+                "index": "Column Name"
+            },
+            inplace=True
+        )
 
-        # Display with styling
         st.dataframe(
             missing_df,
             use_container_width=True,
             height=400
         )
-        dtype_df = pd.DataFrame({
-            "Column": df.columns,
-            "Data Type": df.dtypes.astype(str)
-            })
-        
-        st.dataframe(dtype_df, use_container_width=True)
-    # ======================== TAB 3: SUMMARY ========================
+
+        dtype_df = pd.DataFrame(
+            {
+                "Column": df.columns,
+                "Data Type": df.dtypes.astype(str)
+            }
+        )
+
+        st.dataframe(
+            dtype_df,
+            use_container_width=True
+        )
+
+
+    # ============================================================
+    # TAB 3: SUMMARY
+    # ============================================================
+
     with tab3:
+
         st.subheader("Statistical Summary")
 
-        # Separate numeric and categorical columns
-        num_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-        cat_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
+        num_cols = df.select_dtypes(
+            include=["int64", "float64"]
+        ).columns.tolist()
+
+        cat_cols = df.select_dtypes(
+            include=["object", "category"]
+        ).columns.tolist()
+
 
         if num_cols:
+
             st.markdown("#### 📊 Numeric Columns")
-            st.dataframe(df[num_cols].describe(), use_container_width=True)
+
+            st.dataframe(
+                df[num_cols].describe(),
+                use_container_width=True
+            )
+
 
         if cat_cols:
+
             st.markdown("#### 🏷️ Categorical Columns")
-            # Show top 3 categories for each categorical column
-            for col in cat_cols[:4]:  # Limit to first 4 to keep layout clean
-                with st.expander(f"Top values in '{col}'"):
+
+            for col in cat_cols[:4]:
+
+                with st.expander(
+                    f"Top values in '{col}'"
+                ):
+
                     st.dataframe(
-                        df[col].value_counts().reset_index().head(10),
+                        df[col]
+                        .value_counts()
+                        .reset_index()
+                        .head(10),
                         use_container_width=True,
                         hide_index=True
                     )
+
+
         if len(cat_cols) > 4:
-                st.info(f"Showing top 4 categorical columns. There are {len(cat_cols)} in total.")
+
+            st.info(
+                f"Showing top 4 categorical columns. "
+                f"There are {len(cat_cols)} in total."
+            )
+
+
+
+
+
+
+
+# elif opt=='Data Overview':
+
+#     rows = df.shape[0]
+#     cols = df.shape[1]
+
+#     st.markdown("""
+#     <div style="
+#     background:linear-gradient(135deg,#2563EB,#1E3A8A);
+#     padding:25px;
+#     border-radius:18px;
+#     box-shadow:0 8px 25px rgba(37,99,235,.3);
+#     margin-bottom:20px;">
+
+#     <h1 style="color:white;margin:0;">
+#     📊 Dataset Overview
+#     </h1>
+
+#     <p style="color:#E2E8F0;margin-top:8px;">
+#     Explore, inspect and understand the Bike Sales India dataset.
+#     </p>
+
+#     </div>
+#     """, unsafe_allow_html=True)
+
+#     st.markdown("""
+#     <style>
+#     .stApp {
+#         background:
+#         radial-gradient(circle at top left,#1e3a8a,transparent 35%),
+#         radial-gradient(circle at bottom right,#7c3aed,transparent 35%),
+#         #020617;
+#     }
+#     </style>
+#     """, unsafe_allow_html=True)
+
+
+
+# #========================================
+# #  KPI CARDS
+# #======================================
+#     st.markdown("""
+#         <style>
+
+#         /* ==============================
+#         Global Theme
+#         ============================== */
+
+#         .stApp{
+#             background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
+#         }
+
+#         h1, h2, h3{
+#             color: #ffffff;
+#             font-family: "Inter", sans-serif;
+#             font-weight: 700;
+#             letter-spacing: -0.3px;
+#         }
+
+#         /* ==============================
+#         Dataset Info Cards
+#         ============================== */
+
+#         .dataset-info{
+#             display:flex;
+#             gap:18px;
+#             flex-wrap:wrap;
+#             margin-bottom:28px;
+#         }
+
+#         .dataset-info-item{
+#             flex:1;
+#             min-width:180px;
+#             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+#             padding:22px 18px;
+#             border-radius:18px;
+#             color:#ffffff;
+#             text-align:center;
+#             border:1px solid rgba(255,255,255,0.08);
+#             box-shadow:
+#                 0 10px 25px rgba(0,0,0,0.35),
+#                 inset 0 1px 0 rgba(255,255,255,0.04);
+#             transition: all .35s ease;
+#             font-size:16px;
+#             font-weight:500;
+#             position:relative;
+#             overflow:hidden;
+#             backdrop-filter: blur(6px);
+#         }
+
+#         .dataset-info-item::before{
+#             content:"";
+#             position:absolute;
+#             top:0;
+#             left:-120%;
+#             width:100%;
+#             height:100%;
+#             background: linear-gradient(
+#                 120deg,
+#                 transparent,
+#                 rgba(255,255,255,0.08),
+#                 transparent
+#             );
+#             transition: left .6s ease;
+#         }
+
+#         .dataset-info-item:hover::before{
+#             left:120%;
+#         }
+
+#         .dataset-info-item:hover{
+#             transform: translateY(-6px);
+#             border-color: rgba(255,255,0,0.35);
+#             box-shadow:
+#                 0 18px 35px rgba(0,0,0,0.45),
+#                 0 0 20px rgba(255,255,0,0.08);
+#         }
+
+#         .dataset-info-item strong{
+#             display:block;
+#             color:#FFFF00;
+#             font-size:14px;
+#             text-transform: uppercase;
+#             letter-spacing: .8px;
+#             margin-bottom:10px;
+#             opacity: .95;
+#         }
+
+#         /* ==============================
+#         Dataframe
+#         ============================== */
+
+#         div[data-testid="stDataFrame"]{
+#             border-radius:20px !important;
+#             overflow:hidden !important;
+#             border:1px solid rgba(255,255,255,.08);
+#             box-shadow:
+#                 0 10px 28px rgba(0,0,0,.35),
+#                 inset 0 1px 0 rgba(255,255,255,.03);
+#             background:#111827;
+#         }
+
+#         /* ==============================
+#         Tabs
+#         ============================== */
+
+#         button[data-baseweb="tab"]{
+#             background: rgba(30,41,59,0.9);
+#             color: #e5e7eb;
+#             border: 1px solid rgba(255,255,255,0.06);
+#             border-radius:12px;
+#             margin-right:8px;
+#             padding:10px 18px;
+#             font-weight:600;
+#             transition: all .3s ease;
+#             box-shadow: 0 2px 8px rgba(0,0,0,.18);
+#         }
+
+#         button[data-baseweb="tab"]:hover{
+#             background:#2563eb;
+#             color:#ffffff;
+#             transform: translateY(-2px);
+#             box-shadow: 0 8px 18px rgba(37,99,235,.35);
+#         }
+
+#         /* Active Tab */
+
+#         button[aria-selected="true"]{
+#             background:#2563eb !important;
+#             color:#ffffff !important;
+#             border-color:#3b82f6 !important;
+#             box-shadow: 0 10px 22px rgba(37,99,235,.38);
+#         }
+
+#         /* ==============================
+#         Slider
+#         ============================== */
+
+#         div[data-testid="stSlider"]{
+#             padding-top:12px;
+#             padding-bottom:4px;
+#         }
+
+#         /* ==============================
+#         Download Button
+#         ============================== */
+
+#         .stDownloadButton button{
+#             width:100%;
+#             background: linear-gradient(135deg, #2563eb, #1d4ed8);
+#             color:#ffffff;
+#             border:none;
+#             border-radius:12px;
+#             font-weight:700;
+#             padding:0.65rem 1rem;
+#             transition: all .3s ease;
+#             box-shadow: 0 10px 22px rgba(37,99,235,.28);
+#         }
+
+#         .stDownloadButton button:hover{
+#             background: linear-gradient(135deg, #1d4ed8, #1e40af);
+#             transform: translateY(-2px);
+#             box-shadow: 0 14px 26px rgba(37,99,235,.36);
+#         }
+
+#         /* ==============================
+#         Expander
+#         ============================== */
+
+#         details{
+#             background: rgba(30,41,59,0.92);
+#             border-radius:14px;
+#             border:1px solid rgba(255,255,255,.08);
+#             padding:10px 12px;
+#             box-shadow:
+#                 0 6px 18px rgba(0,0,0,.22),
+#                 inset 0 1px 0 rgba(255,255,255,.03);
+#         }
+
+#         details summary{
+#             color:#ffffff;
+#             font-weight:600;
+#             cursor:pointer;
+#         }
+
+#         /* ==============================
+#         Extra Polishing
+#         ============================== */
+
+#         .block-container{
+#             padding-top: 2rem;
+#             padding-bottom: 2rem;
+#         }
+
+#         section[data-testid="stSidebar"]{
+#             background: #0f172a;
+#             border-right: 1px solid rgba(255,255,255,.06);
+#         }
+
+#         </style>
+#     """, unsafe_allow_html=True)
+
+
+
+
+
+#     st.markdown(f"""
+#     <div class='dataset-info'>
+#         <span class="dataset-info-item"><strong>Rows:</strong> {rows}</span>
+#         <span class="dataset-info-item"><strong>Columns:</strong> {cols}</span>
+#         <span class="dataset-info-item"><strong>Brands:</strong> {df['Brand'].nunique()}</span>
+#         <span class="dataset-info-item"><strong>Models:</strong> {df['Model'].nunique()}</span>
+#     </div>
+#     """, unsafe_allow_html=True)
+
+
 
 
     
+
+
+
+#     tab1, tab2, tab3 = st.tabs(["📄 Data Preview", "🔍 Column Details", "📈 Summary"])
+
+#     # ======================== TAB 1: DATA Preview ========================
+#     with tab1:
+#         col_left, col_right = st.columns([3, 1])
+#         with col_left:
+#             st.subheader("Preview Filtered Data")
+#         with col_right:
+#             # Slider to choose number of rows to display
+#             n_rows = st.slider("Rows to show", min_value=10, max_value=200, value=20, step=10)
+
+#         # Display the first n rows
+#         st.dataframe(df.head(n_rows), use_container_width=True)
+
+#         # Optionally show the last few rows
+#         with st.expander("Show last rows"):
+#              st.dataframe(df.tail(10), use_container_width=True)
+
+#         # Download button for the filtered data
+#         csv = df.to_csv(index=False).encode('utf-8')
+#         st.download_button(
+#             label="📥 Download filtered data as CSV",
+#             data=csv,
+#             file_name="bike_sales_india.csv",
+#             mime="text/csv",
+#             use_container_width=True,
+#         )
+
+#     # ======================== TAB 2: COLUMN DETAILS ========================
+#     with tab2:
+
+#         # Display as a styled table
+#         # Compute missing values and give the column a clear name
+#         missing_df = df.isna().sum().reset_index(name='Missing Count')
+
+# # Optionally rename the first column as well
+#         missing_df.rename(columns={'index': 'Column Name'}, inplace=True)
+
+#         # Display with styling
+#         st.dataframe(
+#             missing_df,
+#             use_container_width=True,
+#             height=400
+#         )
+#         dtype_df = pd.DataFrame({
+#             "Column": df.columns,
+#             "Data Type": df.dtypes.astype(str)
+#             })
+        
+#         st.dataframe(dtype_df, use_container_width=True)
+#     # ======================== TAB 3: SUMMARY ========================
+#     with tab3:
+#         st.subheader("Statistical Summary")
+
+#         # Separate numeric and categorical columns
+#         num_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
+#         cat_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
+
+#         if num_cols:
+#             st.markdown("#### 📊 Numeric Columns")
+#             st.dataframe(df[num_cols].describe(), use_container_width=True)
+
+#         if cat_cols:
+#             st.markdown("#### 🏷️ Categorical Columns")
+#             # Show top 3 categories for each categorical column
+#             for col in cat_cols[:4]:  # Limit to first 4 to keep layout clean
+#                 with st.expander(f"Top values in '{col}'"):
+#                     st.dataframe(
+#                         df[col].value_counts().reset_index().head(10),
+#                         use_container_width=True,
+#                         hide_index=True
+#                     )
+#         if len(cat_cols) > 4:
+#                 st.info(f"Showing top 4 categorical columns. There are {len(cat_cols)} in total.")
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
