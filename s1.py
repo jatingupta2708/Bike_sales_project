@@ -24,19 +24,17 @@ with st.sidebar:
     opt= option_menu(
             menu_title=None,
             options=['Dashboard','Data Overview','Brand Analysis','Model Analysis','Price Analysis','Resale Analysis','State Analysis','About Project'],
-             icons=[
-            "house",
-            "bar-chart",
-            "building",
-            "cpu",
-            "currency-dollar",
-            "graph-up",
-            "fuel-pump",
-            "geo-alt",
-            "pie-chart",
-            "info-circle"
-            ],
-            )
+icons=[
+        "house",
+        "table",
+        "building",
+        "bicycle",
+        "currency-dollar",
+        "graph-up-arrow",
+        "geo-alt",
+        "info-circle"
+    ],
+    )
 
 
 
