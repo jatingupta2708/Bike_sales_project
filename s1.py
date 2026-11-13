@@ -18,7 +18,7 @@ df= pd.read_csv('bike_sales_india.csv')
 with st.sidebar:
     st.image("new logo-Picsart-BackgroundRemover.PNG", width=1200)
     st.markdown("---")
-    st.caption("Developed by Jatin Gupta")
+    st.caption("Developed by Jatin")
     st.markdown("### Menu")
 
     opt= option_menu(
@@ -6053,7 +6053,7 @@ interactive and easy-to-understand format.
     st.divider()
 
     st.caption(
-        "👨‍💻 Developed by Jatin Gupta  |  "
+        "👨‍💻 Developed by Jatin  |  "
         "Bike Sales India – Data Analysis & Visualization Project"
     )
 
@@ -6076,7 +6076,7 @@ st.markdown("""
 <hr>
 <div style="text-align:center; color:#94A3B8; padding:15px;">
 <h5>🏍 MotoVision India - Bike Sales India</h5>
-<p>Developed by Jatin Gupta | BTECH CSE AI/ML 1st Year Project</p>
+<p>Developed by Jatin | BTECH CSE AI/ML 1st Year Project</p>
 <p>© 2026 All Rights Reserved</p>
 </div>
 """, unsafe_allow_html=True)
